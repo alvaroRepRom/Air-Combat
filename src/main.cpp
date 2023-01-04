@@ -1,4 +1,3 @@
-#include "Intellisense.h"
 //butano
 #include "bn_core.h"
 #include "bn_math.h"
@@ -27,7 +26,7 @@
 int main()
 {
     bn::core::init();
-
+    
     ac::Camera cam;
     bn::affine_bg_ptr bg = bn::affine_bg_items::ground.create_bg(-376, -336);
 

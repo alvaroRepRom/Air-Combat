@@ -11,6 +11,7 @@ namespace ac
         private:      
             bn::sprite_ptr _plane;
             bn::sprite_animate_action<4> _action;
+            int _sprite_frame_select();
 
         public:
             Plane_Anim(bn::sprite_ptr& sprite);
