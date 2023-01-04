@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "ios": "cpp",
+        "*.tcc": "cpp",
+        "string": "cpp",
+        "cmath": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp"
+    },
+    "editor.suggest.localityBonus": true,
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\GBA-DEV\\Air-Combat",
+            "binaryPath": "c:\\GBA-DEV\\Air-Combat\\Air-Combat.elf",
+            "binaryArgs": []
+        }
+    ],
+    "C_Cpp.errorSquiggles": "enabled",
+}

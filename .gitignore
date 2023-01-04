@@ -1,0 +1,11 @@
+# ignore all .elf
+*.elf
+
+# ignore all .gba
+*.gba
+
+# ignore all .sav
+*.sav
+
+# ignore build folder
+build/
