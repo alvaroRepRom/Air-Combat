@@ -6,13 +6,13 @@
 #include "bn_affine_bg_builder.h"
 // air combat
 #include "ac_mode_7_camera.h"
-#include "ac_controller.h"
-#include "ac_plane_anim.h"
+#include "ac_player.h"
 #include "ac_scene_type.h"
 #include "ac_scene.h"
 // assets
 #include "bn_sprite_items_plane_sheet.h"
 #include "bn_affine_bg_items_ground.h"
+#include "bn_regular_bg_items_sky.h"
 
 namespace ac
 {
@@ -25,23 +25,22 @@ namespace ac
         }
     }
 
-    Game::Game() : _cam(create_camera()), _bg(bn::affine_bg_items::ground.create_bg(-376, -336))
+    Game::Game() : 
+        _cam(create_camera()), 
+        _sprite_sheet(bn::sprite_items::plane_sheet.create_sprite(0, -48)),
+        _mode7_bg(bn::affine_bg_items::ground.create_bg(-376, -336)),
+        _player(_cam, _sprite_sheet),
+        _mode7_cam(_mode7_bg),
+        _bg(bn::regular_bg_items::sky.create_bg(0, 0))
     {}
 
     bn::optional<Scene_Type> Game::update()
     {
-        bn::sprite_ptr player = bn::sprite_items::plane_sheet.create_sprite(0, 0);
-        Plane_Anim _plane_anim(player);
-        if (bn::keypad::a_pressed())
-        {
-            bn::sound_items::gun_2.play();
-        }
-        //controller.update();
-        //mode_7_cam.update();
-        _plane_anim.update();
-        if (ac::is_paused()) 
-        {
-            bn::core::reset();
-        }
+        bn::optional<Scene_Type> result;
+
+        _player.update();
+        _mode7_cam.update_hbe_values(_player._camera, 25);
+
+        return result;
     }
 }

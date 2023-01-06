@@ -24,10 +24,8 @@ namespace ac
 
     class Mode_7_Camera
     {
-        private:      
-            Camera _camera;
+        private:
             bn::affine_bg_ptr _bg;
-
             bn::affine_bg_pa_register_hbe_ptr _pa_hbe;
             bn::affine_bg_pc_register_hbe_ptr _pc_hbe;
             bn::affine_bg_dx_register_hbe_ptr _dx_hbe;
@@ -36,9 +34,8 @@ namespace ac
             int _speed();
 
         public:
-            Mode_7_Camera(ac::Camera& cam, bn::affine_bg_ptr& bg);
-            void _update_hbe_values(int min_index);
-            void update();
+            Mode_7_Camera(bn::affine_bg_ptr& bg);
+            void update_hbe_values(Camera& camera, int min_index);
     };
 }
 

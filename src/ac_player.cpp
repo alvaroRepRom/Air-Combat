@@ -1,12 +1,24 @@
 #include "ac_player.h"
 // butano
+#include "bn_math.h"
+#include "bn_display.h"
 #include "bn_keypad.h"
+#include "bn_affine_bg_ptr.h"
+#include "bn_affine_bg_builder.h"
+#include "bn_affine_bg_pa_register_hbe_ptr.h"
+#include "bn_affine_bg_pc_register_hbe_ptr.h"
+#include "bn_affine_bg_dx_register_hbe_ptr.h"
+#include "bn_affine_bg_dy_register_hbe_ptr.h"
+// air combat
+#include "ac_mode_7_camera.h"
+#include "ac_plane_anim.h"
 
 namespace ac
 {
-    Player::Player(ac::Camera& cam, bn::sprite_ptr sprite_sheet) : 
-        _camera(cam), 
-        _sprite(sprite_sheet)
+    Player::Player(ac::Camera& camera, bn::sprite_ptr sprite_sheet) : 
+        _camera(camera), 
+        _sprite(sprite_sheet),
+        _player_anim(_sprite)
     {}
 
     void Player::update()
@@ -52,6 +64,9 @@ namespace ac
         _camera.sin = bn::lut_sin(_camera.phi).data() >> 4;
         _camera.x += (dir_x * _camera.cos) - (dir_z * _camera.sin);
         _camera.z += (dir_x * _camera.sin) + (dir_z * _camera.cos);
+
+        // Animations
+        _player_anim.update();
     }
 
     int Player::_speed()

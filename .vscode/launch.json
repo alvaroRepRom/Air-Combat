@@ -24,7 +24,9 @@
                     {
                     "description": "Enable pretty-printing for gdb",
                     "ignoreFailures": true,
-                        "text": "file ${workspaceFolder}/${workspaceFolderBasename}.elf -enable-pretty-printing"
+                    "text": "file ${workspaceFolder}/${workspaceFolderBasename}.elf -enable-pretty-printing"
+                    //"text": "shell start /b \"\" \"C:/Program Files/mGBA/mGBA.exe\" -g \"${command:cmake.buildDirectory}/gba-game.elf\""
+                    //"text": "shell start /b \"\" \"C:/GBA-DEV/mGBA-0.9.3-win64\" -g \"${command:cmake.buildDirectory}/${workspaceFolderBasename}.elf\""
                     }]
             },
             "osx":{
@@ -33,7 +35,7 @@
                     {
                     "description": "Enable pretty-printing for gdb",
                     "ignoreFailures": true,
-                        "text": "file ${workspaceFolder}/${workspaceFolderBasename}.elf -enable-pretty-printing"
+                    "text": "file ${workspaceFolder}/${workspaceFolderBasename}.elf -enable-pretty-printing"
                     }]
             },
         }

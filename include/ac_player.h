@@ -1,20 +1,25 @@
 #ifndef AC_PLAYER_H
 #define AC_PLAYER_H
 
-#include "ac_mode_7_camera.h"
+// butano
 #include "bn_sprite_ptr.h"
+// air combat
+#include "ac_mode_7_camera.h"
+#include "ac_plane_anim.h"
 
 namespace ac
 {
     class Player
     {
         private:      
-            ac::Camera _camera;
-            bn::sprite_ptr _sprite; 
+            bn::sprite_ptr _sprite;
+            Plane_Anim _player_anim;
+
             int _speed();
 
         public:
-            Player(ac::Camera& cam, bn::sprite_ptr sprite_sheet);
+            Player(ac::Camera& camera, bn::sprite_ptr sprite_sheet);
+            Camera _camera;
             void update();
     };
 }
