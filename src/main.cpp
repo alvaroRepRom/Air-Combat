@@ -1,52 +1,57 @@
 //butano
 #include "bn_core.h"
-#include "bn_math.h"
-#include "bn_cameras.h"
-#include "bn_display.h"
-#include "bn_keypad.h"
-#include "bn_camera_ptr.h"
+#include "bn_assert.h"
 #include "bn_affine_bg_ptr.h"
-#include "bn_affine_bg_builder.h"
-#include "bn_bg_palettes.h"
-#include "bn_sprite_ptr.h"
-#include "bn_regular_bg_builder.h"
-#include "bn_regular_bg_attributes.h"
-#include "bn_regular_bg_position_hbe_ptr.h"
-#include "bn_regular_bg_attributes_hbe_ptr.h"
 // air combat
-#include "ac_mode_7_camera.h"
-#include "ac_controller.h"
-#include "ac_plane_anim.h"
-// items
-#include "bn_affine_bg_items_ground.h"
-#include "bn_regular_bg_items_sky.h"
-#include "bn_sprite_items_pivot.h"
-#include "bn_sprite_items_plane_sheet.h"
+#include "ac_scene_type.h"
+#include "ac_scene.h"
+#include "ac_intro.h"
+#include "ac_game.h"
+// assets
+#include "bn_affine_bg_items_cuad.h"
 
 int main()
 {
     bn::core::init();
-    
-    ac::Camera cam;
-    bn::affine_bg_ptr bg = bn::affine_bg_items::ground.create_bg(-376, -336);
 
-    ac::Mode_7_Camera mode_7_cam(ac::Mode_7_Camera(cam, bg));
-    ac::Controller controller(ac::Controller{cam});
-
-    bn::regular_bg_ptr sky = bn::regular_bg_items::sky.create_bg(0, 48);
-    
-    bn::sprite_ptr player = bn::sprite_items::plane_sheet.create_sprite(0, 0);
-    ac::Plane_Anim plane(player);
+    bn::optional<ac::Scene_Type> next_scene_type(ac::Scene_Type::INTRO);
+    bn::unique_ptr<ac::Scene> scene(new ac::Intro());
+    int wait_frame_transition = 30;
     
     while(true)
     {
-        //controller.update();
-        mode_7_cam.update();
-        plane.update();
-        if (ac::is_paused()) {
-            bn::core::reset();
-        }
+        // Gameloop
+        if (scene) next_scene_type = scene -> update();
+
         bn::core::update();
+
+        // Scene Manager
+        if (!next_scene_type) continue;
+
+        if (scene)
+        {
+            wait_frame_transition = 30;
+            scene.reset();
+        }
+        wait_frame_transition--;
+
+        if (wait_frame_transition) continue;
+
+        switch (*next_scene_type)
+        {
+            case ac::Scene_Type::INTRO:
+                scene.reset(new ac::Intro());
+                break;
+            case ac::Scene_Type::TITLE:
+                next_scene_type = ac::Scene_Type::GAME;
+                break;
+            case ac::Scene_Type::GAME:
+                scene.reset(new ac::Game());
+                break;
+            default:
+                BN_ERROR("Invalid scene_type ", "in main.cpp");
+                break;
+        }
     }
 }
 

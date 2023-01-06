@@ -9,10 +9,10 @@
 
 namespace
 {
-    bn::fixed init_y = 50;
-    int pos_angle = 0;
+    bn::fixed const init_y = 50;
     int const amplitud = 2;
     int const oscilation_speed = 3;
+    int pos_angle = 0;
 }
 
 namespace ac
@@ -67,11 +67,13 @@ namespace ac
         }
         else 
         if (x_pos < 0) {
-            if (x_pos < -9) return 4;
-            if (x_pos < -6) return 3;
-            if (x_pos < -3) return 2;
-            return 1;
+            if (x_pos < -9) return 8;
+            if (x_pos < -6) return 7;
+            if (x_pos < -3) return 6;
+            return 5;
         }
+        else
+        if(bn::keypad::down_held()) return 9;
         return 0;
     }
 }

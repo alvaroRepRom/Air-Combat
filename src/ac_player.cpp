@@ -1,22 +1,34 @@
-#include "Intellisense.h"
-#include "ac_controller.h"
-//butano
+#include "ac_player.h"
+// butano
 #include "bn_math.h"
+#include "bn_display.h"
 #include "bn_keypad.h"
+#include "bn_affine_bg_ptr.h"
+#include "bn_affine_bg_builder.h"
+#include "bn_affine_bg_pa_register_hbe_ptr.h"
+#include "bn_affine_bg_pc_register_hbe_ptr.h"
+#include "bn_affine_bg_dx_register_hbe_ptr.h"
+#include "bn_affine_bg_dy_register_hbe_ptr.h"
+// air combat
+#include "ac_mode_7_camera.h"
+#include "ac_plane_anim.h"
 
 namespace ac
 {
-    Controller::Controller(ac::Camera& cam) : _camera(cam)
-    { }
+    Player::Player(ac::Camera& camera, bn::sprite_ptr sprite_sheet) : 
+        _camera(camera), 
+        _sprite(sprite_sheet),
+        _player_anim(_sprite)
+    {}
 
-    void Controller::update()
+    void Player::update()
     {
+        // turn left and right
         bn::fixed dir_x = 0;
 
-        // turn
         if(bn::keypad::left_held())
         {
-            dir_x -= bn::fixed::from_data(32); // a izquiera
+            dir_x -= bn::fixed::from_data(32); // to left
             //gira izquierda
             _camera.phi -= 4;            
             if(_camera.phi < 0) // límite del angulo
@@ -24,44 +36,43 @@ namespace ac
         }
         else if(bn::keypad::right_held())
         {
-            dir_x += bn::fixed::from_data(32); // a derecha
+            dir_x += bn::fixed::from_data(32); // to right
             // giro derecha
             _camera.phi += 4;
-            if(_camera.phi >= 2048) // límite del angulo
+            if(_camera.phi >= 2048) // angle limit
                 _camera.phi -= 2048;
         }
 
         // up and down
         if(bn::keypad::down_held())
         {
-            _camera.y += bn::fixed::from_data(2048); // arriba
+            _camera.y += bn::fixed::from_data(2048); // up
         }
         else if(bn::keypad::up_held())
         {
-            // abajo
+            // down
             _camera.y -= bn::fixed::from_data(2048);
-            if(_camera.y < 0) // si llega al suelo
+            if(_camera.y < 0) // if lower than ground
                 _camera.y = 0;
         }
 
         // Fly speed
-        bn::fixed dir_z = -bn::fixed::from_data(_speed()); // adelante
+        bn::fixed dir_z = -bn::fixed::from_data(_speed()); // forward
 
         // Magic Actual Movement
         _camera.cos = bn::lut_cos(_camera.phi).data() >> 4;
         _camera.sin = bn::lut_sin(_camera.phi).data() >> 4;
         _camera.x += (dir_x * _camera.cos) - (dir_z * _camera.sin);
         _camera.z += (dir_x * _camera.sin) + (dir_z * _camera.cos);
+
+        // Animations
+        _player_anim.update();
     }
 
-    int Controller::_speed()
+    int Player::_speed()
     {
         if(bn::keypad::l_held()) return 40;
         else if(bn::keypad::r_held()) return 22;
         return 32;
-    }
-
-    bool is_paused(){
-        return bn::keypad::start_pressed();
     }
 }
