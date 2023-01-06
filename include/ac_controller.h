@@ -2,7 +2,7 @@
 #define AC_CONTROLLER_H
 
 #include "ac_mode_7_camera.h"
-
+#include "bn_sound_items.h"
 namespace ac
 {
     class Controller

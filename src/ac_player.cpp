@@ -1,15 +1,15 @@
-#include "ac_controller.h"
-//butano
-#include "bn_math.h"
+#include "ac_player.h"
+// butano
 #include "bn_keypad.h"
-#include "bn_sound.h"
 
 namespace ac
 {
-    Controller::Controller(ac::Camera& cam) : _camera(cam)
-    { }
+    Player::Player(ac::Camera& cam, bn::sprite_ptr sprite_sheet) : 
+        _camera(cam), 
+        _sprite(sprite_sheet)
+    {}
 
-    void Controller::update()
+    void Player::update()
     {
         // turn left and right
         bn::fixed dir_x = 0;
@@ -54,14 +54,10 @@ namespace ac
         _camera.z += (dir_x * _camera.sin) + (dir_z * _camera.cos);
     }
 
-    int Controller::_speed()
+    int Player::_speed()
     {
         if(bn::keypad::l_held()) return 40;
         else if(bn::keypad::r_held()) return 22;
         return 32;
-    }
-
-    bool is_paused(){
-        return bn::keypad::start_pressed();
     }
 }

@@ -1,4 +1,3 @@
-#include "Intellisense.h"
 #include "ac_mode_7_camera.h"
 // butano
 #include "bn_math.h"
@@ -31,12 +30,12 @@ namespace ac
 
     void Mode_7_Camera::update()
     {
+        // turn left and right
         bn::fixed dir_x = 0;
 
-        // turn
         if(bn::keypad::left_held())
         {
-            dir_x -= bn::fixed::from_data(32); // a izquiera
+            dir_x -= bn::fixed::from_data(32); // to left
             //gira izquierda
             _camera.phi -= 4;            
             if(_camera.phi < 0) // límite del angulo
@@ -44,35 +43,35 @@ namespace ac
         }
         else if(bn::keypad::right_held())
         {
-            dir_x += bn::fixed::from_data(32); // a derecha
+            dir_x += bn::fixed::from_data(32); // to right
             // giro derecha
             _camera.phi += 4;
-            if(_camera.phi >= 2048) // límite del angulo
+            if(_camera.phi >= 2048) // angle limit
                 _camera.phi -= 2048;
         }
 
         // up and down
         if(bn::keypad::down_held())
         {
-            _camera.y += bn::fixed::from_data(2048); // arriba
+            _camera.y += bn::fixed::from_data(5000); // up 2048
         }
         else if(bn::keypad::up_held())
         {
-            // abajo
-            _camera.y -= bn::fixed::from_data(2048);
-            if(_camera.y < 0) // si llega al suelo
+            // down
+            _camera.y -= bn::fixed::from_data(5000);
+            if(_camera.y < 0) // if lower than ground
                 _camera.y = 0;
         }
 
         // Fly speed
-        bn::fixed dir_z = -bn::fixed::from_data(_speed()); // adelante
+        bn::fixed dir_z = -bn::fixed::from_data(_speed()); // forward
 
         // Magic Actual Movement
         _camera.cos = bn::lut_cos(_camera.phi).data() >> 4;
         _camera.sin = bn::lut_sin(_camera.phi).data() >> 4;
         _camera.x += (dir_x * _camera.cos) - (dir_z * _camera.sin);
         _camera.z += (dir_x * _camera.sin) + (dir_z * _camera.cos);
-
+        
         _update_hbe_values(25);
     }
 

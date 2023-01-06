@@ -10,7 +10,8 @@
         "utility": "cpp",
         "vector": "cpp",
         "deque": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "functional": "cpp"
     },
     "editor.suggest.localityBonus": true,
     "makefile.launchConfigurations": [
