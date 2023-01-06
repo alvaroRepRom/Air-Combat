@@ -18,6 +18,7 @@ namespace ac
 
         private:
             bn::affine_bg_ptr _bg;
+            int _frames_to_wait;
     };
 }
 
