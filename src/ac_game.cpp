@@ -39,7 +39,7 @@ namespace ac
         bn::optional<Scene_Type> result;
 
         _player.update();
-        _mode7_cam.update_hbe_values(_player._camera, 25);
+        _mode7_cam.update_hbe_values(_player.camera, 25);
 
         return result;
     }

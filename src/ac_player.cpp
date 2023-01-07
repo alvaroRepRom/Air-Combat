@@ -15,8 +15,8 @@
 
 namespace ac
 {
-    Player::Player(ac::Camera& camera, bn::sprite_ptr sprite_sheet) : 
-        _camera(camera), 
+    Player::Player(Camera& camera, bn::sprite_ptr sprite_sheet) : 
+        camera(camera), 
         _sprite(sprite_sheet),
         _player_anim(_sprite)
     {}
@@ -30,40 +30,40 @@ namespace ac
         {
             dir_x -= bn::fixed::from_data(32); // to left
             //gira izquierda
-            _camera.phi -= 4;            
-            if(_camera.phi < 0) // límite del angulo
-                _camera.phi += 2048;
+            camera.phi -= 4;            
+            if(camera.phi < 0) // límite del angulo
+                camera.phi += 2048;
         }
         else if(bn::keypad::right_held())
         {
             dir_x += bn::fixed::from_data(32); // to right
             // giro derecha
-            _camera.phi += 4;
-            if(_camera.phi >= 2048) // angle limit
-                _camera.phi -= 2048;
+            camera.phi += 4;
+            if(camera.phi >= 2048) // angle limit
+                camera.phi -= 2048;
         }
 
         // up and down
         if(bn::keypad::down_held())
         {
-            _camera.y += bn::fixed::from_data(2048); // up
+            camera.y += bn::fixed::from_data(2048); // up
         }
         else if(bn::keypad::up_held())
         {
             // down
-            _camera.y -= bn::fixed::from_data(2048);
-            if(_camera.y < 0) // if lower than ground
-                _camera.y = 0;
+            camera.y -= bn::fixed::from_data(2048);
+            if(camera.y < 0) // if lower than ground
+                camera.y = 0;
         }
 
         // Fly speed
         bn::fixed dir_z = -bn::fixed::from_data(_speed()); // forward
 
         // Magic Actual Movement
-        _camera.cos = bn::lut_cos(_camera.phi).data() >> 4;
-        _camera.sin = bn::lut_sin(_camera.phi).data() >> 4;
-        _camera.x += (dir_x * _camera.cos) - (dir_z * _camera.sin);
-        _camera.z += (dir_x * _camera.sin) + (dir_z * _camera.cos);
+        camera.cos = bn::lut_cos(camera.phi).data() >> 4;
+        camera.sin = bn::lut_sin(camera.phi).data() >> 4;
+        camera.x += (dir_x * camera.cos) - (dir_z * camera.sin);
+        camera.z += (dir_x * camera.sin) + (dir_z * camera.cos);
 
         // Animations
         _player_anim.update();

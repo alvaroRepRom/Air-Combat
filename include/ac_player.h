@@ -18,8 +18,8 @@ namespace ac
             int _speed();
 
         public:
-            Player(ac::Camera& camera, bn::sprite_ptr sprite_sheet);
-            Camera _camera;
+            Player(Camera& camera, bn::sprite_ptr sprite_sheet);
+            Camera camera;
             void update();
     };
 }

@@ -6,52 +6,45 @@
 #include "ac_scene_type.h"
 #include "ac_scene.h"
 #include "ac_intro.h"
+#include "ac_title.h"
 #include "ac_game.h"
-// assets
-#include "bn_affine_bg_items_cuad.h"
 
 int main()
 {
     bn::core::init();
 
-    bn::optional<ac::Scene_Type> next_scene_type(ac::Scene_Type::INTRO);
+    bn::optional<ac::Scene_Type> next_scene_type;
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
-    int wait_frame_transition = 30;
     
-    while(true)
+    while(1)
     {
         // Gameloop
-        if (scene) next_scene_type = scene -> update();
-
-        bn::core::update();
-
+        if (scene) next_scene_type = scene->update();
         // Scene Manager
-        if (!next_scene_type) continue;
-
-        if (scene)
+        if (next_scene_type)
         {
-            wait_frame_transition = 30;
-            scene.reset();
+            if (scene)
+                scene.reset();
+            else
+            {
+                switch (*next_scene_type)
+                {
+                case ac::Scene_Type::INTRO:
+                    scene.reset(new ac::Intro());
+                    break;
+                case ac::Scene_Type::TITLE:
+                    scene.reset(new ac::Title());
+                    break;
+                case ac::Scene_Type::GAME:
+                    scene.reset(new ac::Game());
+                    break;
+                default:
+                    BN_ERROR("Invalid next scene: ", int(*next_scene_type));
+                    break;
+                }
+            }
         }
-        wait_frame_transition--;
-
-        if (wait_frame_transition) continue;
-
-        switch (*next_scene_type)
-        {
-            case ac::Scene_Type::INTRO:
-                scene.reset(new ac::Intro());
-                break;
-            case ac::Scene_Type::TITLE:
-                next_scene_type = ac::Scene_Type::GAME;
-                break;
-            case ac::Scene_Type::GAME:
-                scene.reset(new ac::Game());
-                break;
-            default:
-                BN_ERROR("Invalid scene_type ", "in main.cpp");
-                break;
-        }
+        bn::core::update();
     }
 }
 
