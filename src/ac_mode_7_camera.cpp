@@ -2,12 +2,7 @@
 // butano
 #include "bn_math.h"
 #include "bn_display.h"
-#include "bn_affine_bg_ptr.h"
 #include "bn_affine_bg_builder.h"
-#include "bn_affine_bg_pa_register_hbe_ptr.h"
-#include "bn_affine_bg_pc_register_hbe_ptr.h"
-#include "bn_affine_bg_dx_register_hbe_ptr.h"
-#include "bn_affine_bg_dy_register_hbe_ptr.h"
 
 namespace
 {

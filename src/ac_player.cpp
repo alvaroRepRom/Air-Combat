@@ -3,15 +3,7 @@
 #include "bn_math.h"
 #include "bn_display.h"
 #include "bn_keypad.h"
-#include "bn_affine_bg_ptr.h"
-#include "bn_affine_bg_builder.h"
-#include "bn_affine_bg_pa_register_hbe_ptr.h"
-#include "bn_affine_bg_pc_register_hbe_ptr.h"
-#include "bn_affine_bg_dx_register_hbe_ptr.h"
-#include "bn_affine_bg_dy_register_hbe_ptr.h"
 // air combat
-#include "ac_mode_7_camera.h"
-#include "ac_plane_anim.h"
 
 namespace ac
 {
@@ -50,8 +42,7 @@ namespace ac
         }
         else if(bn::keypad::up_held())
         {
-            // down
-            camera.y -= bn::fixed::from_data(2048);
+            camera.y -= bn::fixed::from_data(2048); // down
             if(camera.y < 0) // if lower than ground
                 camera.y = 0;
         }

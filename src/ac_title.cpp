@@ -1,5 +1,6 @@
 #include "ac_title.h"
 // butano
+#include "bn_keypad.h"
 // air combat
 #include "ac_scene_type.h"
 #include "ac_scene.h"
@@ -14,16 +15,14 @@ namespace ac
     }
 
     Title::Title() : 
-        _bg(bn::regular_bg_items::dungeon_2x.create_bg(0, 0)),
-        _frames_to_wait(num_frames) // 3 seconds
+        _bg(bn::regular_bg_items::dungeon_2x.create_bg(0, 0))
     {}
 
     bn::optional<Scene_Type> Title::update()
     {
         bn::optional<Scene_Type> result;
         
-        _frames_to_wait--;
-        if (!_frames_to_wait) result = Scene_Type::GAME;
+        if (bn::keypad::any_pressed()) result = Scene_Type::GAME;
 
         return result;
     }

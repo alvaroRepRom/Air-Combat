@@ -1,10 +1,7 @@
 #ifndef AC_MODE_7_CAMERA_H
 #define AC_MODE_7_CAMERA_H
 
-#include "bn_fixed_point.h"
-#include "bn_display.h"
 #include "bn_affine_bg_ptr.h"
-#include "bn_affine_bg_builder.h"
 #include "bn_affine_bg_pa_register_hbe_ptr.h"
 #include "bn_affine_bg_pc_register_hbe_ptr.h"
 #include "bn_affine_bg_dx_register_hbe_ptr.h"

@@ -2,11 +2,11 @@
 #define AC_GAME_H
 
 // butano
-#include "ac_scene_type.h"
-#include "ac_scene.h"
 #include "bn_affine_bg_ptr.h"
 #include "bn_regular_bg_ptr.h"
 // air combat
+#include "ac_scene_type.h"
+#include "ac_scene.h"
 #include "ac_mode_7_camera.h"
 #include "ac_plane_anim.h"
 #include "ac_player.h"
