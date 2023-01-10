@@ -4,12 +4,14 @@
 // butano
 #include "bn_affine_bg_ptr.h"
 #include "bn_regular_bg_ptr.h"
+#include "bn_pool.h"
 // air combat
 #include "ac_scene_type.h"
 #include "ac_scene.h"
 #include "ac_mode_7_camera.h"
 #include "ac_plane_anim.h"
 #include "ac_player.h"
+#include "ac_bullet.h"
 
 namespace ac
 {
@@ -29,6 +31,7 @@ namespace ac
             bn::regular_bg_ptr _bg;
             Player _player;
             Mode_7_Camera _mode7_cam;
+            Bullet _bullet;
     };
 }
 
