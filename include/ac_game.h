@@ -25,13 +25,11 @@ namespace ac
             virtual bn::optional<Scene_Type> update() final;
 
         private:
-            Camera _cam;
             bn::sprite_ptr _sprite_sheet;
             bn::affine_bg_ptr _mode7_bg;
             bn::regular_bg_ptr _bg;
             Player _player;
             Mode_7_Camera _mode7_cam;
-            Bullet _bullet;
     };
 }
 

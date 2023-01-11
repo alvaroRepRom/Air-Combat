@@ -13,20 +13,15 @@ namespace ac
         _sprite.set_visible(false);
     }
 
-    void Bullet::init(bn::fixed x_shoot_pos, bn::fixed y_shoot_pos)
+    void Bullet::init(bn::fixed_point shoot_position)
     {
         _sprite.set_visible(true);
-        _sprite.set_position(x_shoot_pos, y_shoot_pos);
+        _sprite.set_position(shoot_position);
         _frames_left = 120;
     }
 
     void Bullet::update()
     {
-        if (bn::keypad::a_pressed() && !_sprite.visible())
-        {
-            init(0, 45);
-        }
-
         if (_sprite.visible())
         {
             _sprite.set_y(_sprite.y() - 1);

@@ -3,6 +3,7 @@
 
 // butano
 #include "bn_sprite_ptr.h"
+#include "bn_fixed_point.h"
 // air combat
 
 namespace ac
@@ -12,7 +13,7 @@ namespace ac
         public:
             Bullet();
             void update();
-            void init(bn::fixed x_shoot_pos, bn::fixed y_shoot_pos);
+            void init(bn::fixed_point shoot_position);
             bool is_been_used() const;
 
         private:

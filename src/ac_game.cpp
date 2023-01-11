@@ -10,23 +10,12 @@
 
 namespace ac
 {
-    namespace
-    {
-        Camera create_camera()
-        {
-            Camera cam;
-            return cam;
-        }
-    }
-
     Game::Game() : 
-        _cam(create_camera()), 
         _sprite_sheet(bn::sprite_items::plane_sheet.create_sprite(0, -48)),
         _mode7_bg(bn::affine_bg_items::fondo.create_bg(-376, -336)),
-        _player(_cam, _sprite_sheet),
+        _player(_sprite_sheet),
         _mode7_cam(_mode7_bg),
-        _bg(bn::regular_bg_items::sky.create_bg(0, 0)),
-        _bullet()
+        _bg(bn::regular_bg_items::sky.create_bg(0, 0))
     {}
 
     bn::optional<Scene_Type> Game::update()
@@ -35,7 +24,6 @@ namespace ac
 
         _player.update();
         _mode7_cam.update_hbe_values(_player.camera, 25);
-        _bullet.update();
 
         return result;
     }

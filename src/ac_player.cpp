@@ -7,10 +7,16 @@
 
 namespace ac
 {
-    Player::Player(Camera& camera, bn::sprite_ptr sprite_sheet) : 
-        camera(camera), 
+    namespace
+    {
+        int constexpr WAIT_SHOT_CADENCE = 15;
+    }
+
+    Player::Player(bn::sprite_ptr& sprite_sheet) : 
         _sprite(sprite_sheet),
-        _player_anim(_sprite)
+        _player_anim(_sprite),
+        _bullet_pool(),
+        _wait_shot_cadence(WAIT_SHOT_CADENCE)
     {}
 
     void Player::update()
@@ -58,6 +64,16 @@ namespace ac
 
         // Animations
         _player_anim.update();
+
+        // shooting
+        _bullet_pool.update();
+
+        _wait_shot_cadence--;
+        if (bn::keypad::a_held() && _wait_shot_cadence < 0)
+        {
+            _bullet_pool.shoot_bullet(_sprite.position());
+            _wait_shot_cadence = WAIT_SHOT_CADENCE;
+        }
     }
 
     int Player::_speed()
