@@ -4,6 +4,7 @@
 #include "bn_display.h"
 #include "bn_keypad.h"
 // air combat
+#include "bn_sprite_items_cross.h"
 
 namespace ac
 {
@@ -14,6 +15,7 @@ namespace ac
 
     Player::Player(bn::sprite_ptr& sprite_sheet) : 
         _sprite(sprite_sheet),
+        _aim_cross_sprite(bn::sprite_items::cross.create_sprite(0, 0)),
         _player_anim(_sprite),
         _bullet_pool(),
         _wait_shot_cadence(WAIT_SHOT_CADENCE)

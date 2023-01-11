@@ -17,7 +17,6 @@ namespace
 
 namespace ac
 {
-    /// @brief Creates fly animations on suspension and turnings
     Plane_Anim::Plane_Anim(bn::sprite_ptr& sprite) : _plane(sprite), 
             _action(bn::create_sprite_animate_action_forever(_plane, 2, 
                     bn::sprite_items::plane_sheet.tiles_item(), 1,2,3,4))
@@ -72,8 +71,6 @@ namespace ac
             if (x_pos < -3) return 6;
             return 5;
         }
-        else
-        if(bn::keypad::down_held()) return 9;
         return 0;
     }
 }

@@ -14,6 +14,7 @@ namespace ac
     {
         private:      
             bn::sprite_ptr _sprite;
+            bn::sprite_ptr _aim_cross_sprite;
             Plane_Anim _player_anim;
             Bullet_Pool _bullet_pool;
             int _wait_shot_cadence;
