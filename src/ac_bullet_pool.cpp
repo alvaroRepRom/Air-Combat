@@ -17,13 +17,13 @@ namespace ac
     Bullet_Pool::Bullet_Pool() : _pool(init_pool())
     {}
 
-    void Bullet_Pool::shoot_bullet(bn::fixed_point shoot_position)
+    void Bullet_Pool::shoot_bullet(bn::fixed_point shoot_position, bn::fixed_point aimed_position)
     {
         for(int i = 0; i < _pool.size(); i++)
         {
             if (!_pool[i].is_active())
             {
-                _pool[i].init(shoot_position);
+                _pool[i].init(shoot_position, aimed_position);
                 return;
             }
         }

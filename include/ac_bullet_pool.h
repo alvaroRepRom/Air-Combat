@@ -14,7 +14,7 @@ namespace ac
     {
         public:
             Bullet_Pool();
-            void shoot_bullet(bn::fixed_point shoot_position);
+            void shoot_bullet(bn::fixed_point shoot_position, bn::fixed_point aimed_position);
             void update();
 
         private:

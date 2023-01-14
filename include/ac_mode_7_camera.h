@@ -12,7 +12,7 @@ namespace ac
     struct Camera
     {
         bn::fixed x = 440;
-        bn::fixed y = 128;
+        bn::fixed y = 300;//128;
         bn::fixed z = 320;
         int phi = 10;
         int cos = 0;

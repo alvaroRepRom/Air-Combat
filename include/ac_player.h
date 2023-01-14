@@ -18,6 +18,7 @@ namespace ac
             Plane_Anim _player_anim;
             Bullet_Pool _bullet_pool;
             int _wait_shot_cadence;
+            bool _is_moving_cross[2];
 
             void _move_aim_cross();
             void _move_air_ship();

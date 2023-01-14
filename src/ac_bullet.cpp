@@ -1,36 +1,41 @@
 #include "ac_bullet.h"
 // butano
-// air combat
+#include "bn_math.h"
+// assets
 #include "bn_sprite_items_bullet.h"
 
 namespace ac
 {
     namespace
     {
-        constexpr int WAIT_FRAMES_CADENCE = 120; // 2 secod
+        constexpr int FRAMES_ALIVE = 30; // 0.5 seconds
+        constexpr bn::fixed SCALE_FACTOR = 0.03333; // 0.0333 = 1 / 30 frames
     }
 
-    Bullet::Bullet() : 
-        _sprite(bn::sprite_items::bullet.create_sprite(0, 0)),
-        _frames_left(WAIT_FRAMES_CADENCE) 
+    Bullet::Bullet() : _sprite(bn::sprite_items::bullet.create_sprite(0, 0))
     {
         _sprite.set_visible(false);
     }
 
-    void Bullet::init(bn::fixed_point shoot_position)
+    void Bullet::init(bn::fixed_point &shoot_position, bn::fixed_point &aimed_position)
     {
         _sprite.set_visible(true);
-        _sprite.set_position(shoot_position);
-        _frames_left = WAIT_FRAMES_CADENCE;
+        // add a bit more in Y to see bullet fade out in aim cross
+        _sprite.set_position(shoot_position.x(), shoot_position.y() - 5);
+        _frames_left = FRAMES_ALIVE;
+
+        bn::fixed dx = aimed_position.x() - shoot_position.x();
+        bn::fixed dy = aimed_position.y() - shoot_position.y();
+        _velocity = bn::fixed_point(dx / _frames_left, dy / _frames_left);
     }
 
     void Bullet::update()
     {
-        _sprite.set_y(_sprite.y() - 1);
+        _sprite.set_position(_sprite.position() + _velocity);
 
         _frames_left--;
-        if (_frames_left < 0)
-            _sprite.set_visible(false);
+        if(_frames_left) _sprite.set_scale(SCALE_FACTOR * _frames_left);
+        else             _sprite.set_visible(false);
     }
     
     bool Bullet::is_active() const

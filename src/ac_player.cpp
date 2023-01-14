@@ -39,24 +39,26 @@ namespace ac
         // turn left and right
         if(bn::keypad::left_held())
         {
+            _is_moving_cross[0] = true;
             _aim_cross_sprite.set_x(_aim_cross_sprite.x() - 1);
             if (_aim_cross_sprite.x() < -X_BORDER)
                 _aim_cross_sprite.set_x(-X_BORDER);
         }
         else if(bn::keypad::right_held())
         {
+            _is_moving_cross[0] = true;
             _aim_cross_sprite.set_x(_aim_cross_sprite.x() + 1);
             if (_aim_cross_sprite.x() > X_BORDER)
                 _aim_cross_sprite.set_x(X_BORDER);
         }
-        else // if not moving to ship X position
+        else // if not moving, go to ship X position
         {
-            bn::fixed offset_x = X_BORDER - AIM_OFFSET.x();
-            if (_aim_cross_sprite.x() > offset_x)
+            _is_moving_cross[0] = false;
+            if (_aim_cross_sprite.x() > _sprite.x())
             {
                 _aim_cross_sprite.set_x(_aim_cross_sprite.x() - 1);
             }
-            else if (_aim_cross_sprite.x() < -offset_x)
+            else if (_aim_cross_sprite.x() < _sprite.x())
             {
                 _aim_cross_sprite.set_x(_aim_cross_sprite.x() + 1);
             }
@@ -65,15 +67,29 @@ namespace ac
         // up and down
         if(bn::keypad::down_held())
         {
+            _is_moving_cross[1] = true;
             _aim_cross_sprite.set_y(_aim_cross_sprite.y() + 1);
             if (_aim_cross_sprite.y() > Y_BORDER)
                 _aim_cross_sprite.set_y(Y_BORDER);
         }
         else if(bn::keypad::up_held())
         {
+            _is_moving_cross[1] = true;
             _aim_cross_sprite.set_y(_aim_cross_sprite.y() - 1);
             if (_aim_cross_sprite.y() < -Y_BORDER)
                 _aim_cross_sprite.set_y(-Y_BORDER);
+        }
+        else // if not moving, go to ship Y position
+        {
+            _is_moving_cross[1] = false;
+            if (_aim_cross_sprite.y() > _sprite.y() - INIT_Y)
+            {
+                _aim_cross_sprite.set_y(_aim_cross_sprite.y() - 1);
+            }
+            else if (_aim_cross_sprite.y() < _sprite.y() - INIT_Y)
+            {
+                _aim_cross_sprite.set_y(_aim_cross_sprite.y() + 1);
+            }
         }
     }
 
@@ -135,7 +151,7 @@ namespace ac
         _wait_shot_cadence--;
         if (bn::keypad::a_held() && _wait_shot_cadence < 0)
         {
-            _bullet_pool.shoot_bullet(_sprite.position());
+            _bullet_pool.shoot_bullet(_sprite.position(), _aim_cross_sprite.position());
             _wait_shot_cadence = WAIT_SHOT_CADENCE;
         }
     }
