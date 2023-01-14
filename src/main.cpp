@@ -19,30 +19,25 @@ int main()
     {
         // Gameloop
         if (scene) next_scene_type = scene->update();
+        bn::core::update();
         // Scene Manager
         if (next_scene_type)
         {
-            if (scene)
-                scene.reset();
-            else
+            switch (*next_scene_type)
             {
-                switch (*next_scene_type)
-                {
-                case ac::Scene_Type::INTRO:
-                    scene.reset(new ac::Intro());
-                    break;
-                case ac::Scene_Type::TITLE:
-                    scene.reset(new ac::Title());
-                    break;
-                case ac::Scene_Type::GAME:
-                    scene.reset(new ac::Game());
-                    break;
-                default:
-                    BN_ERROR("Invalid next scene: ", int(*next_scene_type));
-                    break;
-                }
+            case ac::Scene_Type::INTRO:
+                scene.reset(new ac::Intro());
+                break;
+            case ac::Scene_Type::TITLE:
+                scene.reset(new ac::Title());
+                break;
+            case ac::Scene_Type::GAME:
+                scene.reset(new ac::Game());
+                break;
+            default:
+                BN_ERROR("Invalid next scene: ", int(*next_scene_type));
+                break;
             }
-        }
-        bn::core::update();
+        }        
     }
 }

@@ -13,7 +13,7 @@ namespace ac
         constexpr int WAIT_SHOT_CADENCE = 15;
         constexpr int X_BORDER = bn::display::width() / 2 - 20;
         constexpr int Y_BORDER = bn::display::height() / 2 - 20;
-        constexpr bn::fixed_point MAX_DELTA_POSITION(30, 15);
+        constexpr bn::fixed_point AIM_OFFSET(30, 15);
         constexpr int INIT_Y = 48;
     }
 
@@ -51,12 +51,12 @@ namespace ac
         }
         else // if not moving to ship X position
         {
-            bn::fixed offset = X_BORDER - MAX_DELTA_POSITION.x();
-            if (_aim_cross_sprite.x() > offset)
+            bn::fixed offset_x = X_BORDER - AIM_OFFSET.x();
+            if (_aim_cross_sprite.x() > offset_x)
             {
                 _aim_cross_sprite.set_x(_aim_cross_sprite.x() - 1);
             }
-            else if (_aim_cross_sprite.x() < -offset)
+            else if (_aim_cross_sprite.x() < -offset_x)
             {
                 _aim_cross_sprite.set_x(_aim_cross_sprite.x() + 1);
             }
@@ -84,21 +84,25 @@ namespace ac
         if (x_dist > 0) // aim to the right
         {
             bn::fixed delta_x = 0.5;
-            if (x_dist > MAX_DELTA_POSITION.x())
+            if (x_dist > AIM_OFFSET.x())
             {
                 delta_x = 1;
             }
-            _sprite.set_x(_sprite.x() + delta_x);
+
+            if(_sprite.x() < X_BORDER - AIM_OFFSET.x())
+                _sprite.set_x(_sprite.x() + delta_x);
         }
         else 
         if (x_dist < 0) // aim to the left
         {
             bn::fixed delta_x = 0.5;
-            if (x_dist < -MAX_DELTA_POSITION.x())
+            if (x_dist < -AIM_OFFSET.x())
             {
                 delta_x = 1;
             }
-            _sprite.set_x(_sprite.x() - delta_x);
+
+            if(_sprite.x() > -X_BORDER + AIM_OFFSET.x())
+                _sprite.set_x(_sprite.x() - delta_x);
         }
 
         // MOVE PLAYER Y
@@ -106,7 +110,7 @@ namespace ac
         if (y_dist > 0) // aim down
         {
             bn::fixed delta_y = 0.5;
-            if (y_dist > MAX_DELTA_POSITION.y())
+            if (y_dist > AIM_OFFSET.y())
             {
                 delta_y = 1;
             }
@@ -116,7 +120,7 @@ namespace ac
         if (y_dist < 0) // aim up
         {
             bn::fixed delta_y = 0.5;
-            if (y_dist < -MAX_DELTA_POSITION.y())
+            if (y_dist < -AIM_OFFSET.y())
             {
                 delta_y = 1;
             }
