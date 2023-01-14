@@ -39,21 +39,18 @@ namespace ac
         // turn left and right
         if(bn::keypad::left_held())
         {
-            _is_moving_cross[0] = true;
             _aim_cross_sprite.set_x(_aim_cross_sprite.x() - 1);
             if (_aim_cross_sprite.x() < -X_BORDER)
                 _aim_cross_sprite.set_x(-X_BORDER);
         }
         else if(bn::keypad::right_held())
         {
-            _is_moving_cross[0] = true;
             _aim_cross_sprite.set_x(_aim_cross_sprite.x() + 1);
             if (_aim_cross_sprite.x() > X_BORDER)
                 _aim_cross_sprite.set_x(X_BORDER);
         }
-        else // if not moving, go to ship X position
+        else // if not X-axis input, go to ship X position
         {
-            _is_moving_cross[0] = false;
             if (_aim_cross_sprite.x() > _sprite.x())
             {
                 _aim_cross_sprite.set_x(_aim_cross_sprite.x() - 1);
@@ -67,21 +64,18 @@ namespace ac
         // up and down
         if(bn::keypad::down_held())
         {
-            _is_moving_cross[1] = true;
             _aim_cross_sprite.set_y(_aim_cross_sprite.y() + 1);
-            if (_aim_cross_sprite.y() > Y_BORDER)
-                _aim_cross_sprite.set_y(Y_BORDER);
+            if (_aim_cross_sprite.y() > Y_BORDER - INIT_Y + AIM_OFFSET.y())
+                _aim_cross_sprite.set_y(Y_BORDER - INIT_Y + AIM_OFFSET.y());
         }
         else if(bn::keypad::up_held())
         {
-            _is_moving_cross[1] = true;
             _aim_cross_sprite.set_y(_aim_cross_sprite.y() - 1);
             if (_aim_cross_sprite.y() < -Y_BORDER)
                 _aim_cross_sprite.set_y(-Y_BORDER);
         }
-        else // if not moving, go to ship Y position
+        else // if not Y-axis input, go to ship Y position
         {
-            _is_moving_cross[1] = false;
             if (_aim_cross_sprite.y() > _sprite.y() - INIT_Y)
             {
                 _aim_cross_sprite.set_y(_aim_cross_sprite.y() - 1);
@@ -95,9 +89,9 @@ namespace ac
 
     void Player::_move_air_ship()
     {
-        // MOVE PLAYER X
+        // MOVE SHIP X
         bn::fixed x_dist = _aim_cross_sprite.x() - _sprite.x();        
-        if (x_dist > 0) // aim to the right
+        if (x_dist > 0) // IF aim to the right
         {
             bn::fixed delta_x = 0.5;
             if (x_dist > AIM_OFFSET.x())
@@ -109,7 +103,7 @@ namespace ac
                 _sprite.set_x(_sprite.x() + delta_x);
         }
         else 
-        if (x_dist < 0) // aim to the left
+        if (x_dist < 0) // IF aim to the left
         {
             bn::fixed delta_x = 0.5;
             if (x_dist < -AIM_OFFSET.x())
@@ -121,7 +115,7 @@ namespace ac
                 _sprite.set_x(_sprite.x() - delta_x);
         }
 
-        // MOVE PLAYER Y
+        // MOVE SHIP Y
         bn::fixed y_dist = _aim_cross_sprite.y() - _sprite.y() + INIT_Y;
         if (y_dist > 0) // aim down
         {
@@ -131,6 +125,10 @@ namespace ac
                 delta_y = 1;
             }
             _sprite.set_y(_sprite.y() + delta_y);
+
+            // STOP DOWN ship movement 
+            if (_sprite.y() > Y_BORDER)
+                _sprite.set_y(Y_BORDER);
         }
         else 
         if (y_dist < 0) // aim up
@@ -141,6 +139,10 @@ namespace ac
                 delta_y = 1;
             }
             _sprite.set_y(_sprite.y() - delta_y);
+
+            // STOP UP ship movement 
+            if (_sprite.y() < -Y_BORDER + INIT_Y + AIM_OFFSET.y())
+                _sprite.set_y(-Y_BORDER + INIT_Y + AIM_OFFSET.y());
         }
     }
 

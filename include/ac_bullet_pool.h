@@ -18,7 +18,7 @@ namespace ac
             void update();
 
         private:
-            bn::array<Bullet, 10> _pool;
+            bn::array<Bullet, 3> _pool;
     };
 }
 

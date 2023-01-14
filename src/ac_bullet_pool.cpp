@@ -5,10 +5,10 @@ namespace ac
 {
     namespace
     {
-        bn::array<Bullet, 10> init_pool()
+        bn::array<Bullet, 3> init_pool()
         {
-            bn::array<Bullet, 10> pool;
-            for (int i = 0; i < 10; i++)
+            bn::array<Bullet, 3> pool;
+            for (int i = 0; i < 3; i++)
                 pool[i] = Bullet();
             return pool;            
         }
