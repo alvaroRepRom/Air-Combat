@@ -14,7 +14,7 @@ namespace ac
             Bullet();
             void update();
             void init(bn::fixed_point shoot_position);
-            bool is_been_used() const;
+            bool is_active() const;
 
         private:
             bn::sprite_ptr _sprite;

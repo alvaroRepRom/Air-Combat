@@ -19,7 +19,9 @@ namespace ac
             Bullet_Pool _bullet_pool;
             int _wait_shot_cadence;
 
-            int _speed();
+            void _move_aim_cross();
+            void _move_air_ship();
+            void _shooting();
 
         public:
             Player(bn::sprite_ptr& sprite_sheet);

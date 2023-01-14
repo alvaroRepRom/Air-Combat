@@ -10,7 +10,11 @@ namespace ac
 {
     namespace
     {
-        int constexpr WAIT_SHOT_CADENCE = 15;
+        constexpr int WAIT_SHOT_CADENCE = 15;
+        constexpr int X_BORDER = bn::display::width() / 2 - 20;
+        constexpr int Y_BORDER = bn::display::height() / 2 - 20;
+        constexpr bn::fixed_point MAX_DELTA_POSITION(30, 15);
+        constexpr int INIT_Y = 48;
     }
 
     Player::Player(bn::sprite_ptr& sprite_sheet) : 
@@ -19,56 +23,110 @@ namespace ac
         _player_anim(_sprite),
         _bullet_pool(),
         _wait_shot_cadence(WAIT_SHOT_CADENCE)
-    {}
+    {
+        _sprite.set_position(0, INIT_Y);
+    }
 
     void Player::update()
+    {       
+        _move_aim_cross();
+        _move_air_ship();
+        _shooting();
+    }
+
+    void Player::_move_aim_cross()
     {
         // turn left and right
-        bn::fixed dir_x = 0;
-
         if(bn::keypad::left_held())
         {
-            dir_x -= bn::fixed::from_data(32); // to left
-            //gira izquierda
-            camera.phi -= 4;            
-            if(camera.phi < 0) // límite del angulo
-                camera.phi += 2048;
+            _aim_cross_sprite.set_x(_aim_cross_sprite.x() - 1);
+            if (_aim_cross_sprite.x() < -X_BORDER)
+                _aim_cross_sprite.set_x(-X_BORDER);
         }
         else if(bn::keypad::right_held())
         {
-            dir_x += bn::fixed::from_data(32); // to right
-            // giro derecha
-            camera.phi += 4;
-            if(camera.phi >= 2048) // angle limit
-                camera.phi -= 2048;
+            _aim_cross_sprite.set_x(_aim_cross_sprite.x() + 1);
+            if (_aim_cross_sprite.x() > X_BORDER)
+                _aim_cross_sprite.set_x(X_BORDER);
         }
-
+        else // if not moving to ship X position
+        {
+            bn::fixed offset = X_BORDER - MAX_DELTA_POSITION.x();
+            if (_aim_cross_sprite.x() > offset)
+            {
+                _aim_cross_sprite.set_x(_aim_cross_sprite.x() - 1);
+            }
+            else if (_aim_cross_sprite.x() < -offset)
+            {
+                _aim_cross_sprite.set_x(_aim_cross_sprite.x() + 1);
+            }
+        }
+        
         // up and down
         if(bn::keypad::down_held())
         {
-            camera.y += bn::fixed::from_data(2048); // up
+            _aim_cross_sprite.set_y(_aim_cross_sprite.y() + 1);
+            if (_aim_cross_sprite.y() > Y_BORDER)
+                _aim_cross_sprite.set_y(Y_BORDER);
         }
         else if(bn::keypad::up_held())
         {
-            camera.y -= bn::fixed::from_data(2048); // down
-            if(camera.y < 0) // if lower than ground
-                camera.y = 0;
+            _aim_cross_sprite.set_y(_aim_cross_sprite.y() - 1);
+            if (_aim_cross_sprite.y() < -Y_BORDER)
+                _aim_cross_sprite.set_y(-Y_BORDER);
+        }
+    }
+
+    void Player::_move_air_ship()
+    {
+        // MOVE PLAYER X
+        bn::fixed x_dist = _aim_cross_sprite.x() - _sprite.x();        
+        if (x_dist > 0) // aim to the right
+        {
+            bn::fixed delta_x = 0.5;
+            if (x_dist > MAX_DELTA_POSITION.x())
+            {
+                delta_x = 1;
+            }
+            _sprite.set_x(_sprite.x() + delta_x);
+        }
+        else 
+        if (x_dist < 0) // aim to the left
+        {
+            bn::fixed delta_x = 0.5;
+            if (x_dist < -MAX_DELTA_POSITION.x())
+            {
+                delta_x = 1;
+            }
+            _sprite.set_x(_sprite.x() - delta_x);
         }
 
-        // Fly speed
-        bn::fixed dir_z = -bn::fixed::from_data(_speed()); // forward
+        // MOVE PLAYER Y
+        bn::fixed y_dist = _aim_cross_sprite.y() - _sprite.y() + INIT_Y;
+        if (y_dist > 0) // aim down
+        {
+            bn::fixed delta_y = 0.5;
+            if (y_dist > MAX_DELTA_POSITION.y())
+            {
+                delta_y = 1;
+            }
+            _sprite.set_y(_sprite.y() + delta_y);
+        }
+        else 
+        if (y_dist < 0) // aim up
+        {
+            bn::fixed delta_y = 0.5;
+            if (y_dist < -MAX_DELTA_POSITION.y())
+            {
+                delta_y = 1;
+            }
+            _sprite.set_y(_sprite.y() - delta_y);
+        }
+    }
 
-        // Magic Actual Movement
-        camera.cos = bn::lut_cos(camera.phi).data() >> 4;
-        camera.sin = bn::lut_sin(camera.phi).data() >> 4;
-        camera.x += (dir_x * camera.cos) - (dir_z * camera.sin);
-        camera.z += (dir_x * camera.sin) + (dir_z * camera.cos);
-
-        // Animations
-        _player_anim.update();
-
-        // shooting
-        _bullet_pool.update();
+    void Player::_shooting()
+    {
+        _bullet_pool.update(); // update active bullets
 
         _wait_shot_cadence--;
         if (bn::keypad::a_held() && _wait_shot_cadence < 0)
@@ -76,12 +134,5 @@ namespace ac
             _bullet_pool.shoot_bullet(_sprite.position());
             _wait_shot_cadence = WAIT_SHOT_CADENCE;
         }
-    }
-
-    int Player::_speed()
-    {
-        if(bn::keypad::l_held()) return 40;
-        else if(bn::keypad::r_held()) return 22;
-        return 32;
     }
 }

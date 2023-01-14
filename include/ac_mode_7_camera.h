@@ -27,12 +27,13 @@ namespace ac
             bn::affine_bg_pc_register_hbe_ptr _pc_hbe;
             bn::affine_bg_dx_register_hbe_ptr _dx_hbe;
             bn::affine_bg_dy_register_hbe_ptr _dy_hbe;
-            
-            int _speed();
+            Camera _camera;
+
+            void _update_hbe_values(int min_index);
 
         public:
             Mode_7_Camera(bn::affine_bg_ptr& bg);
-            void update_hbe_values(Camera& camera, int min_index);
+            void update();
     };
 }
 
