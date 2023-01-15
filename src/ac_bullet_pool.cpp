@@ -1,5 +1,4 @@
 #include "ac_bullet_pool.h"
-// butano
 
 namespace ac
 {

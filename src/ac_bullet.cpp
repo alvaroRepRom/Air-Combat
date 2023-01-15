@@ -1,6 +1,4 @@
 #include "ac_bullet.h"
-// butano
-#include "bn_math.h"
 // assets
 #include "bn_sprite_items_bullet.h"
 
@@ -20,7 +18,8 @@ namespace ac
     void Bullet::init(bn::fixed_point &shoot_position, bn::fixed_point &aimed_position)
     {
         _sprite.set_visible(true);
-        // add a bit more in Y to see bullet fade out in aim cross
+
+        // add a bit more in Y so it's not overlap with ship
         _sprite.set_position(shoot_position.x(), shoot_position.y() - 5);
         _frames_left = FRAMES_ALIVE;
 
