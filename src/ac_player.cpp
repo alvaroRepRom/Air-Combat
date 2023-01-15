@@ -5,6 +5,7 @@
 #include "bn_keypad.h"
 // air combat
 #include "bn_sprite_items_cross.h"
+#include "bn_sprite_items_plane_sheet.h"
 
 namespace ac
 {
@@ -89,13 +90,16 @@ namespace ac
 
     void Player::_move_air_ship()
     {
+        int sprite_index = 0;
         // MOVE SHIP X
         bn::fixed x_dist = _aim_cross_sprite.x() - _sprite.x();        
         if (x_dist > 0) // IF aim to the right
         {
+            sprite_index = 1;
             bn::fixed delta_x = 0.5;
             if (x_dist > AIM_OFFSET.x())
             {
+                sprite_index = 2;
                 delta_x = 1;
             }
 
@@ -105,9 +109,11 @@ namespace ac
         else 
         if (x_dist < 0) // IF aim to the left
         {
+            sprite_index = 5;
             bn::fixed delta_x = 0.5;
             if (x_dist < -AIM_OFFSET.x())
             {
+                sprite_index = 6;
                 delta_x = 1;
             }
 
@@ -144,6 +150,8 @@ namespace ac
             if (_sprite.y() < -Y_BORDER + INIT_Y + AIM_OFFSET.y())
                 _sprite.set_y(-Y_BORDER + INIT_Y + AIM_OFFSET.y());
         }
+
+        _sprite.set_item(bn::sprite_items::plane_sheet, sprite_index);
     }
 
     void Player::_shooting()

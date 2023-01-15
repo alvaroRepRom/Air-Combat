@@ -9,7 +9,7 @@
 
 namespace
 {
-    bn::fixed const init_y = 50;
+    bn::fixed const init_y = 48;
     int const amplitud = 2;
     int const oscilation_speed = 3;
     int pos_angle = 0;
