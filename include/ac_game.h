@@ -11,7 +11,7 @@
 #include "ac_mode_7_camera.h"
 #include "ac_plane_anim.h"
 #include "ac_player.h"
-#include "ac_bullet.h"
+#include "ac_enemy_spawner.h"
 
 namespace ac
 {
@@ -30,6 +30,7 @@ namespace ac
             bn::regular_bg_ptr _bg;
             Player _player;
             Mode_7_Camera _mode7_cam;
+            Enemy_Spawner _enemy_spawner;
     };
 }
 
