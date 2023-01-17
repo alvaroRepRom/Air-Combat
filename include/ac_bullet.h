@@ -12,7 +12,7 @@ namespace ac
         public:
             Bullet();
             void update();
-            void init(bn::fixed_point &shoot_position, bn::fixed_point &aimed_position);
+            void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);
             bool is_active() const;
 
         private:

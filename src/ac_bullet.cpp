@@ -6,8 +6,12 @@ namespace ac
 {
     namespace
     {
-        constexpr int FRAMES_ALIVE = 30; // 0.5 seconds
-        constexpr bn::fixed SCALE_FACTOR = 0.03333; // 0.0333 = 1 / 30 frames
+        constexpr const int FRAMES_ALIVE = 30; // 0.5 seconds
+        constexpr bn::fixed SCALE_FACTOR()
+        {
+            bn::fixed frames(FRAMES_ALIVE);
+            return 1 / frames;
+        }
     }
 
     Bullet::Bullet() : _sprite(bn::sprite_items::bullet.create_sprite(0, 0))
@@ -15,7 +19,7 @@ namespace ac
         _sprite.set_visible(false);
     }
 
-    void Bullet::init(bn::fixed_point &shoot_position, bn::fixed_point &aimed_position)
+    void Bullet::init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position)
     {
         _sprite.set_visible(true);
 
@@ -33,8 +37,8 @@ namespace ac
         _sprite.set_position(_sprite.position() + _velocity);
 
         _frames_left--;
-        if(_frames_left) _sprite.set_scale(SCALE_FACTOR * _frames_left);
-        else             _sprite.set_visible(false);
+        if (_frames_left) _sprite.set_scale(SCALE_FACTOR() * _frames_left);
+        else              _sprite.set_visible(false);
     }
     
     bool Bullet::is_active() const

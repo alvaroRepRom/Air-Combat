@@ -16,7 +16,7 @@ namespace ac
     Bullet_Pool::Bullet_Pool() : _pool(init_pool())
     {}
 
-    void Bullet_Pool::shoot_bullet(bn::fixed_point shoot_position, bn::fixed_point aimed_position)
+    void Bullet_Pool::shoot_bullet(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position)
     {
         for(int i = 0; i < _pool.size(); i++)
         {
