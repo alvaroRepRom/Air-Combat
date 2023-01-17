@@ -4,6 +4,7 @@
 // butano
 #include "bn_sprite_ptr.h"
 #include "bn_fixed_point.h"
+#include "ac_collider.h"
 
 namespace ac
 {
@@ -11,6 +12,8 @@ namespace ac
     {
         public:
             Bullet();
+            Collider collider;
+
             void update();
             void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);
             bool is_active() const;

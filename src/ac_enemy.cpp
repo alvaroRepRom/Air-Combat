@@ -5,7 +5,8 @@
 namespace ac
 {
     Enemy::Enemy() :
-        _sprite(bn::sprite_items::pivot.create_sprite(0, 0))
+        _sprite(bn::sprite_items::pivot.create_sprite(0, 0)),
+        collider(_sprite, 32, 32)
     {
         _sprite.set_visible(false);
         _sprite.set_z_order(1);

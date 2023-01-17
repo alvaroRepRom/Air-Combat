@@ -14,7 +14,9 @@ namespace ac
         }
     }
 
-    Bullet::Bullet() : _sprite(bn::sprite_items::bullet.create_sprite(0, 0))
+    Bullet::Bullet() : 
+        _sprite(bn::sprite_items::bullet.create_sprite(0, 0)),
+        collider(_sprite, 16, 16)
     {
         _sprite.set_visible(false);
     }

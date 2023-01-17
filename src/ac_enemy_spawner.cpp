@@ -1,5 +1,4 @@
 #include "ac_enemy_spawner.h"
-// butano
 
 namespace ac
 {

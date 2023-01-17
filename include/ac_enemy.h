@@ -4,6 +4,7 @@
 // butano
 #include "bn_sprite_ptr.h"
 #include "bn_fixed_point.h"
+#include "ac_collider.h"
 
 namespace ac
 {
@@ -11,6 +12,8 @@ namespace ac
     {
         public:
             Enemy();
+            Collider collider;
+            
             void init();
             void update();
             bool is_active();

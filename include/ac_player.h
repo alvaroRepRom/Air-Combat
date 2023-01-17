@@ -7,6 +7,7 @@
 #include "ac_mode_7_camera.h"
 #include "ac_plane_anim.h"
 #include "ac_bullet_pool.h"
+#include "ac_collider.h"
 
 namespace ac
 {
@@ -26,6 +27,7 @@ namespace ac
         public:
             Player(bn::sprite_ptr& sprite_sheet);
             Camera camera;
+            Collider collider;
             
             void update();
     };

@@ -3,6 +3,7 @@
 #include "bn_math.h"
 #include "bn_display.h"
 #include "bn_keypad.h"
+#include "bn_log.h"
 // air combat
 #include "bn_sprite_items_cross.h"
 #include "bn_sprite_items_plane_sheet.h"
@@ -23,7 +24,8 @@ namespace ac
         _aim_cross_sprite(bn::sprite_items::cross.create_sprite(0, 0)),
         _player_anim(_sprite),
         _bullet_pool(),
-        _wait_shot_cadence(WAIT_SHOT_CADENCE)
+        _wait_shot_cadence(WAIT_SHOT_CADENCE),
+        collider(_sprite, 32, 14)
     {
         _sprite.set_position(0, INIT_Y);
     }
@@ -33,6 +35,7 @@ namespace ac
         _move_aim_cross();
         _move_air_ship();
         _shooting();
+        BN_LOG("collider position: ", collider.origin_x(), ", ", collider.origin_y());
     }
 
     void Player::_move_aim_cross()
