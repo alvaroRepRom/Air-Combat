@@ -13,6 +13,11 @@ namespace ac
     bn::fixed       Collider::width()   { return _width; }
     bn::fixed       Collider::height()  { return _height; }
 
+    void Collider::set_sprite(bn::sprite_ptr& sprite)
+    {
+        _sprite = sprite;
+    }
+
     [[nodiscard]] bool Collider::check_collision(Collider& box_b)
     {
         return this->origin_x() - this->width()/2  <= box_b.origin_x() + box_b.width()/2  &&

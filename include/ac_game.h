@@ -12,6 +12,7 @@
 #include "ac_plane_anim.h"
 #include "ac_player.h"
 #include "ac_enemy_spawner.h"
+#include "ac_game_events.h"
 
 namespace ac
 {
@@ -31,6 +32,7 @@ namespace ac
             Player _player;
             Mode_7_Camera _mode7_cam;
             Enemy_Spawner _enemy_spawner;
+            Game_Events _game_events;
     };
 }
 

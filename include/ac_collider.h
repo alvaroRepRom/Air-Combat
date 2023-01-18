@@ -21,6 +21,8 @@ namespace ac
             bn::fixed width();
             bn::fixed height();
 
+            void set_sprite(bn::sprite_ptr& sprite);
+
             [[nodiscard]] bool check_collision(Collider& box_b);
     };
 }

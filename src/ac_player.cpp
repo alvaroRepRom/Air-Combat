@@ -12,19 +12,20 @@ namespace ac
 {
     namespace
     {
-        constexpr int WAIT_SHOT_CADENCE = 15;
-        constexpr int X_BORDER = bn::display::width() / 2 - 20;
-        constexpr int Y_BORDER = bn::display::height() / 2 - 20;
-        constexpr bn::fixed_point AIM_OFFSET(30, 15);
-        constexpr int INIT_Y = 48;
+        constexpr const int WAIT_SHOT_CADENCE = 15;
+        constexpr const int X_BORDER = bn::display::width() / 2 - 20;
+        constexpr const int Y_BORDER = bn::display::height() / 2 - 20;
+        constexpr const bn::fixed_point AIM_OFFSET(30, 15);
+        constexpr const int INIT_Y = 48;
     }
 
-    Player::Player(bn::sprite_ptr& sprite_sheet) : 
+    Player::Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events) : 
         _sprite(sprite_sheet),
         _aim_cross_sprite(bn::sprite_items::cross.create_sprite(0, 0)),
         _player_anim(_sprite),
-        _bullet_pool(),
+        _bullet_pool(game_events),
         _wait_shot_cadence(WAIT_SHOT_CADENCE),
+        _game_events(game_events),
         collider(_sprite, 32, 14)
     {
         _sprite.set_position(0, INIT_Y);
@@ -35,7 +36,7 @@ namespace ac
         _move_aim_cross();
         _move_air_ship();
         _shooting();
-        BN_LOG("collider position: ", collider.origin_x(), ", ", collider.origin_y());
+        //BN_LOG("collider position: ", collider.origin_x(), ", ", collider.origin_y());
     }
 
     void Player::_move_aim_cross()

@@ -12,10 +12,10 @@ namespace ac
     Game::Game() : 
         _sprite_sheet(bn::sprite_items::plane_sheet.create_sprite(0, 0)),
         _mode7_bg(bn::affine_bg_items::fondo.create_bg(-376, -336)),
-        _player(_sprite_sheet),
+        _player(_sprite_sheet, &_game_events),
         _mode7_cam(_mode7_bg),
         _bg(bn::regular_bg_items::sky.create_bg(0, 0)),
-        _enemy_spawner()
+        _enemy_spawner(&_game_events)
     {}
 
     bn::optional<Scene_Type> Game::update()

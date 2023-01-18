@@ -8,6 +8,7 @@
 #include "ac_plane_anim.h"
 #include "ac_bullet_pool.h"
 #include "ac_collider.h"
+#include "ac_game_events.h"
 
 namespace ac
 {
@@ -19,13 +20,14 @@ namespace ac
             Plane_Anim _player_anim;
             Bullet_Pool _bullet_pool;
             int _wait_shot_cadence;
+            Game_Events* _game_events;
 
             void _move_aim_cross();
             void _move_air_ship();
             void _shooting();
 
         public:
-            Player(bn::sprite_ptr& sprite_sheet);
+            Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events);
             Camera camera;
             Collider collider;
             

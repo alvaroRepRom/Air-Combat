@@ -15,11 +15,12 @@ namespace ac
     void Enemy::init()
     {
         _sprite.set_visible(true);
+        collider.set_sprite(_sprite);
     }
 
     void Enemy::update()
     {
-
+        _sprite.set_x(_sprite.x() + 0.1);
     }
 
     bool Enemy::is_active()
