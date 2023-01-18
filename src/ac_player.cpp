@@ -36,7 +36,6 @@ namespace ac
         _move_aim_cross();
         _move_air_ship();
         _shooting();
-        //BN_LOG("collider position: ", collider.origin_x(), ", ", collider.origin_y());
     }
 
     void Player::_move_aim_cross()

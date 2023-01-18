@@ -8,6 +8,7 @@
 // air combat
 #include "ac_bullet.h"
 #include "ac_game_events.h"
+#include "ac_constants.h"
 
 namespace ac
 {
@@ -19,7 +20,7 @@ namespace ac
             void update();
 
         private:
-            bn::array<Bullet, 1> _pool;
+            bn::array<Bullet, constants::NUMBER_OF_BULLETS> _pool;
             Game_Events* _game_events;
     };
 }

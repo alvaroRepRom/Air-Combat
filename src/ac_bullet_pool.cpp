@@ -4,12 +4,12 @@ namespace ac
 {
     namespace
     {
-        bn::array<Bullet, 1> init_pool()
+        bn::array<Bullet, constants::NUMBER_OF_BULLETS> init_pool()
         {
-            bn::array<Bullet, 1> pool;
-            for (int i = 0; i < 1; i++)
+            bn::array<Bullet, constants::NUMBER_OF_BULLETS> pool;
+            for (int i = 0; i < pool.size(); i++)
                 pool[i] = Bullet();
-            return pool;            
+            return pool;
         }
     }
 

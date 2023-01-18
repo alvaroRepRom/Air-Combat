@@ -9,11 +9,6 @@
 
 namespace ac
 {
-    namespace
-    {
-        constexpr int num_frames = 180;
-    }
-
     Title::Title() : 
         _bg(bn::regular_bg_items::dungeon_2x.create_bg(0, 0))
     {}

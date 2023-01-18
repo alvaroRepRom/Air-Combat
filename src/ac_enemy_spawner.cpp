@@ -15,7 +15,10 @@ namespace ac
         for (int i = 0; i < _enemy_pool.size(); i++){
             _enemy_pool[i].update();
             bool collide = _enemy_pool[i].collider.check_collision(*_game_events->bullet_collider);
-            if (collide) BN_LOG("has Collide?: ", collide);
+            if (collide){
+                //_enemy_pool[i].set_visible(false);
+                BN_LOG("has Collide?: ", collide);
+            } 
         }
         
         _frames_left--;
