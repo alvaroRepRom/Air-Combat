@@ -26,6 +26,7 @@ namespace ac
             {
                 _pool[i].init(shoot_position, aimed_position);
                 _game_events->bullet_collider = &_pool[i].collider;
+                //_game_events->bullet_colliders[i] = &_pool[i].collider;
                 return;
             }
         }

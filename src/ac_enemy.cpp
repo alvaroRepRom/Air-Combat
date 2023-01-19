@@ -27,4 +27,9 @@ namespace ac
     {
         return _sprite.visible();
     }
+
+    void Enemy::deactivate()
+    {
+        _sprite.set_visible(false);
+    }
 }

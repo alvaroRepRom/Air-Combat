@@ -17,6 +17,7 @@ namespace ac
             void init();
             void update();
             bool is_active();
+            void deactivate();
 
         private:
             bn::sprite_ptr _sprite;

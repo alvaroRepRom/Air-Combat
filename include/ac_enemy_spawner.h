@@ -9,6 +9,7 @@
 // air combat
 #include "ac_enemy.h"
 #include "ac_game_events.h"
+#include "ac_constants.h"
 
 namespace ac
 {
@@ -21,7 +22,7 @@ namespace ac
             void update();
 
         private:
-            bn::array<Enemy, 3> _enemy_pool;
+            bn::array<Enemy, constants::NUMBER_OF_ENEMIES> _enemy_pool;
             bn::random _random_generator;
             int _frames_left;
             Game_Events* _game_events;
