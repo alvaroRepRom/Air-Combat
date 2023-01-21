@@ -11,7 +11,8 @@
         "vector": "cpp",
         "deque": "cpp",
         "unordered_map": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "numbers": "cpp"
     },
     "editor.suggest.localityBonus": true,
     "makefile.launchConfigurations": [

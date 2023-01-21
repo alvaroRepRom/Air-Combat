@@ -3,9 +3,20 @@
 #include "bn_math.h"
 #include "bn_display.h"
 #include "bn_affine_bg_builder.h"
+#include "bn_log.h"
 
 namespace
 {
+    struct Camera
+    {
+        bn::fixed x = 440;
+        bn::fixed y = 350;
+        bn::fixed z = 320;
+        int phi = 0;
+        int cos = 0;
+        int sin = 0;
+    } _camera;
+
     int16_t _pa_values[bn::display::height()];
     int16_t _pc_values[bn::display::height()];
     int _dx_values[bn::display::height()];
@@ -16,26 +27,20 @@ namespace
 
 namespace ac 
 {
-    Mode_7_Camera::Mode_7_Camera(bn::affine_bg_ptr& bg) : 
-        _bg(bg),
-        _pa_hbe(bn::affine_bg_pa_register_hbe_ptr::create(_bg, _pa_values)),
-        _pc_hbe(bn::affine_bg_pc_register_hbe_ptr::create(_bg, _pc_values)),
-        _dx_hbe(bn::affine_bg_dx_register_hbe_ptr::create(_bg, _dx_values)),
-        _dy_hbe(bn::affine_bg_dy_register_hbe_ptr::create(_bg, _dy_values))
+    Mode_7_Camera::Mode_7_Camera(bn::affine_bg_ptr& bg) :
+        _pa_hbe(bn::affine_bg_pa_register_hbe_ptr::create(bg, _pa_values)),
+        _pc_hbe(bn::affine_bg_pc_register_hbe_ptr::create(bg, _pc_values)),
+        _dx_hbe(bn::affine_bg_dx_register_hbe_ptr::create(bg, _dx_values)),
+        _dy_hbe(bn::affine_bg_dy_register_hbe_ptr::create(bg, _dy_values))
     {
-        _camera.cos = bn::lut_cos(_camera.phi).data() >> 4;
-        _camera.sin = bn::lut_sin(_camera.phi).data() >> 4;
+        _camera.cos = bn::lut_cos(_camera.phi).data() >> 4; // 256
+        _camera.sin = bn::lut_sin(_camera.phi).data() >> 4; // 0
     }
 
     void Mode_7_Camera::update()
     {
-        // Magic Actual Movement
         _camera.z += Z_SPEED * _camera.cos;
-        _update_hbe_values();
-    }
-
-    void Mode_7_Camera::_update_hbe_values()
-    {
+        
         int camera_x = _camera.x.data();
         int camera_y = _camera.y.data() >> 4;
         int camera_z = _camera.z.data();
@@ -60,7 +65,8 @@ namespace ac
             lxr = (bn::display::width() / 2) * lsf;
             lyr = y_shift * lcf;
             _dy_values[index] = (camera_z - lxr - lyr) >> 4;
-        }        
+        }
+        
         _pa_hbe.reload_values_ref();
         _pc_hbe.reload_values_ref();
         _dx_hbe.reload_values_ref();

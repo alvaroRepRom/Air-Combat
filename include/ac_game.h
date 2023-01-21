@@ -9,7 +9,6 @@
 #include "ac_scene_type.h"
 #include "ac_scene.h"
 #include "ac_mode_7_camera.h"
-#include "ac_plane_anim.h"
 #include "ac_player.h"
 #include "ac_enemy_spawner.h"
 #include "ac_game_events.h"

@@ -10,10 +10,11 @@
 
 namespace ac
 {
-    struct Game_Events
+    class Game_Events
     {
-        Collider* bullet_collider;
-        bn::array<Collider*, constants::NUMBER_OF_BULLETS> bullet_colliders;
+        public:
+            Collider* bullet_collider;
+            bn::array<Collider*, constants::NUMBER_OF_BULLETS> bullet_colliders;
     };
 }
 
