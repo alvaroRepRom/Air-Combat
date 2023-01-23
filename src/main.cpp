@@ -14,7 +14,7 @@ int main()
 
     bn::optional<ac::Scene_Type> next_scene_type;
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
-    
+
     while(1)
     {
         // Gameloop
@@ -38,6 +38,6 @@ int main()
                 BN_ERROR("Invalid next scene: ", int(*next_scene_type));
                 break;
             }
-        }        
+        }
     }
 }

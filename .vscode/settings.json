@@ -13,7 +13,8 @@
         "unordered_map": "cpp",
         "functional": "cpp",
         "numbers": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "memory": "cpp"
     },
     "editor.suggest.localityBonus": true,
     "makefile.launchConfigurations": [
