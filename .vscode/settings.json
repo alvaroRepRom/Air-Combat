@@ -12,7 +12,8 @@
         "deque": "cpp",
         "unordered_map": "cpp",
         "functional": "cpp",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "random": "cpp"
     },
     "editor.suggest.localityBonus": true,
     "makefile.launchConfigurations": [

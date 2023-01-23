@@ -2,6 +2,11 @@
 
 namespace ac
 {
+    Collider::Collider(bn::sprite_ptr& sprite, bn::fixed radius) :
+        _sprite(sprite),
+        _radius(radius)
+    {}
+
     Collider::Collider(bn::sprite_ptr& sprite, bn::fixed width, bn::fixed height) :
         _sprite(sprite),
         _width(width),
@@ -12,6 +17,7 @@ namespace ac
     bn::fixed       Collider::origin_y(){ return _sprite.y(); }
     bn::fixed       Collider::width()   { return _width; }
     bn::fixed       Collider::height()  { return _height; }
+    bn::fixed       Collider::radius()  { return _radius; }
 
     void            Collider::set_sprite(bn::sprite_ptr& sprite)
     {
