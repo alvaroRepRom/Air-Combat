@@ -4,7 +4,8 @@ namespace arr
 {
     namespace
     {
-        bn::fixed box_projection(const bn::fixed &circle_pos, const bn::fixed &box_origin, const bn::fixed &box_half_side)
+        bn::fixed box_projection(const bn::fixed &circle_pos, 
+                                const bn::fixed &box_origin, const bn::fixed &box_half_side)
         {
             if (circle_pos < box_origin - box_half_side) 
                 return box_origin - box_half_side;
@@ -40,7 +41,7 @@ namespace arr
     [[nodiscard]] bool check_collision(Box_Collider& box, Circle_Collider& circle)
     {
         bn::fixed c_x = box_projection(circle.origin_x(), box.origin_x(), box.half_width());
-        bn::fixed c_y = box_projection(circle.origin_y(), box.origin_x(), box.half_height());
+        bn::fixed c_y = box_projection(circle.origin_y(), box.origin_y(), box.half_height());
 
         return (circle.origin_x() - c_x) * (circle.origin_x() - c_x) +
                (circle.origin_y() - c_y) * (circle.origin_y() - c_y) <=
@@ -52,7 +53,7 @@ namespace arr
     [[nodiscard]] bool check_collision(Circle_Collider& circle, Box_Collider& box)
     {
         bn::fixed c_x = box_projection(circle.origin_x(), box.origin_x(), box.half_width());
-        bn::fixed c_y = box_projection(circle.origin_y(), box.origin_x(), box.half_height());
+        bn::fixed c_y = box_projection(circle.origin_y(), box.origin_y(), box.half_height());
 
         return (circle.origin_x() - c_x) * (circle.origin_x() - c_x) +
                (circle.origin_y() - c_y) * (circle.origin_y() - c_y) <=

@@ -1,6 +1,5 @@
 //butano
 #include "bn_core.h"
-#include "bn_affine_bg_ptr.h"
 // air combat
 #include "ac_scene_type.h"
 #include "ac_scene.h"
