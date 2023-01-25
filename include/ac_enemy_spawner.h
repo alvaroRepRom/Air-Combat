@@ -14,6 +14,7 @@
 namespace ac
 {
     class Enemy;
+    class Game_events;
 
     class Enemy_Spawner
     {

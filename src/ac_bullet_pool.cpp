@@ -25,8 +25,7 @@ namespace ac
             if (!_pool[i].is_active())
             {
                 _pool[i].init(shoot_position, aimed_position);
-                _game_events->bullet_collider = &_pool[i].collider;
-                //_game_events->bullet_colliders[i] = &_pool[i].collider;
+                _game_events->bullet_col = &_pool[i].col;
                 return;
             }
         }

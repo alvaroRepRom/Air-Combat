@@ -1,7 +1,6 @@
 #include "ac_bullet.h"
 // assets
 #include "bn_sprite_items_bullet.h"
-#include "bn_log.h"
 
 namespace ac
 {
@@ -12,12 +11,12 @@ namespace ac
             bn::fixed frames(FRAMES_ALIVE);
             return 1 / frames;
         }();
-        bn::fixed h = 16;
+        bn::fixed h = 8;
     }
 
     Bullet::Bullet() : 
         _sprite(bn::sprite_items::bullet.create_sprite(0, 0)),
-        collider(_sprite, h, h)
+        col(_sprite, h)
     {
         _sprite.set_visible(false);
     }
@@ -25,7 +24,7 @@ namespace ac
     void Bullet::init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position)
     {
         _sprite.set_visible(true);
-        collider.set_sprite(_sprite);
+        col.set_sprite(_sprite);
 
         // add a bit more in Y so it's not overlap with ship
         _sprite.set_position(shoot_position.x(), shoot_position.y() - 5);

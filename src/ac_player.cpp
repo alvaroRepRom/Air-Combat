@@ -24,8 +24,7 @@ namespace ac
         _aim_cross_sprite(bn::sprite_items::cross.create_sprite(0, 0)),
         _bullet_pool(game_events),
         _wait_shot_cadence(WAIT_SHOT_CADENCE),
-        _game_events(game_events),
-        collider(_sprite, 32, 14)
+        _game_events(game_events)
     {
         _sprite.set_position(0, INIT_Y);
     }

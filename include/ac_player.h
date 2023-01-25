@@ -5,7 +5,6 @@
 #include "bn_sprite_ptr.h"
 // air combat
 #include "ac_bullet_pool.h"
-#include "ac_collider.h"
 #include "ac_game_events.h"
 
 namespace ac
@@ -25,7 +24,6 @@ namespace ac
 
         public:
             Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events);
-            Collider collider;
             
             void update();
     };

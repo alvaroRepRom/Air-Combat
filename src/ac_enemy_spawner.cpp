@@ -1,5 +1,6 @@
 #include "ac_enemy_spawner.h"
 #include "bn_log.h"
+#include "arr_collisions.h"
 
 namespace ac
 {
@@ -28,7 +29,7 @@ namespace ac
             if (_enemy_pool[i].is_active())
             {
                 _enemy_pool[i].update();
-                if (_enemy_pool[i].collider.check_collision(*_game_events->bullet_collider))
+                if (arr::check_collision(*_game_events->bullet_col, _enemy_pool[i].col))
                 {
                     _enemy_pool[i].deactivate();
                     BN_LOG("has Collide?: ", true);

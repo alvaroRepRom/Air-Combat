@@ -4,7 +4,8 @@
 // butano
 #include "bn_sprite_ptr.h"
 #include "bn_fixed_point.h"
-#include "ac_collider.h"
+// arr
+#include "arr_circle_collider.h"
 
 namespace ac
 {
@@ -12,7 +13,7 @@ namespace ac
     {
         public:
             Enemy();
-            Collider collider;
+            arr::Circle_Collider col;
             
             void init();
             void update();
