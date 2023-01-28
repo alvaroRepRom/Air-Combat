@@ -5,6 +5,7 @@
 #include "bn_sprite_ptr.h"
 #include "bn_fixed_point.h"
 #include "bn_array.h"
+#include "bn_deque.h"
 // air combat
 #include "ac_constants.h"
 // arr
@@ -19,7 +20,7 @@ namespace ac
     class Game_Events
     {
         public:
-            arr::Circle_Collider* bullet_col;
+            bn::deque<arr::Circle_Collider, 4> bullet_col_list;
     };
 }
 

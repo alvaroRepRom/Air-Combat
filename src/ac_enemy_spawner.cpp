@@ -29,10 +29,22 @@ namespace ac
             if (_enemy_pool[i].is_active())
             {
                 _enemy_pool[i].update();
-                if (arr::check_collision(*_game_events->bullet_col, _enemy_pool[i].col))
+
+                if (!_game_events->bullet_col_list.empty())
                 {
-                    _enemy_pool[i].deactivate();
-                    BN_LOG("has Collide?: ", true);
+                    for (int index = 0; index < _game_events->bullet_col_list.size(); index++)
+                    {
+                        if (arr::check_collision(_game_events->bullet_col_list[index], _enemy_pool[i].col))
+                        {
+                            _enemy_pool[i].deactivate();
+                            //_game_events->bullet_col_list.pop_front();
+                            BN_LOG("has Collide?: ", true);
+                        }
+                        else
+                        {
+                            //_game_events->bullet_col_list.end();
+                        }
+                    }
                 }
             }
         }
