@@ -24,25 +24,20 @@ namespace ac
 
     void Enemy_Spawner::update()
     {
-        for (int i = 0; i < _enemy_pool.size(); i++)
+        for (auto enemy : _enemy_pool)
         {
-            if (_enemy_pool[i].is_active())
+            if (enemy.is_active())
             {
-                _enemy_pool[i].update();
+                enemy.update();
 
                 if (!_game_events->bullet_col_list.empty())
                 {
-                    for (int index = 0; index < _game_events->bullet_col_list.size(); index++)
+                    for (auto bullet_col : _game_events->bullet_col_list)
                     {
-                        if (arr::check_collision(_game_events->bullet_col_list[index], _enemy_pool[i].col))
+                        if (arr::check_collision(bullet_col, enemy.col))
                         {
-                            _enemy_pool[i].deactivate();
-                            //_game_events->bullet_col_list.pop_front();
+                            enemy.deactivate();
                             BN_LOG("has Collide?: ", true);
-                        }
-                        else
-                        {
-                            //_game_events->bullet_col_list.end();
                         }
                     }
                 }
