@@ -47,7 +47,6 @@ namespace ac
         if (_frames_left)
         {
             _sprite.set_scale(SCALE_FACTOR * _frames_left);
-            
         } 
         else 
         {
