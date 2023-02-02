@@ -1,4 +1,6 @@
 #include "ac_bullet_pool.h"
+// assets
+#include "bn_sprite_items_bullet.h"
 
 namespace ac
 {
@@ -8,14 +10,16 @@ namespace ac
         {
             bn::array<Bullet, constants::NUMBER_OF_BULLETS> pool;
             for (int i = 0; i < pool.size(); i++)
-                pool[i] = Bullet(game_events);
+                pool[i] = Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events);
             return pool;
         }*/
     }
 
     Bullet_Pool::Bullet_Pool(Game_Events* game_events) : 
         _game_events(game_events),
-        _pool({Bullet(game_events), Bullet(game_events), Bullet(game_events)})
+        _pool({Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
+            Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
+            Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events)})
         //_pool(init_pool(_game_events))
     {}
 

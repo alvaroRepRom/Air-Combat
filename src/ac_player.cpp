@@ -104,7 +104,7 @@ namespace ac
                 delta_x = 1;
             }
 
-            if(_sprite.x() < X_BORDER - AIM_OFFSET.x())
+            if (_sprite.x() < X_BORDER - AIM_OFFSET.x())
                 _sprite.set_x(_sprite.x() + delta_x);
         }
         else 

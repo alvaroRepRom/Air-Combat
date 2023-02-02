@@ -1,6 +1,5 @@
 #include "ac_bullet.h"
-// assets
-#include "bn_sprite_items_bullet.h"
+// butano
 #include "bn_log.h"
 
 namespace ac
@@ -15,8 +14,8 @@ namespace ac
         bn::fixed h = 8;
     }
 
-    Bullet::Bullet(Game_Events* game_events) : 
-        _sprite(bn::sprite_items::bullet.create_sprite(0, 0)),
+    Bullet::Bullet(bn::sprite_ptr sprite, Game_Events* game_events) : 
+        _sprite(sprite),//bn::sprite_items::bullet.create_sprite(0, 0)),
         col(_sprite, h),
         _game_events(game_events)
     {

@@ -15,7 +15,7 @@ namespace ac
     {
         public:
             Bullet();
-            Bullet(Game_Events* game_events);
+            Bullet(bn::sprite_ptr sprite, Game_Events* game_events);
             arr::Circle_Collider col;
 
             void update();

@@ -26,20 +26,19 @@ namespace ac
     {
         for (auto enemy : _enemy_pool)
         {
-            if (enemy.is_active())
-            {
-                enemy.update();
+            if (!enemy.is_active()) continue;
 
-                if (_game_events->bullet_col_list.empty()) continue;
-                
-                for (auto bullet_col : _game_events->bullet_col_list)
+            enemy.update();
+
+            if (_game_events->bullet_col_list.empty()) continue;
+            
+            for (auto bullet_col : _game_events->bullet_col_list)
+            {
+                if (arr::check_collision(bullet_col, enemy.col))
                 {
-                    if (arr::check_collision(bullet_col, enemy.col))
-                    {
-                        enemy.deactivate();
-                        BN_LOG("has Collide?: ", true);
-                    }
-                }                
+                    enemy.deactivate();
+                    BN_LOG("has Collide?: ", true);
+                }
             }
         }
         
