@@ -15,4 +15,9 @@ namespace arr
     {
         _sprite = sprite;
     }
+
+    void            Circle_Collider::on_collision()
+    {
+
+    }
 }

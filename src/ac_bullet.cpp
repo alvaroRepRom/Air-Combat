@@ -15,6 +15,7 @@ namespace ac
     }
 
     Bullet::Bullet(bn::sprite_ptr sprite, Game_Events* game_events) : 
+        arr::Circle_Collider(sprite, h),
         _sprite(sprite),//bn::sprite_items::bullet.create_sprite(0, 0)),
         col(_sprite, h),
         _game_events(game_events)
@@ -28,7 +29,7 @@ namespace ac
         col.set_sprite(_sprite);
 
         //_game_events->bullet_col_list.push_front(&col);
-        _game_events->bullet_col_list.push_front(col);
+        _game_events->bullet_col_list.push_front(this);
         // add a bit more in Y so it's not overlap with ship
         _sprite.set_position(shoot_position.x(), shoot_position.y() - 5);
         _frames_left = FRAMES_ALIVE;
@@ -57,5 +58,15 @@ namespace ac
     bool Bullet::is_active() const
     {
         return _sprite.visible();
+    }
+
+    void Bullet::action()
+    {
+        _sprite.set_visible(false);
+    }
+
+    void Bullet::on_collision()
+    {
+        _sprite.set_visible(false);
     }
 }

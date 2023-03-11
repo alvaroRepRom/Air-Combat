@@ -8,19 +8,26 @@
 #include "ac_game_events.h"
 // arr
 #include "arr_circle_collider.h"
+#include "arr_event.h"
 
 namespace ac
 {
-    class Bullet
+    class arr::Circle_Collider;
+
+    class Bullet : public arr::Circle_Collider
     {
         public:
             Bullet();
             Bullet(bn::sprite_ptr sprite, Game_Events* game_events);
             arr::Circle_Collider col;
 
+            virtual void action() final;
+
             void update();
             void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);
             bool is_active() const;
+
+            virtual void on_collision() final;
 
         private:
             bn::sprite_ptr _sprite;

@@ -1,5 +1,5 @@
-#ifndef AC_GAME_EVENTS_H
-#define AC_GAME_EVENTS_H
+#ifndef ARR_EVENT_H
+#define ARR_EVENT_H
 
 // butano
 #include "bn_sprite_ptr.h"
@@ -12,16 +12,16 @@
 #include "arr_box_collider.h"
 #include "arr_circle_collider.h"
 #include "arr_collisions.h"
-#include "arr_event.h"
 
-namespace ac
+namespace arr
 {
-    class arr::Circle_Collider;
-
-    class Game_Events
+    class Event
     {
         public:
-            bn::deque<arr::Circle_Collider*, 4> bullet_col_list;
+            virtual ~Event() = default;
+            virtual void action() = 0;
+        protected:
+            Event() = default;
     };
 }
 

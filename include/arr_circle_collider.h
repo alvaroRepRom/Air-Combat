@@ -12,6 +12,7 @@ namespace arr
             bn::fixed _radius;
 
         public:
+            Circle_Collider();
             Circle_Collider(bn::sprite_ptr& sprite, bn::fixed radius);
 
             bn::fixed origin_x();
@@ -19,6 +20,7 @@ namespace arr
             bn::fixed radius();
 
             void set_sprite(bn::sprite_ptr& sprite);
+            virtual void on_collision();
     };
 }
 
