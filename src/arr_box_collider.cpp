@@ -47,12 +47,12 @@ namespace arr
     {
         if (_is_enabled && circle_collider.is_enabled())
         {
-            bn::fixed cicle_c_x = circle_collider.origin_x();
+            bn::fixed circle_c_x = circle_collider.origin_x();
             bn::fixed circle_c_y = circle_collider.origin_y();
-            bn::fixed c_x = box_projection(cicle_c_x, origin_x(), _half_width);
+            bn::fixed c_x = box_projection(circle_c_x, origin_x(), _half_width);
             bn::fixed c_y = box_projection(circle_c_y, origin_y(), _half_height);
 
-            if ((cicle_c_x - c_x) * (cicle_c_x - c_x) +
+            if ((circle_c_x - c_x) * (circle_c_x - c_x) +
                 (circle_c_y - c_y) * (circle_c_y - c_y) <=
                 (circle_collider.radius() * circle_collider.radius()))
             {
