@@ -31,6 +31,7 @@ namespace ac
     void Bullet::init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position)
     {
         _sprite.set_visible(true);
+        set_enabled(true);
         col.set_sprite(_sprite);
 
         //_game_events->bullet_col_list.push_front(&col);
@@ -69,5 +70,6 @@ namespace ac
     void Bullet::on_collision()
     {
         _sprite.set_visible(false);
+        set_enabled(false);
     }
 }

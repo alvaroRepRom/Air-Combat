@@ -14,6 +14,7 @@ namespace arr
         private:
             bn::sprite_ptr _sprite;
             bn::fixed _radius;
+            bool _is_enabled;
 
         public:
             Circle_Collider();
@@ -22,9 +23,11 @@ namespace arr
             bn::fixed origin_x();
             bn::fixed origin_y();
             bn::fixed radius();
+            bool is_enabled();
 
             void set_sprite(bn::sprite_ptr& sprite);
             void set_radius(bn::fixed radius);
+            void set_enabled(bool is_enabled);
 
             bool check_collision(Circle_Collider& circle_collider);
             bool check_collision(Box_Collider& box_collider);
