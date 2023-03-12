@@ -29,18 +29,18 @@ namespace ac
             if (!enemy.is_active()) continue;
 
             enemy.update();
-            
-            if (_game_events->bullet_col_list.empty()) continue;
 
-            for (auto bullet_col : _game_events->bullet_col_list)
+            for (auto bullet_col : _game_events->bullet_col_array)
             {
                 //bullet_col->check_collision(enemy.col);
-                
-                if (arr::check_collision(*bullet_col, enemy.col))
-                {
-                    BN_LOG("peor");
-                    enemy.deactivate();
-                    bullet_col->on_collision();
+                if (bullet_col->is_enabled()){
+                    if (arr::check_collision(*bullet_col, enemy.col))
+                    {
+                        BN_LOG("peor");
+                        enemy.deactivate();
+                        bullet_col->on_collision();
+                    }
+
                 }
             }
         }

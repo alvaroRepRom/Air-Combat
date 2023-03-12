@@ -2,6 +2,7 @@
 // assets
 #include "bn_sprite_items_bullet.h"
 #include "bn_log.h"
+#include "arr_circle_collider.h"
 
 namespace ac
 {
@@ -18,11 +19,14 @@ namespace ac
 
     Bullet_Pool::Bullet_Pool(Game_Events* game_events) : 
         _game_events(game_events),
-        _pool({Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
-            Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
-            Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events)})
+        _pool({Bullet(bn::sprite_items::bullet.create_sprite(0, 0)), 
+            Bullet(bn::sprite_items::bullet.create_sprite(0, 0)), 
+            Bullet(bn::sprite_items::bullet.create_sprite(0, 0))})
         //_pool(init_pool(_game_events))
-    {}
+    {
+        for (int i = 0; i <_pool.size(); i++)
+            _game_events->bullet_col_array[i] = &_pool[i];        
+    }
 
     void Bullet_Pool::shoot_bullet(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position)
     {

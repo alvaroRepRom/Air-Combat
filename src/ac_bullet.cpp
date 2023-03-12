@@ -15,11 +15,10 @@ namespace ac
         constexpr const int y_shoot_offset = 5;
     }
 
-    Bullet::Bullet(bn::sprite_ptr sprite, Game_Events* game_events) : 
+    Bullet::Bullet(bn::sprite_ptr sprite) : 
         arr::Circle_Collider(sprite, h),
         _sprite(sprite),
-        col(_sprite, h),
-        _game_events(game_events)
+        col(_sprite, h)
     {
         _sprite.set_visible(false);
         set_enabled(false);
@@ -33,9 +32,6 @@ namespace ac
         set_enabled(true);
         _is_active = true;
         col.set_sprite(_sprite);
-
-        //_game_events->bullet_col_list.push_front(&col);
-        _game_events->bullet_col_list.push_front(this);
         
         // add a bit more in Y so it's not overlap with ship
         _sprite.set_position(shoot_position.x(), shoot_position.y() - y_shoot_offset);
@@ -58,7 +54,6 @@ namespace ac
         } 
         else 
         {
-            _game_events->bullet_col_list.pop_front();
             _sprite.set_visible(false);
             set_enabled(false);
             _is_active = false;
