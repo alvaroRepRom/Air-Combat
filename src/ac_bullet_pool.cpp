@@ -31,7 +31,6 @@ namespace ac
             if (!_pool[i].is_active())
             {
                 _pool[i].init(shoot_position, aimed_position);
-                //_game_events->bullet_col_list.push_front(&_pool[i].col);
                 return;
             }
         }
@@ -39,11 +38,11 @@ namespace ac
 
     void Bullet_Pool::update()
     {
-        BN_LOG("inside");
-        if (_pool.empty()) return;
-        BN_LOG("not empty");
-        for(int i = 0; i < _pool.size(); i++)
+
+        for(int i = 0; i < _pool.size(); i++){
+            BN_LOG(_pool[i].is_active(), i);
             if (_pool[i].is_active()) 
                 _pool[i].update();
+        }
     }
 }

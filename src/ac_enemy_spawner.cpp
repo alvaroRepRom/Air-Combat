@@ -35,9 +35,10 @@ namespace ac
             for (auto bullet_col : _game_events->bullet_col_list)
             {
                 //bullet_col->check_collision(enemy.col);
-
+                
                 if (arr::check_collision(*bullet_col, enemy.col))
                 {
+                    BN_LOG("peor");
                     enemy.deactivate();
                     bullet_col->on_collision();
                 }

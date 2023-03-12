@@ -17,21 +17,21 @@ namespace ac
 
     Bullet::Bullet(bn::sprite_ptr sprite, Game_Events* game_events) : 
         arr::Circle_Collider(sprite, h),
-        _sprite(sprite),//bn::sprite_items::bullet.create_sprite(0, 0)),
+        _sprite(sprite),
         col(_sprite, h),
         _game_events(game_events)
     {
         _sprite.set_visible(false);
-        
-        // BN_LOG("Bullet to events ");
-        // _game_events->bullet_col_list.push_front(this);
-        // BN_LOG("Bullet in list ");
+        set_enabled(false);
+        _frames_left = FRAMES_ALIVE;
+        _is_active = false;
     }
 
     void Bullet::init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position)
     {
         _sprite.set_visible(true);
         set_enabled(true);
+        _is_active = true;
         col.set_sprite(_sprite);
 
         //_game_events->bullet_col_list.push_front(&col);
@@ -53,22 +53,26 @@ namespace ac
         _frames_left--;
         if (_frames_left)
         {
+            BN_LOG(SCALE_FACTOR * _frames_left);
             _sprite.set_scale(SCALE_FACTOR * _frames_left);
         } 
         else 
         {
             _game_events->bullet_col_list.pop_front();
             _sprite.set_visible(false);
+            set_enabled(false);
+            _is_active = false;
         }
     }
     
-    bool Bullet::is_active() const
+    bool Bullet::is_active()
     {
-        return _sprite.visible();
+        return _is_active;//_sprite.visible();
     }
 
-    void Bullet::on_collision()
+    void Bullet::on_collision() // override from circle_collision
     {
+        _is_active = false;
         _sprite.set_visible(false);
         set_enabled(false);
     }

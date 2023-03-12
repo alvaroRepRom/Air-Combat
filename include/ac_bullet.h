@@ -21,7 +21,7 @@ namespace ac
 
             void update();
             void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);
-            bool is_active() const;
+            bool is_active();
 
             virtual void on_collision() final;
 
@@ -30,6 +30,7 @@ namespace ac
             bn::fixed_point _velocity;
             int _frames_left;
             Game_Events* _game_events;
+            bool _is_active;
     };
 }
 
