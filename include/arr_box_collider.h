@@ -2,15 +2,17 @@
 #define ARR_BOX_COLLIDER_H
 
 #include "bn_sprite_ptr.h"
+// arr
+#include "arr_circle_collider.h"
 
 namespace arr
 {
+    class Circle_Collider;
+
     class Box_Collider
     {
         private:
             bn::sprite_ptr _sprite;
-            bn::fixed _width;
-            bn::fixed _height;
             bn::fixed _half_width;
             bn::fixed _half_height;
 
@@ -25,6 +27,13 @@ namespace arr
             bn::fixed half_height();
 
             void set_sprite(bn::sprite_ptr& sprite);
+
+            bn::fixed box_projection(const bn::fixed &circle_pos, const bn::fixed &box_origin, const bn::fixed &box_half_side);
+
+            bool check_collision(Circle_Collider& circle_collider);
+            bool check_collision(Box_Collider& box_collider);
+
+            virtual void on_collision();
     };
 }
 

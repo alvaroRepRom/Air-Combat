@@ -11,7 +11,8 @@ namespace ac
             bn::fixed frames(FRAMES_ALIVE);
             return 1 / frames;
         }();
-        bn::fixed h = 8;
+        constexpr const bn::fixed h = 8;
+        constexpr const int y_shoot_offset = 5;
     }
 
     Bullet::Bullet(bn::sprite_ptr sprite, Game_Events* game_events) : 
@@ -21,6 +22,10 @@ namespace ac
         _game_events(game_events)
     {
         _sprite.set_visible(false);
+        
+        // BN_LOG("Bullet to events ");
+        // _game_events->bullet_col_list.push_front(this);
+        // BN_LOG("Bullet in list ");
     }
 
     void Bullet::init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position)
@@ -30,8 +35,9 @@ namespace ac
 
         //_game_events->bullet_col_list.push_front(&col);
         _game_events->bullet_col_list.push_front(this);
+        
         // add a bit more in Y so it's not overlap with ship
-        _sprite.set_position(shoot_position.x(), shoot_position.y() - 5);
+        _sprite.set_position(shoot_position.x(), shoot_position.y() - y_shoot_offset);
         _frames_left = FRAMES_ALIVE;
         
         bn::fixed dx = aimed_position.x() - shoot_position.x();
@@ -58,11 +64,6 @@ namespace ac
     bool Bullet::is_active() const
     {
         return _sprite.visible();
-    }
-
-    void Bullet::action()
-    {
-        _sprite.set_visible(false);
     }
 
     void Bullet::on_collision()

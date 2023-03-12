@@ -12,16 +12,12 @@
 
 namespace ac
 {
-    class arr::Circle_Collider;
-
     class Bullet : public arr::Circle_Collider
     {
         public:
             Bullet();
             Bullet(bn::sprite_ptr sprite, Game_Events* game_events);
             arr::Circle_Collider col;
-
-            virtual void action() final;
 
             void update();
             void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);

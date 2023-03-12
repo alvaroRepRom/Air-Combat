@@ -1,6 +1,7 @@
 #include "ac_bullet_pool.h"
 // assets
 #include "bn_sprite_items_bullet.h"
+#include "bn_log.h"
 
 namespace ac
 {
@@ -38,6 +39,9 @@ namespace ac
 
     void Bullet_Pool::update()
     {
+        BN_LOG("inside");
+        if (_pool.empty()) return;
+        BN_LOG("not empty");
         for(int i = 0; i < _pool.size(); i++)
             if (_pool[i].is_active()) 
                 _pool[i].update();
