@@ -28,7 +28,7 @@ namespace ac
             int _frames_left;
             Game_Events _game_events;
 
-            void spawn();
+            void _spawn();
     };
 }
 

@@ -1,5 +1,9 @@
+// butano
+#include "bn_array.h"
+// air combat
 #include "ac_enemy_spawner.h"
 #include "bn_log.h"
+// arr
 #include "arr_collisions.h"
 
 namespace ac
@@ -29,18 +33,15 @@ namespace ac
             if (!enemy.is_active()) continue;
 
             enemy.update();
-
-            for (auto bullet_col : _game_events.bullet_col_array)
+            
+            for (auto bullet_collider : _game_events.bullet_col_array)
             {
-                //bullet_col->check_collision(enemy.col);
-                if (bullet_col->is_enabled()){
-                    if (arr::check_collision(*bullet_col, enemy.col))
+                if (bullet_collider->is_enabled()){
+                    if (arr::check_collision(*bullet_collider, enemy.col))
                     {
-                        BN_LOG("peor");
                         enemy.deactivate();
-                        bullet_col->on_collision();
+                        bullet_collider->on_collision();
                     }
-
                 }
             }
         }
@@ -50,11 +51,11 @@ namespace ac
         {
             _frames_left = 60;
             if (_random_generator.get_int(5) == 0)
-                spawn();
+                _spawn();
         }
     }
 
-    void Enemy_Spawner::spawn()
+    void Enemy_Spawner::_spawn()
     {
         for (int i = 0; i < _enemy_pool.size(); i++)
         {
