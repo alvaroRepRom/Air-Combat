@@ -16,8 +16,8 @@ namespace ac
         private:      
             bn::sprite_ptr _sprite;
             bn::sprite_ptr _aim_cross_sprite;
-            bn::array<Bullet, ac::constants::NUMBER_OF_BULLETS> _bullet_array;
             int _wait_shot_cadence;
+            bn::array<Bullet, ac::constants::NUMBER_OF_BULLETS> _bullet_array;
             Game_Events _game_events;
 
             void _move_aim_cross();
@@ -26,7 +26,7 @@ namespace ac
 
         public:
             Player(bn::sprite_ptr& sprite_sheet, Game_Events &game_events);
-            
+
             void update();
     };
 }

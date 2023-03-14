@@ -3,6 +3,7 @@
 
 // butano
 #include "bn_array.h"
+#include "bn_forward_list.h"
 // air combat
 #include "ac_constants.h"
 // arr
@@ -17,6 +18,7 @@ namespace ac
     {
         public:
             bn::array<arr::Circle_Collider*, 3> bullet_col_array;
+            bn::forward_list<arr::Circle_Collider*, 3> bullet_col_f_list;
     };
 }
 

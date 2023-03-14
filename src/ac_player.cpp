@@ -33,8 +33,9 @@ namespace ac
     {
         _sprite.set_position(0, INIT_Y);
 
-        for (int i = 0; i <_bullet_array.size(); i++)
+        for (int i = 0; i < ac::constants::NUMBER_OF_BULLETS; i++){
             _game_events.bullet_col_array[i] = &_bullet_array[i];
+        }
     }
 
     void Player::update()
@@ -165,7 +166,7 @@ namespace ac
 
     void Player::_shooting()
     {
-        _wait_shot_cadence--;
+        _wait_shot_cadence--;        
         for (int i = 0; i < _bullet_array.size(); i++)
         {
             if (_bullet_array[i].is_active()) {

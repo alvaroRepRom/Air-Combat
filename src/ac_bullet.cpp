@@ -32,7 +32,9 @@ namespace ac
         _sprite.set_visible(true);
         set_enabled(true);
         _is_active = true;
-        col.set_sprite(_sprite);
+        //col.set_sprite(_sprite);
+
+        _game_events.bullet_col_f_list.push_front(this);
         
         // add a bit more in Y so it's not overlap with ship
         _sprite.set_position(shoot_position.x(), shoot_position.y() - y_shoot_offset);
@@ -58,6 +60,7 @@ namespace ac
             _sprite.set_visible(false);
             set_enabled(false);
             _is_active = false;
+            _game_events.bullet_col_f_list.remove(this);
         }
     }
     
@@ -71,5 +74,6 @@ namespace ac
         _is_active = false;
         _sprite.set_visible(false);
         set_enabled(false);
+        _game_events.bullet_col_f_list.remove(this);
     }
 }

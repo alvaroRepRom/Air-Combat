@@ -10,7 +10,7 @@ namespace ac
 {
     namespace
     {
-        bn::array<Enemy, constants::NUMBER_OF_ENEMIES> init_pool()
+        bn::array<Enemy, constants::NUMBER_OF_ENEMIES> init_enemy_array()
         {
             bn::array<Enemy, constants::NUMBER_OF_ENEMIES> pool;
             for (int i = 0; i < pool.size(); i++)
@@ -22,19 +22,19 @@ namespace ac
     Enemy_Spawner::Enemy_Spawner(Game_Events &game_events) : 
         _frames_left(60),
         _random_generator(),
-        _enemy_pool(init_pool()),
+        _enemy_array(init_enemy_array()),
         _game_events(game_events)
     {}
 
     void Enemy_Spawner::update()
     {
-        for (auto enemy : _enemy_pool)
+        for (auto enemy : _enemy_array)
         {
             if (!enemy.is_active()) continue;
 
             enemy.update();
             
-            for (auto bullet_collider : _game_events.bullet_col_array)
+            for (auto bullet_collider : _game_events.bullet_col_f_list)
             {
                 if (bullet_collider->is_enabled()){
                     if (arr::check_collision(*bullet_collider, enemy.col))
@@ -57,11 +57,11 @@ namespace ac
 
     void Enemy_Spawner::_spawn()
     {
-        for (int i = 0; i < _enemy_pool.size(); i++)
+        for (int i = 0; i < _enemy_array.size(); i++)
         {
-            if (!_enemy_pool[i].is_active())
+            if (!_enemy_array[i].is_active())
             {
-                _enemy_pool[i].init();
+                _enemy_array[i].init();
                 return;
             }
         }
