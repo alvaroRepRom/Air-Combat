@@ -15,8 +15,9 @@ namespace ac
         constexpr const int y_shoot_offset = 5;
     }
 
-    Bullet::Bullet(bn::sprite_ptr sprite) : 
+    Bullet::Bullet(bn::sprite_ptr sprite, Game_Events &game_events) : 
         arr::Circle_Collider(sprite, h),
+        _game_events(game_events),
         _sprite(sprite),
         col(_sprite, h)
     {

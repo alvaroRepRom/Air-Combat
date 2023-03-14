@@ -4,6 +4,8 @@
 // butano
 #include "bn_sprite_ptr.h"
 #include "bn_fixed_point.h"
+// air combat
+#include "ac_game_events.h"
 // arr
 #include "arr_circle_collider.h"
 
@@ -13,7 +15,7 @@ namespace ac
     {
         public:
             Bullet();
-            Bullet(bn::sprite_ptr sprite);
+            Bullet(bn::sprite_ptr sprite, Game_Events &game_events);
             arr::Circle_Collider col;
 
             void update();
@@ -27,6 +29,7 @@ namespace ac
             bn::fixed_point _velocity;
             int _frames_left;
             bool _is_active;
+            Game_Events _game_events;
     };
 }
 

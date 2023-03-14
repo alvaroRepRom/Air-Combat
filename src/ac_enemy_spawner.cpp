@@ -15,7 +15,7 @@ namespace ac
         }
     }
 
-    Enemy_Spawner::Enemy_Spawner(Game_Events* game_events) : 
+    Enemy_Spawner::Enemy_Spawner(Game_Events &game_events) : 
         _frames_left(60),
         _random_generator(),
         _enemy_pool(init_pool()),
@@ -30,7 +30,7 @@ namespace ac
 
             enemy.update();
 
-            for (auto bullet_col : _game_events->bullet_col_array)
+            for (auto bullet_col : _game_events.bullet_col_array)
             {
                 //bullet_col->check_collision(enemy.col);
                 if (bullet_col->is_enabled()){
