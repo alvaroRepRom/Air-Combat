@@ -4,9 +4,10 @@
 #include "bn_display.h"
 #include "bn_keypad.h"
 #include "bn_log.h"
-// air combat
+// assets
 #include "bn_sprite_items_cross.h"
 #include "bn_sprite_items_plane_sheet.h"
+#include "bn_sprite_items_bullet.h"
 
 namespace ac
 {
@@ -22,9 +23,12 @@ namespace ac
     Player::Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events) : 
         _sprite(sprite_sheet),
         _aim_cross_sprite(bn::sprite_items::cross.create_sprite(0, 0)),
-        _bullet_pool(game_events),
-        _wait_shot_cadence(WAIT_SHOT_CADENCE),
-        _game_events(game_events)
+        _bullet_array({ 
+            Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
+            Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
+            Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events)
+        }),
+        _wait_shot_cadence(WAIT_SHOT_CADENCE)
     {
         _sprite.set_position(0, INIT_Y);
     }
@@ -157,13 +161,18 @@ namespace ac
 
     void Player::_shooting()
     {
-        _bullet_pool.update(); // update active bullets
-
-        _wait_shot_cadence--;
-        if (bn::keypad::a_held() && _wait_shot_cadence < 0)
+        _wait_shot_cadence--;        
+        for (int i = 0; i < _bullet_array.size(); i++)
         {
-            _bullet_pool.shoot_bullet(_sprite.position(), _aim_cross_sprite.position());
-            _wait_shot_cadence = WAIT_SHOT_CADENCE;
+            if (_bullet_array[i].is_active()) {
+                _bullet_array[i].update();
+            }
+            else 
+            if (bn::keypad::a_held() && _wait_shot_cadence < 0)
+            {
+                _bullet_array[i].init(_sprite.position(), _aim_cross_sprite.position());
+                _wait_shot_cadence = WAIT_SHOT_CADENCE;
+            }
         }
     }
 }

@@ -1,12 +1,15 @@
 #include "ac_enemy_spawner.h"
+// butano
+#include "bn_array.h"
 #include "bn_log.h"
+// arr
 #include "arr_collisions.h"
 
 namespace ac
 {
     namespace
     {
-        bn::array<Enemy, constants::NUMBER_OF_ENEMIES> init_pool()
+        bn::array<Enemy, constants::NUMBER_OF_ENEMIES> init_enemy_array()
         {
             bn::array<Enemy, constants::NUMBER_OF_ENEMIES> pool;
             for (int i = 0; i < pool.size(); i++)
@@ -18,26 +21,27 @@ namespace ac
     Enemy_Spawner::Enemy_Spawner(Game_Events* game_events) : 
         _frames_left(60),
         _random_generator(),
-        _enemy_pool(init_pool()),
+        _enemy_array(init_enemy_array()),
         _game_events(game_events)
     {}
 
     void Enemy_Spawner::update()
-    {
-        for (auto enemy : _enemy_pool)
+    {        
+        for (int i = 0; i < _enemy_array.size(); i++)
         {
-            if (!enemy.is_active()) continue;
+            if (!_enemy_array[i].is_active()) continue;
 
-            enemy.update();
-
-            if (_game_events->bullet_col_list.empty()) continue;
+            _enemy_array[i].update();
             
-            for (auto bullet_col : _game_events->bullet_col_list)
+            for (auto bullet_collider : _game_events->bullet_col_f_list)
             {
-                if (arr::check_collision(bullet_col, enemy.col))
+                if (bullet_collider->is_collision_enabled())
                 {
-                    enemy.deactivate();
-                    BN_LOG("has Collide?: ", true);
+                    if (arr::check_collision(*bullet_collider, _enemy_array[i].col))
+                    {
+                        _enemy_array[i].deactivate();
+                        bullet_collider->on_collision();
+                    }
                 }
             }
         }
@@ -47,17 +51,17 @@ namespace ac
         {
             _frames_left = 60;
             if (_random_generator.get_int(5) == 0)
-                spawn();
+                _spawn();
         }
     }
 
-    void Enemy_Spawner::spawn()
+    void Enemy_Spawner::_spawn()
     {
-        for (int i = 0; i < _enemy_pool.size(); i++)
+        for (int i = 0; i < _enemy_array.size(); i++)
         {
-            if (!_enemy_pool[i].is_active())
+            if (!_enemy_array[i].is_active())
             {
-                _enemy_pool[i].init();
+                _enemy_array[i].init();
                 return;
             }
         }

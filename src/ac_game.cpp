@@ -23,7 +23,7 @@ namespace ac
     {
         bn::optional<Scene_Type> result;
 
-        _player.update();
+        _player.update();        
         _enemy_spawner.update();
         _mode7_cam.update();
         

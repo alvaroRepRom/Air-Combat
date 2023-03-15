@@ -11,22 +11,27 @@
 
 namespace ac
 {
-    class Bullet
+    class Bullet : public arr::Circle_Collider
     {
         public:
             Bullet();
             Bullet(bn::sprite_ptr sprite, Game_Events* game_events);
-            arr::Circle_Collider col;
 
             void update();
             void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);
-            bool is_active() const;
+            bool is_active();
+
+            virtual void on_collision() final;
 
         private:
             bn::sprite_ptr _sprite;
             bn::fixed_point _velocity;
             int _frames_left;
+            bool _is_active;
+            bool _is_first_frame;
             Game_Events* _game_events;
+
+            void _deactivate();
     };
 }
 
