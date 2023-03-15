@@ -12,7 +12,7 @@ namespace arr
     bn::fixed   Circle_Collider::origin_x()   { return _sprite.x(); }
     bn::fixed   Circle_Collider::origin_y()   { return _sprite.y(); }
     bn::fixed   Circle_Collider::radius()     { return _radius; }
-    bool        Circle_Collider::is_enabled() { return _is_enabled; }
+    bool        Circle_Collider::is_collision_enabled() { return _is_enabled; }
 
 // Setters
     void        Circle_Collider::set_sprite(bn::sprite_ptr& sprite) {
@@ -23,13 +23,13 @@ namespace arr
         _radius = radius;
     }
 
-    void        Circle_Collider::set_enabled(bool is_enabled) {
-        _is_enabled = is_enabled;
+    void        Circle_Collider::set_collision_enabled(bool is_collision_enabled) {
+        _is_enabled = is_collision_enabled;
     }
 
 // Methods
     bool        Circle_Collider::check_collision(Circle_Collider& circle_collider){
-        if (_is_enabled && circle_collider.is_enabled())
+        if (_is_enabled && circle_collider.is_collision_enabled())
         {
             if ((circle_collider.origin_x() - origin_x()) * (circle_collider.origin_x() - origin_x()) +
                 (circle_collider.origin_y() - origin_y()) * (circle_collider.origin_y() - origin_y()) <=

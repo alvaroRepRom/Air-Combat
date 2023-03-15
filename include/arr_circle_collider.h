@@ -23,11 +23,11 @@ namespace arr
             bn::fixed origin_x();
             bn::fixed origin_y();
             bn::fixed radius();
-            bool is_enabled();
+            bool is_collision_enabled();
 
             void set_sprite(bn::sprite_ptr& sprite);
             void set_radius(bn::fixed radius);
-            void set_enabled(bool is_enabled);
+            void set_collision_enabled(bool is_collision_enabled);
 
             bool check_collision(Circle_Collider& circle_collider);
             bool check_collision(Box_Collider& box_collider);

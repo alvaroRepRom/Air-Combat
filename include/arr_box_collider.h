@@ -26,10 +26,10 @@ namespace arr
             bn::fixed height();
             bn::fixed half_width();
             bn::fixed half_height();
-            bool is_enabled();
+            bool is_collision_enabled();
 
             void set_sprite(bn::sprite_ptr& sprite);
-            void set_enabled(bool is_enabled);
+            void set_collision_enabled(bool is_collision_enabled);
 
             bool check_collision(Circle_Collider& circle_collider);
             bool check_collision(Box_Collider& box_collider);

@@ -20,7 +20,7 @@ namespace ac
         constexpr const int INIT_Y = 48;
     }
 
-    Player::Player(bn::sprite_ptr& sprite_sheet, Game_Events &game_events) : 
+    Player::Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events) : 
         _sprite(sprite_sheet),
         _aim_cross_sprite(bn::sprite_items::cross.create_sprite(0, 0)),
         _bullet_array({ 
@@ -28,14 +28,9 @@ namespace ac
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events)
         }),
-        _wait_shot_cadence(WAIT_SHOT_CADENCE),
-        _game_events(game_events)
+        _wait_shot_cadence(WAIT_SHOT_CADENCE)
     {
         _sprite.set_position(0, INIT_Y);
-
-        for (int i = 0; i < ac::constants::NUMBER_OF_BULLETS; i++){
-            _game_events.bullet_col_array[i] = &_bullet_array[i];
-        }
     }
 
     void Player::update()

@@ -18,14 +18,13 @@ namespace ac
             bn::sprite_ptr _aim_cross_sprite;
             int _wait_shot_cadence;
             bn::array<Bullet, ac::constants::NUMBER_OF_BULLETS> _bullet_array;
-            Game_Events _game_events;
 
             void _move_aim_cross();
             void _move_air_ship();
             void _shooting();
 
         public:
-            Player(bn::sprite_ptr& sprite_sheet, Game_Events &game_events);
+            Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events);
 
             void update();
     };

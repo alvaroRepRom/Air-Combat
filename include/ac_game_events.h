@@ -17,7 +17,6 @@ namespace ac
     class Game_Events
     {
         public:
-            bn::array<arr::Circle_Collider*, 3> bullet_col_array;
             bn::forward_list<arr::Circle_Collider*, 3> bullet_col_f_list;
     };
 }

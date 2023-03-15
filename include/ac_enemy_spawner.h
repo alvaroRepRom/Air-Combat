@@ -21,14 +21,14 @@ namespace ac
     class Enemy_Spawner
     {
         public:
-            Enemy_Spawner(Game_Events &game_events);
+            Enemy_Spawner(Game_Events* game_events);
             void update();
 
         private:
             bn::array<Enemy, constants::NUMBER_OF_ENEMIES> _enemy_array;
             bn::random _random_generator;
             int _frames_left;
-            Game_Events _game_events;
+            Game_Events* _game_events;
 
             void _spawn();
     };

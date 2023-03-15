@@ -15,8 +15,7 @@ namespace ac
     {
         public:
             Bullet();
-            Bullet(bn::sprite_ptr sprite, Game_Events &game_events);
-            arr::Circle_Collider col;
+            Bullet(bn::sprite_ptr sprite, Game_Events* game_events);
 
             void update();
             void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);
@@ -29,7 +28,9 @@ namespace ac
             bn::fixed_point _velocity;
             int _frames_left;
             bool _is_active;
-            Game_Events _game_events;
+            Game_Events* _game_events;
+
+            void _deactivate();
     };
 }
 

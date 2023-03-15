@@ -31,21 +31,21 @@ namespace arr
     bn::fixed   Box_Collider::height()      { return _half_height * 2; }
     bn::fixed   Box_Collider::half_width()  { return _half_width; }
     bn::fixed   Box_Collider::half_height() { return _half_height; }
-    bool        Box_Collider::is_enabled() { return _is_enabled; }
+    bool        Box_Collider::is_collision_enabled() { return _is_enabled; }
 
 // Setters
     void        Box_Collider::set_sprite(bn::sprite_ptr& sprite) {
         _sprite = sprite;
     }
 
-    void        Box_Collider::set_enabled(bool is_enabled) {
-        _is_enabled = is_enabled;
+    void        Box_Collider::set_collision_enabled(bool is_collision_enabled) {
+        _is_enabled = is_collision_enabled;
     }
 
 // Methods
     bool        Box_Collider::check_collision(Circle_Collider& circle_collider)
     {
-        if (_is_enabled && circle_collider.is_enabled())
+        if (_is_enabled && circle_collider.is_collision_enabled())
         {
             bn::fixed circle_c_x = circle_collider.origin_x();
             bn::fixed circle_c_y = circle_collider.origin_y();
@@ -66,7 +66,7 @@ namespace arr
 
     bool        Box_Collider::check_collision(Box_Collider& box_collider) 
     {
-        if (_is_enabled && box_collider.is_enabled())
+        if (_is_enabled && box_collider.is_collision_enabled())
         {
             if (origin_x() - half_width()  <= box_collider.origin_x() + box_collider.half_width()  &&
                 origin_x() + half_width()  >= box_collider.origin_x() - box_collider.half_width()  &&

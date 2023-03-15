@@ -19,7 +19,7 @@ namespace ac
         }
     }
 
-    Enemy_Spawner::Enemy_Spawner(Game_Events &game_events) : 
+    Enemy_Spawner::Enemy_Spawner(Game_Events* game_events) : 
         _frames_left(60),
         _random_generator(),
         _enemy_array(init_enemy_array()),
@@ -27,19 +27,20 @@ namespace ac
     {}
 
     void Enemy_Spawner::update()
-    {
-        for (auto enemy : _enemy_array)
+    {        
+        for (int i = 0; i < _enemy_array.size(); i++)
         {
-            if (!enemy.is_active()) continue;
+            if (!_enemy_array[i].is_active()) continue;
 
-            enemy.update();
+            _enemy_array[i].update();
             
-            for (auto bullet_collider : _game_events.bullet_col_f_list)
+            for (auto bullet_collider : _game_events->bullet_col_f_list)
             {
-                if (bullet_collider->is_enabled()){
-                    if (arr::check_collision(*bullet_collider, enemy.col))
+                if (bullet_collider->is_collision_enabled())
+                {
+                    if (arr::check_collision(*bullet_collider, _enemy_array[i].col))
                     {
-                        enemy.deactivate();
+                        _enemy_array[i].deactivate();
                         bullet_collider->on_collision();
                     }
                 }
