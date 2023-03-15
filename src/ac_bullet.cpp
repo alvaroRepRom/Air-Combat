@@ -19,7 +19,8 @@ namespace ac
         arr::Circle_Collider(sprite, h),
         _game_events(game_events),
         _sprite(sprite),
-        _frames_left(FRAMES_ALIVE)
+        _frames_left(FRAMES_ALIVE),
+        _is_first_frame(true)
     {
         _deactivate();
     }
@@ -31,7 +32,10 @@ namespace ac
         _is_active = true;
         set_radius(h);
 
-        _game_events->bullet_col_f_list.push_front(this);
+        if (_is_first_frame) {
+            _game_events->bullet_col_f_list.push_front(this);
+            _is_first_frame = false;
+        }
         
         // add a bit more in Y so it's not overlap with ship
         _sprite.set_position(shoot_position.x(), shoot_position.y() - y_shoot_offset);
@@ -47,15 +51,12 @@ namespace ac
         _sprite.set_position(_sprite.position() + _velocity);
 
         _frames_left--;
-        if (_frames_left)
-        {
+        if (_frames_left) {
             _sprite.set_scale(SCALE_FACTOR * _frames_left);
             set_radius(h * SCALE_FACTOR * _frames_left);
         } 
-        else 
-        {
+        else {
             _deactivate();
-            _game_events->bullet_col_f_list.remove(this);
         }
     }
     

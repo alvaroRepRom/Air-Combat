@@ -2,12 +2,10 @@
 #define AC_GAME_EVENTS_H
 
 // butano
-#include "bn_array.h"
 #include "bn_forward_list.h"
 // air combat
 #include "ac_constants.h"
 // arr
-#include "arr_box_collider.h"
 #include "arr_circle_collider.h"
 
 namespace ac
@@ -17,7 +15,7 @@ namespace ac
     class Game_Events
     {
         public:
-            bn::forward_list<arr::Circle_Collider*, 3> bullet_col_f_list;
+            bn::forward_list<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> bullet_col_f_list;
     };
 }
 

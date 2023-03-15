@@ -28,6 +28,7 @@ namespace ac
             bn::fixed_point _velocity;
             int _frames_left;
             bool _is_active;
+            bool _is_first_frame;
             Game_Events* _game_events;
 
             void _deactivate();

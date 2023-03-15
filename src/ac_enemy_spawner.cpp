@@ -1,7 +1,6 @@
+#include "ac_enemy_spawner.h"
 // butano
 #include "bn_array.h"
-// air combat
-#include "ac_enemy_spawner.h"
 #include "bn_log.h"
 // arr
 #include "arr_collisions.h"
