@@ -19,8 +19,7 @@ namespace ac
         private:
             Game_Events* _game_events;
             bn::sprite_text_generator _text_generator;
-            bn::vector<bn::sprite_ptr, 32> _text_sprites;
-            
+            bn::vector<bn::sprite_ptr, 32> _text_sprites;            
     };
 }
 

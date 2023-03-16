@@ -9,7 +9,6 @@ namespace ac
 {
     namespace
     {
-        //bn::window outside_window = bn::window::outside();
         constexpr bn::fixed text_x_limit = bn::display::width() / 2 - 10;
         constexpr bn::fixed text_y_limit = -bn::display::height() / 2 + 7;
         constexpr bn::string_view score_label = "SCORE: ";
