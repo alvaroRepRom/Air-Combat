@@ -16,7 +16,8 @@ namespace ac
         _player(_sprite_sheet, &_game_events),
         _mode7_cam(_mode7_bg),
         _bg(bn::regular_bg_items::sky.create_bg(0, 0)),
-        _enemy_spawner(&_game_events)
+        _enemy_spawner(&_game_events),
+        _hud(&_game_events)
     {}
 
     bn::optional<Scene_Type> Game::update()
@@ -26,6 +27,7 @@ namespace ac
         _player.update();        
         _enemy_spawner.update();
         _mode7_cam.update();
+        _hud.update();
         
         return result;
     }

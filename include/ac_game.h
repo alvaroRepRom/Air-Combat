@@ -4,7 +4,6 @@
 // butano
 #include "bn_affine_bg_ptr.h"
 #include "bn_regular_bg_ptr.h"
-#include "bn_pool.h"
 // air combat
 #include "ac_scene_type.h"
 #include "ac_scene.h"
@@ -12,6 +11,7 @@
 #include "ac_player.h"
 #include "ac_enemy_spawner.h"
 #include "ac_game_events.h"
+#include "ac_hud.h"
 
 namespace ac
 {
@@ -32,6 +32,7 @@ namespace ac
             Mode_7_Camera _mode7_cam;
             Enemy_Spawner _enemy_spawner;
             Game_Events _game_events;
+            Hud _hud;
     };
 }
 
