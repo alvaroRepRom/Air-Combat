@@ -41,6 +41,8 @@ namespace ac
                     {
                         _enemy_array[i].deactivate();
                         bullet_collider->on_collision();
+                        _game_events->has_change_score = true;
+                        _game_events->score += 10;
                     }
                 }
             }

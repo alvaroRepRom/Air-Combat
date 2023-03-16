@@ -33,6 +33,7 @@ namespace ac
 
         if (_game_events.has_change_score) {
             _hud.update(_game_events.score);
+            _game_events.has_change_score = false;
         }
         
         return result;
