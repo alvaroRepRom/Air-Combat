@@ -18,7 +18,10 @@ namespace ac
         _bg(bn::regular_bg_items::sky.create_bg(0, 0)),
         _enemy_spawner(&_game_events),
         _hud(&_game_events)
-    {}
+    {
+        _game_events.score = 0;
+        _game_events.has_change_score = true;
+    }
 
     bn::optional<Scene_Type> Game::update()
     {
@@ -27,7 +30,10 @@ namespace ac
         _player.update();        
         _enemy_spawner.update();
         _mode7_cam.update();
-        _hud.update();
+
+        if (_game_events.has_change_score) {
+            _hud.update(_game_events.score);
+        }
         
         return result;
     }
