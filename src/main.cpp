@@ -1,5 +1,6 @@
 //butano
 #include "bn_core.h"
+#include "bn_log.h"
 // air combat
 #include "ac_scene_type.h"
 #include "ac_scene.h"
@@ -14,8 +15,24 @@ int main()
     bn::optional<ac::Scene_Type> next_scene_type;
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
 
+    // profiling
+    bn::fixed max_cpu_usage;
+    int counter = 1;
+//*********************
+
     while(1)
     {
+        // profiling
+        counter--;
+        if(! counter)
+        {
+            max_cpu_usage = bn::max(max_cpu_usage, bn::core::last_cpu_usage());
+            BN_LOG((max_cpu_usage * 100).right_shift_integer(), "%");
+            max_cpu_usage = 0;
+            counter = 60;
+        }
+//******************
+
         // Gameloop
         if (scene) next_scene_type = scene->update();
         bn::core::update();
