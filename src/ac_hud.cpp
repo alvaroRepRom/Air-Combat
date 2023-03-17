@@ -16,7 +16,8 @@ namespace ac
 
     Hud::Hud(Game_Events* game_events) : 
         _game_events(game_events),
-        _text_generator(common::variable_8x8_sprite_font)
+        _text_generator(common::variable_8x8_sprite_font),
+        _total_score(0)
     {
         _text_generator.set_right_alignment();
     }
@@ -24,13 +25,19 @@ namespace ac
 
     void Hud::update(int score)
     {
+        _total_score += score;
+        
         bn::string<32> text;
-
+        
         bn::ostringstream text_stream(text);
         text_stream.append(score_label);
-        text_stream.append(score);
+        text_stream.append(_total_score);
 
         _text_sprites.clear();
         _text_generator.generate(text_x_limit, text_y_limit, text, _text_sprites);
+    }
+    
+    int Hud::total_score() { 
+        return _total_score; 
     }
 }

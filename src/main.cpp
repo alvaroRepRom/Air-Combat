@@ -15,14 +15,14 @@ int main()
     bn::optional<ac::Scene_Type> next_scene_type;
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
 
-    // profiling
+// profiling *****
     bn::fixed max_cpu_usage;
-    int counter = 1;
+    int counter = 60;
 //*********************
 
     while(1)
     {
-        // profiling
+// profiling *******
         counter--;
         if(! counter)
         {

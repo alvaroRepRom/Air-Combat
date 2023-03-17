@@ -24,6 +24,7 @@ namespace ac
             bn::sprite_ptr _sprite;
             bn::fixed_point _velocity;
             int _frames_left;
+            bn::fixed _dx;
     };
 }
 

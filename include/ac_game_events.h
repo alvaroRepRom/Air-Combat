@@ -16,7 +16,6 @@ namespace ac
     {
         public:
             bn::forward_list<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> bullet_col_f_list;
-            bool has_change_score;
             int score;
     };
 }

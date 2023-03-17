@@ -31,6 +31,9 @@ namespace arr
      */
     [[nodiscard]] bool check_collision(Circle_Collider& circle_a, Circle_Collider& circle_b)
     {
+        if (!circle_a.is_collision_enabled() || 
+            !circle_b.is_collision_enabled()) 
+            return false;
         return (circle_b.origin_x() - circle_a.origin_x()) * (circle_b.origin_x() - circle_a.origin_x()) +
                (circle_b.origin_y() - circle_a.origin_y()) * (circle_b.origin_y() - circle_a.origin_y()) <=
                (circle_b.radius()   + circle_a.radius())   * (circle_b.radius()   + circle_a.radius());

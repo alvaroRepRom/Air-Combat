@@ -1,6 +1,7 @@
 #include "ac_game.h"
 // butano
 #include "bn_affine_bg_builder.h"
+#include "bn_log.h"
 // air combat
 // assets
 #include "bn_sprite_items_plane_sheet.h"
@@ -20,7 +21,7 @@ namespace ac
         _hud(&_game_events)
     {
         _game_events.score = 0;
-        _game_events.has_change_score = true;
+        _hud.update(0);
     }
 
     bn::optional<Scene_Type> Game::update()
@@ -31,9 +32,9 @@ namespace ac
         _enemy_spawner.update();
         _mode7_cam.update();
 
-        if (_game_events.has_change_score) {
+        if (_game_events.score) {
             _hud.update(_game_events.score);
-            _game_events.has_change_score = false;
+            _game_events.score = 0;
         }
         
         return result;

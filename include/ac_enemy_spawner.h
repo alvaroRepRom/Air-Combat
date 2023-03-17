@@ -2,12 +2,10 @@
 #define AC_ENEMY_SPAWNER_H
 
 // butano
-#include "bn_sprite_ptr.h"
 #include "bn_array.h"
 #include "bn_forward_list.h"
-#include "bn_fixed_point.h"
 #include "bn_random.h"
-#include "bn_optional.h"
+#include "bn_fixed_point.h"
 // air combat
 #include "ac_enemy.h"
 #include "ac_game_events.h"
