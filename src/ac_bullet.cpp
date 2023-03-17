@@ -60,7 +60,7 @@ namespace ac
         }
     }
     
-    bool Bullet::is_active()
+    bool Bullet::is_active() 
     {
         return _is_active;
     }

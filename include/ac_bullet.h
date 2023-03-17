@@ -21,7 +21,7 @@ namespace ac
             void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);
             bool is_active();
 
-            virtual void on_collision() final;
+            void on_collision() override;
 
         private:
             bn::sprite_ptr _sprite;

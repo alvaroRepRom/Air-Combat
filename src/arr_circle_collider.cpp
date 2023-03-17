@@ -47,5 +47,6 @@ namespace arr
         return box_collider.check_collision(*this);
     }
 
-    void        Circle_Collider::on_collision() {} // virtual
+// Virtual
+    void        Circle_Collider::on_collision() {}
 }
