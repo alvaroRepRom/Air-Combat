@@ -8,12 +8,32 @@
 #include "ac_title.h"
 #include "ac_game.h"
 
+#include "ac_save_ranking.h"
+
 int main()
 {
     bn::core::init();
 
     bn::optional<ac::Scene_Type> next_scene_type;
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
+
+
+
+// save system *********
+    // ac::Save_Ranking::SRam_Data sram_data;
+    // sram_data.max_score = 30;
+    // ac::Save_Ranking::save_score(sram_data);
+
+    //ac::Save_Ranking::reset_score();
+    ac::Save_Ranking::SRam_Data loaded_data = ac::Save_Ranking::load_score();
+
+    for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++)
+    {
+        BN_LOG(i + 1, ":  => ", loaded_data.score_array[i]);
+        //BN_LOG(i + 1, ": ", loaded_data.name_score_array[i] , " => ", loaded_data.score_array[i]);
+    }
+// ***************
+
 
 // profiling *****
     bn::fixed max_cpu_usage;
