@@ -8,6 +8,8 @@
 #include "ac_title.h"
 #include "ac_game.h"
 
+#include "arr_timer.h"
+
 #include "ac_save_ranking.h"
 
 int main()
@@ -29,27 +31,26 @@ int main()
 
     for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++)
     {
-        BN_LOG(i + 1, ":  => ", loaded_data.score_array[i]);
-        //BN_LOG(i + 1, ": ", loaded_data.name_score_array[i] , " => ", loaded_data.score_array[i]);
+        BN_LOG(i + 1, ": ", loaded_data.first_letter_array[i], 
+                            loaded_data.second_letter_array[i], 
+                            loaded_data.third_letter_array[i] , " => ", loaded_data.score_array[i]);
     }
 // ***************
 
 
 // profiling *****
     bn::fixed max_cpu_usage;
-    int counter = 60;
+    arr::Timer _timer(60);
 //*********************
 
     while(1)
     {
 // profiling *******
-        counter--;
-        if(! counter)
+        if(_timer.is_time_up())
         {
             max_cpu_usage = bn::max(max_cpu_usage, bn::core::last_cpu_usage());
             BN_LOG((max_cpu_usage * 100).right_shift_integer(), "%");
             max_cpu_usage = 0;
-            counter = 60;
         }
 //******************
 

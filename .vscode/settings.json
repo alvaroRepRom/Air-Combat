@@ -14,7 +14,8 @@
         "functional": "cpp",
         "numbers": "cpp",
         "random": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "algorithm": "cpp"
     },
     "editor.suggest.localityBonus": true,
     "makefile.launchConfigurations": [

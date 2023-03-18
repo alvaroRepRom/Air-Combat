@@ -13,7 +13,9 @@ namespace ac::Save_Ranking
     {
         bool is_default = true;
         bn::array<int, ac::constants::NUMBER_SAVES_SCORE> score_array;
-        //bn::array<bn::string<32>, ac::constants::NUMBER_SAVES_SCORE> name_score_array;
+        bn::array<char, ac::constants::NUMBER_SAVES_SCORE> first_letter_array;
+        bn::array<char, ac::constants::NUMBER_SAVES_SCORE> second_letter_array;
+        bn::array<char, ac::constants::NUMBER_SAVES_SCORE> third_letter_array;
     };
     
     void save_score(SRam_Data sram_data);

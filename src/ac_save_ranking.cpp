@@ -16,11 +16,12 @@ namespace ac::Save_Ranking
             sram_data.score_array[3] = 40;
             sram_data.score_array[4] = 20;
 
-            // sram_data.name_score_array[0] = "AAA";
-            // sram_data.name_score_array[1] = "BBB";
-            // sram_data.name_score_array[2] = "CCC";
-            // sram_data.name_score_array[3] = "DDD";
-            // sram_data.name_score_array[4] = "EEE";
+            for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++)
+            {
+                sram_data.first_letter_array[0] = 'A';
+                sram_data.second_letter_array[0] = 'A';
+                sram_data.third_letter_array[0] = 'A';
+            }
 
             return sram_data;
         }
