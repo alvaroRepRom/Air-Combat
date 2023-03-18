@@ -18,9 +18,9 @@ namespace ac::Save_Ranking
 
             for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++)
             {
-                sram_data.first_letter_array[0] = 'A';
-                sram_data.second_letter_array[0] = 'A';
-                sram_data.third_letter_array[0] = 'A';
+                sram_data.first_letter_array[i] = 'A';
+                sram_data.second_letter_array[i] = 'A';
+                sram_data.third_letter_array[i] = 'A';
             }
 
             return sram_data;
