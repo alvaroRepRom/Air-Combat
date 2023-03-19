@@ -82,9 +82,9 @@ namespace ac
 
             if (rank_pos == _new_record_position) {
                 // insert name
-                for (int j = 0; j < _name_inserted.size(); j++)
+                for (int j = 0; j < _name_inserted.size(); j++) {
                     text_stream.append(char(_name_inserted[j]));
-                
+                }                
                 text_stream.append(":  ");
                 text_stream.append(_player_score);
                 score_index_offset = 1;

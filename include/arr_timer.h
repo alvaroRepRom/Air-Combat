@@ -12,6 +12,9 @@ namespace arr
             Timer(int frame_time);
 
             bool is_time_up();
+            bool is_time_up_once();
+            void reset_timer();
+            void reset_timer(int frame_time);
 
         private:
             int _frame_count;

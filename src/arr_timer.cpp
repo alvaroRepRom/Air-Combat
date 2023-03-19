@@ -16,4 +16,25 @@ namespace arr
         }
         return false;
     }
+
+    bool Timer::is_time_up_once()
+    {
+        if (_frame_count > 0) 
+        {
+            _frame_count--;
+            if (!_frame_count) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void Timer::reset_timer() {
+        _frame_count = _frame_interval;
+    }
+
+    void Timer::reset_timer(int frame_time) {
+        _frame_interval = frame_time;
+        _frame_count    = frame_time;
+    }
 }
