@@ -46,6 +46,7 @@ int main()
             switch (*next_scene_type)
             {
             case ac::Scene_Type::INTRO:
+                game_events = ac::Game_Events();
                 scene.reset(new ac::Intro());
                 break;
             case ac::Scene_Type::TITLE:
