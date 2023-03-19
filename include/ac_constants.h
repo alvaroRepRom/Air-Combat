@@ -7,6 +7,7 @@ namespace ac::constants
     constexpr const int NUMBER_OF_BULLETS = 3;
     constexpr const int NUMBER_OF_ENEMIES = 3;
     constexpr const int NUMBER_SAVES_SCORE = 5;
+    constexpr const int NUMBER_NAME_LETTERS = 3;
 }
 
 #endif

@@ -31,9 +31,12 @@ int main()
 
     for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++)
     {
-        BN_LOG(i + 1, ": ", loaded_data.first_letter_array[i], 
-                            loaded_data.second_letter_array[i], 
-                            loaded_data.third_letter_array[i] , " => ", loaded_data.score_array[i]);
+        BN_LOG(i + 1, ": ", loaded_data.name_array[i][0], 
+                            loaded_data.name_array[i][1], 
+                            loaded_data.name_array[i][2] , " => ", loaded_data.score_array[i]);
+        // BN_LOG(i + 1, ": ", loaded_data.first_letter_array[i], 
+        //                     loaded_data.second_letter_array[i], 
+        //                     loaded_data.third_letter_array[i] , " => ", loaded_data.score_array[i]);
     }
 // ***************
 
