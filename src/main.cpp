@@ -19,9 +19,8 @@ int main()
     bn::core::init();
 
     bn::optional<ac::Scene_Type> next_scene_type;
-    //bn::unique_ptr<ac::Scene> scene(new ac::Intro());
+    bn::unique_ptr<ac::Scene> scene(new ac::Intro());
     ac::Game_Events game_events;
-    bn::unique_ptr<ac::Scene> scene(new ac::Ranking(&game_events));
 
 
 // save system *********

@@ -11,6 +11,8 @@
 
 namespace ac
 {
+    class Game_Events;
+
     class Bullet : public arr::Circle_Collider
     {
         public:

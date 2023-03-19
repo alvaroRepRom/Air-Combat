@@ -16,10 +16,10 @@ namespace ac
         _sprite_sheet(bn::sprite_items::plane_sheet.create_sprite(0, 0)),
         _mode7_bg(bn::affine_bg_items::ground.create_bg(-376, -336)),
         _game_events(game_events),
-        _player(_sprite_sheet, _game_events),
+        _player(_sprite_sheet, game_events),
         _mode7_cam(_mode7_bg),
         _bg(bn::regular_bg_items::sky.create_bg(0, 0)),
-        _enemy_spawner(_game_events),
+        _enemy_spawner(game_events),
         _hud()
     {
         _game_events->score = 0;

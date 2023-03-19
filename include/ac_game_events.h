@@ -5,6 +5,7 @@
 #include "bn_forward_list.h"
 // air combat
 #include "ac_constants.h"
+#include "ac_bullet.h"
 // arr
 #include "arr_circle_collider.h"
 

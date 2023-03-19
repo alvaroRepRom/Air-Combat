@@ -2,7 +2,9 @@
 // butano
 #include "bn_keypad.h"
 #include "bn_string.h"
+#include "bn_log.h"
 // air combat
+#include "ac_scene_type.h"
 #include "ac_constants.h"
 // assets
 #include "bn_regular_bg_items_sky.h"
@@ -49,23 +51,22 @@ namespace ac
             {
                 bn::string<32> text;        
                 bn::ostringstream text_stream(text);
-                
-                for (int i = 0; i < ac::constants::NUMBER_NAME_LETTERS; i++) {
-                    text_stream.append(_save_data_ranking.name_array[score_index - score_index_offset][i]);                    
-                }
-
-                text_stream.append(":  ");
 
                 if (score_index == _new_record_position) {
+                    // insert name
+                    text_stream.append(":  ");
                     text_stream.append(_game_events->score);
-                    score_index_offset = -1;
+                    score_index_offset = 1;
                 }
                 else {
+                    for (int i = 0; i < ac::constants::NUMBER_NAME_LETTERS; i++) {
+                        text_stream.append(_save_data_ranking.name_array[score_index - score_index_offset][i]);                    
+                    }
+                    text_stream.append(":  ");
                     text_stream.append(_save_data_ranking.score_array[score_index - score_index_offset]);
                 }
                 
                 _text_generator.generate(0, height, text, _text_sprites_array[score_index]);
-
                 height += 20;
             }
 
@@ -83,6 +84,10 @@ namespace ac
                 _current_letter -= 1;
                 if (_current_letter < 0)
                     _current_letter = 24;
+            }
+
+            if (bn::keypad::start_pressed()) {
+                result = Scene_Type::INTRO;
             }
         }
 
