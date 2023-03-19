@@ -7,7 +7,8 @@ namespace ac
     {
         INTRO,
         TITLE,
-        GAME
+        GAME,
+        RANKING
     };
 }
 

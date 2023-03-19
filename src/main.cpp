@@ -7,18 +7,21 @@
 #include "ac_intro.h"
 #include "ac_title.h"
 #include "ac_game.h"
-
+#include "ac_ranking.h"
+#include "ac_game_events.h"
+// arr
 #include "arr_timer.h"
-
 #include "ac_save_ranking.h"
+
 
 int main()
 {
     bn::core::init();
 
     bn::optional<ac::Scene_Type> next_scene_type;
-    bn::unique_ptr<ac::Scene> scene(new ac::Intro());
-
+    //bn::unique_ptr<ac::Scene> scene(new ac::Intro());
+    ac::Game_Events game_events;
+    bn::unique_ptr<ac::Scene> scene(new ac::Ranking(&game_events));
 
 
 // save system *********
@@ -28,16 +31,6 @@ int main()
 
     //ac::Save_Ranking::reset_score();
     ac::Save_Ranking::SRam_Data loaded_data = ac::Save_Ranking::load_score();
-
-    for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++)
-    {
-        BN_LOG(i + 1, ": ", loaded_data.name_array[i][0], 
-                            loaded_data.name_array[i][1], 
-                            loaded_data.name_array[i][2] , " => ", loaded_data.score_array[i]);
-        // BN_LOG(i + 1, ": ", loaded_data.first_letter_array[i], 
-        //                     loaded_data.second_letter_array[i], 
-        //                     loaded_data.third_letter_array[i] , " => ", loaded_data.score_array[i]);
-    }
 // ***************
 
 
@@ -72,7 +65,10 @@ int main()
                 scene.reset(new ac::Title());
                 break;
             case ac::Scene_Type::GAME:
-                scene.reset(new ac::Game());
+                scene.reset(new ac::Game(&game_events));
+                break;
+            case ac::Scene_Type::RANKING:
+                scene.reset(new ac::Ranking(&game_events));
                 break;
             default:
                 BN_ERROR("Invalid next scene: ", int(*next_scene_type));

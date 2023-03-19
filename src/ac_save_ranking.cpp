@@ -11,16 +11,14 @@ namespace ac::Save_Ranking
             SRam_Data sram_data;
 
             sram_data.is_default = false;
+            int default_score = 100;
 
-            sram_data.score_array[0] = 100;
-            sram_data.score_array[1] = 80;
-            sram_data.score_array[2] = 60;
-            sram_data.score_array[3] = 40;
-            sram_data.score_array[4] = 20;
-
-            for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++)
+            for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++) {
+                sram_data.score_array[i] = default_score;
+                default_score -= 20;
                 for (int j = 0; j < ac::constants::NUMBER_NAME_LETTERS; j++)
                     sram_data.name_array[i][j] = 'A';
+            }
             
             return sram_data;
         }

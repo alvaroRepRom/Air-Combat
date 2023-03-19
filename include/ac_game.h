@@ -20,7 +20,7 @@ namespace ac
     class Game : public Scene
     {
         public:
-            Game();
+            Game(Game_Events* game_events);
             virtual ~Game() = default;
             virtual bn::optional<Scene_Type> update() final;
 
@@ -31,7 +31,7 @@ namespace ac
             Player _player;
             Mode_7_Camera _mode7_cam;
             Enemy_Spawner _enemy_spawner;
-            Game_Events _game_events;
+            Game_Events* _game_events;
             Hud _hud;
     };
 }

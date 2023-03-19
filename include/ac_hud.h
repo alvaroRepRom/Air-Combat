@@ -12,13 +12,12 @@ namespace ac
     class Hud
     {
         public:
-            Hud(Game_Events* game_events);
+            Hud();
 
             void update(int score);
             int total_score();
 
         private:
-            Game_Events* _game_events;
             bn::sprite_text_generator _text_generator;
             bn::vector<bn::sprite_ptr, 32> _text_sprites;
             int _total_score;

@@ -14,8 +14,7 @@ namespace ac
         constexpr bn::string_view score_label = "SCORE: ";
     }
 
-    Hud::Hud(Game_Events* game_events) : 
-        _game_events(game_events),
+    Hud::Hud() : 
         _text_generator(common::variable_8x8_sprite_font),
         _total_score(0)
     {
