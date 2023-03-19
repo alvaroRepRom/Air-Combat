@@ -11,7 +11,6 @@
 #include "ac_game_events.h"
 // arr
 #include "arr_timer.h"
-#include "ac_save_ranking.h"
 
 
 int main()
@@ -21,17 +20,6 @@ int main()
     bn::optional<ac::Scene_Type> next_scene_type;
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
     ac::Game_Events game_events;
-
-
-// save system *********
-    // ac::Save_Ranking::SRam_Data sram_data;
-    // sram_data.max_score = 30;
-    // ac::Save_Ranking::save_score(sram_data);
-
-    //ac::Save_Ranking::reset_score();
-    ac::Save_Ranking::SRam_Data loaded_data = ac::Save_Ranking::load_score();
-// ***************
-
 
 // profiling *****
     bn::fixed max_cpu_usage;
@@ -67,7 +55,7 @@ int main()
                 scene.reset(new ac::Game(&game_events));
                 break;
             case ac::Scene_Type::RANKING:
-                scene.reset(new ac::Ranking(&game_events));
+                scene.reset(new ac::Ranking(game_events.score));
                 break;
             default:
                 BN_ERROR("Invalid next scene: ", int(*next_scene_type));

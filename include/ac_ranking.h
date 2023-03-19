@@ -19,7 +19,7 @@ namespace ac
     class Ranking : public Scene
     {
         public:
-            Ranking(Game_Events* game_events);
+            Ranking(int player_score);
             virtual ~Ranking() = default;
             virtual bn::optional<Scene_Type> update() final;
 
@@ -28,10 +28,11 @@ namespace ac
             Game_Events* _game_events;
             bn::sprite_text_generator _text_generator;
             bn::array<bn::vector<bn::sprite_ptr, 32>, ac::constants::NUMBER_SAVES_SCORE> _text_sprites_array;
-            int _current_letter;
-            bool _is_start_frame;
+            bn::array<int, ac::constants::NUMBER_NAME_LETTERS> _name_inserted;
+            int _current_letter_index;
             Save_Ranking::SRam_Data _save_data_ranking;
             int _new_record_position;
+            int _player_score;
 
             void _save_result();
     };
