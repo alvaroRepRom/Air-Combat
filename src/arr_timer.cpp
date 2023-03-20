@@ -7,6 +7,14 @@ namespace arr
         _frame_interval(frame_time)
     {}
 
+    int Timer::frames_left() {
+        return _frame_count;
+    }
+    
+    int Timer::frames_elapsed() {
+        return _frame_interval - _frame_count;
+    }
+
     bool Timer::is_time_up()
     {
         _frame_count--;

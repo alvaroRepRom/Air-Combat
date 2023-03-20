@@ -11,6 +11,9 @@ namespace arr
         public:
             Timer(int frame_time);
 
+            int frames_left();
+            int frames_elapsed();
+
             bool is_time_up();
             bool is_time_up_once();
             void reset_timer();
