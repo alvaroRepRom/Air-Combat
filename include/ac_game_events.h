@@ -5,17 +5,23 @@
 #include "bn_forward_list.h"
 // air combat
 #include "ac_constants.h"
-#include "ac_bullet.h"
 // arr
 #include "arr_circle_collider.h"
 
 namespace ac
 {
     class arr::Circle_Collider;
+
+    // struct Game_Events
+    // {
+    //     bn::forward_list<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> bullet_col_f_list;
+    //     int score;
+    // };
     
     class Game_Events
     {
         public:
+            Game_Events() { bullet_col_f_list.clear(); score = 0; }
             bn::forward_list<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> bullet_col_f_list;
             int score;
     };

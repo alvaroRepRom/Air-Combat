@@ -15,12 +15,13 @@ namespace ac
                 pool[i] = Enemy();
             return pool;
         }
+        constexpr const int FRAMES_LEFT_SPAWN_ENEMY = 60;
     }
 
     Enemy_Spawner::Enemy_Spawner(Game_Events* game_events) : 
-        _frames_left(60),
-        _random_generator(),
         _enemy_array(init_enemy_array()),
+        _random_generator(),
+        _frames_left(FRAMES_LEFT_SPAWN_ENEMY),
         _game_events(game_events)
     {}
 
@@ -30,10 +31,12 @@ namespace ac
         {
             if (!enemy.is_active()) continue;
 
-            enemy.update();
-            
+            enemy.update();            
+
             for (auto bullet_collider : _game_events->bullet_col_f_list)
             {
+                if (!bullet_collider->is_collision_enabled()) continue;
+
                 if (arr::check_collision(*bullet_collider, enemy.col))
                 {
                     enemy.deactivate();
@@ -46,7 +49,7 @@ namespace ac
         _frames_left--;
         if (!_frames_left)
         {
-            _frames_left = 60;
+            _frames_left = FRAMES_LEFT_SPAWN_ENEMY;
             if (_random_generator.get_int(5) == 0)
                 _spawn();
         }
@@ -56,9 +59,9 @@ namespace ac
     {
         for (int i = 0; i < _enemy_array.size(); i++)
         {
-            if (!_enemy_array[i].is_active())
+            if (!_enemy_array.at(i).is_active())
             {
-                _enemy_array[i].init();
+                _enemy_array.at(i).init();
                 return;
             }
         }

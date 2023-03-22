@@ -19,6 +19,8 @@ namespace arr
         public:
             Circle_Collider();
             Circle_Collider(bn::sprite_ptr& sprite, bn::fixed radius);
+            
+            virtual ~Circle_Collider() = default;
 
             bn::fixed origin_x();
             bn::fixed origin_y();

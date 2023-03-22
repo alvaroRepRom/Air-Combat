@@ -25,6 +25,9 @@ namespace ac
             bn::fixed_point _velocity;
             int _frames_left;
             bn::fixed _dx;
+            bn::fixed _dy;
+            bool _goes_up;
+            bool _goes_right;
     };
 }
 

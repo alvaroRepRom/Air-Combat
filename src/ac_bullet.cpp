@@ -17,10 +17,10 @@ namespace ac
 
     Bullet::Bullet(bn::sprite_ptr sprite, Game_Events* game_events) : 
         arr::Circle_Collider(sprite, h),
-        _game_events(game_events),
         _sprite(sprite),
         _frames_left(FRAMES_ALIVE),
-        _is_first_frame(true)
+        _is_first_frame(true),
+        _game_events(game_events)
     {
         _deactivate();
     }

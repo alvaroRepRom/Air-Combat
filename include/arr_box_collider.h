@@ -20,6 +20,8 @@ namespace arr
         public:
             Box_Collider(bn::sprite_ptr& sprite, bn::fixed width, bn::fixed height);
 
+            virtual ~Box_Collider() = default;
+
             bn::fixed origin_x();
             bn::fixed origin_y();
             bn::fixed width();

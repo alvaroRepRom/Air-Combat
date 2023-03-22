@@ -19,6 +19,8 @@ namespace ac
             Bullet();
             Bullet(bn::sprite_ptr sprite, Game_Events* game_events);
 
+            virtual ~Bullet() = default;
+
             void update();
             void init(const bn::fixed_point &shoot_position, const bn::fixed_point &aimed_position);
             bool is_active();

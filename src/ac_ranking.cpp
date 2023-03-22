@@ -39,8 +39,8 @@ namespace ac
     {
         _text_generator.set_center_alignment();
 
-        for (int j = 0; j < ac::constants::NUMBER_NAME_LETTERS; j++)
-            _name_inserted[j] = A_LETTER;
+        for (int j = 0; j < _name_inserted.size(); j++)
+            _name_inserted.at(j) = A_LETTER;
     }
 
     bn::optional<Scene_Type> Ranking::update()
@@ -48,15 +48,15 @@ namespace ac
         bn::optional<Scene_Type> result;
 
         if (bn::keypad::up_pressed()) {
-            _name_inserted[_current_letter_index] += 1;
-            if (_name_inserted[_current_letter_index] > Z_LETTER)
-                _name_inserted[_current_letter_index] = A_LETTER;
+            _name_inserted.at(_current_letter_index) += 1;
+            if (_name_inserted.at(_current_letter_index) > Z_LETTER)
+                _name_inserted.at(_current_letter_index) = A_LETTER;
         }
         else 
         if (bn::keypad::down_pressed()) {
-            _name_inserted[_current_letter_index] -= 1;
-            if (_name_inserted[_current_letter_index] < A_LETTER)
-                _name_inserted[_current_letter_index] = Z_LETTER;
+            _name_inserted.at(_current_letter_index) -= 1;
+            if (_name_inserted.at(_current_letter_index) < A_LETTER)
+                _name_inserted.at(_current_letter_index) = Z_LETTER;
         }
         else
         if (bn::keypad::left_pressed()) {
