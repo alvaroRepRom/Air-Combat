@@ -7,6 +7,8 @@ namespace ac
 {
     namespace {
         constexpr const bn::fixed COLLIDER_RADIUS = 9;
+        constexpr const int HALF_WIDTH = 100;
+        constexpr const int HALF_HEIGHT = 60;
     }
 
     Enemy::Enemy(bn::sprite_ptr sprite, Game_Events* game_events) :
@@ -28,17 +30,17 @@ namespace ac
 
     void Enemy::update()
     {
-        if (_sprite.y() > 30) {
+        if (_sprite.y() > HALF_HEIGHT) {
             _goes_up = true;
         }
-        else if (_sprite.y() < -30) {
+        else if (_sprite.y() < -HALF_HEIGHT) {
             _goes_up = false;
         }
 
-        if (_sprite.x() > 50) {
+        if (_sprite.x() > HALF_WIDTH) {
             _goes_right = false;
         }
-        else if (_sprite.x() < -50) {
+        else if (_sprite.x() < -HALF_WIDTH) {
             _goes_right = true;
         }
 
