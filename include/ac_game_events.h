@@ -10,14 +10,6 @@
 
 namespace ac
 {
-    class arr::Circle_Collider;
-
-    // struct Game_Events
-    // {
-    //     bn::forward_list<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> bullet_col_f_list;
-    //     int score;
-    // };
-    
     class Game_Events
     {
         public:

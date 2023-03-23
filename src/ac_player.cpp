@@ -34,7 +34,7 @@ namespace ac
     }
 
     void Player::update()
-    {       
+    {
         _move_aim_cross();
         _move_air_ship();
         _shooting();
@@ -170,7 +170,7 @@ namespace ac
             else 
             if (bn::keypad::a_held() && _wait_shot_cadence < 0)
             {
-                _bullet_array[i].init(_sprite.position(), _aim_cross_sprite.position());
+                _bullet_array[i].init(_sprite.position(), _aim_cross_sprite.position());                
                 _wait_shot_cadence = WAIT_SHOT_CADENCE;
             }
         }

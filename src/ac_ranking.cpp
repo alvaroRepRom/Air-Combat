@@ -16,13 +16,13 @@ namespace ac
     namespace 
     {
         constexpr int player_result_position(int score, 
-                bn::array<int, ac::constants::NUMBER_SAVES_SCORE> score_array)
+                bn::array<int, constants::NUMBER_SAVES_SCORE> score_array)
         {
-            for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++) {
-                if (score > score_array[i])
+            for (int i = 0; i < constants::NUMBER_SAVES_SCORE; i++) {
+                if (score > score_array.at(i))
                     return i;
             }
-            return ac::constants::NUMBER_SAVES_SCORE;
+            return constants::NUMBER_SAVES_SCORE;
         }
 
         constexpr const int A_LETTER = 65;
@@ -62,12 +62,12 @@ namespace ac
         if (bn::keypad::left_pressed()) {
             _current_letter_index -= 1;
             if (_current_letter_index < 0)
-                _current_letter_index = ac::constants::NUMBER_NAME_LETTERS - 1;
+                _current_letter_index = constants::NUMBER_NAME_LETTERS - 1;
         }
         else 
         if (bn::keypad::right_pressed()) {
             _current_letter_index += 1;
-            if (_current_letter_index > ac::constants::NUMBER_NAME_LETTERS - 1)
+            if (_current_letter_index > constants::NUMBER_NAME_LETTERS - 1)
                 _current_letter_index = 0;
         }
 
@@ -75,7 +75,7 @@ namespace ac
         int height = -40;
         int score_index_offset = 0;
 
-        for (int rank_pos = 0; rank_pos < ac::constants::NUMBER_SAVES_SCORE; rank_pos++)
+        for (int rank_pos = 0; rank_pos < constants::NUMBER_SAVES_SCORE; rank_pos++)
         {
             bn::string<32> text;        
             bn::ostringstream text_stream(text);
@@ -104,7 +104,7 @@ namespace ac
 
         if (bn::keypad::start_pressed()) {
             result = Scene_Type::INTRO;
-            if (_new_record_position != ac::constants::NUMBER_SAVES_SCORE)
+            if (_new_record_position != constants::NUMBER_SAVES_SCORE)
                 _save_result();
         }
 
@@ -113,12 +113,12 @@ namespace ac
 
     void Ranking::_save_result()
     {
-        for (int rank_pos = ac::constants::NUMBER_SAVES_SCORE - 1; rank_pos >= 0; rank_pos--)
+        for (int rank_pos = constants::NUMBER_SAVES_SCORE - 1; rank_pos >= 0; rank_pos--)
         {
             if (rank_pos == _new_record_position) {
                 // Add New Record
                 _save_data_ranking.score_array[rank_pos] = _player_score;
-                for (int i = 0; i < ac::constants::NUMBER_NAME_LETTERS; i++) {
+                for (int i = 0; i < constants::NUMBER_NAME_LETTERS; i++) {
                     _save_data_ranking.name_array[rank_pos][i] = (char)_name_inserted[i];
                 }
                 break;
@@ -126,7 +126,7 @@ namespace ac
             else {
                 // Move Rank Down
                 _save_data_ranking.score_array[rank_pos] = _save_data_ranking.score_array[rank_pos - 1];
-                for (int i = 0; i < ac::constants::NUMBER_NAME_LETTERS; i++) {
+                for (int i = 0; i < constants::NUMBER_NAME_LETTERS; i++) {
                     _save_data_ranking.name_array[rank_pos][i] = _save_data_ranking.name_array[rank_pos - 1][i];
                 }
             }

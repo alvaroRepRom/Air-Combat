@@ -3,7 +3,6 @@
 
 // butano
 #include "bn_array.h"
-#include "bn_forward_list.h"
 #include "bn_random.h"
 #include "bn_fixed_point.h"
 // air combat
@@ -23,11 +22,11 @@ namespace ac
             void update();
 
         private:
-            bn::array<Enemy, constants::NUMBER_OF_ENEMIES> _enemy_array;
+            bn::array<Enemy, constants::NUMBER_OF_ENEMIES> _enemy_array;            
             bn::random _random_generator;
             int _frames_left;
             Game_Events* _game_events;
-
+            
             void _spawn();
     };
 }

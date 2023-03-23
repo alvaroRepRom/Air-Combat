@@ -13,11 +13,11 @@ namespace ac::Save_Ranking
             sram_data.is_default = false;
             int default_score = 100;
 
-            for (int i = 0; i < ac::constants::NUMBER_SAVES_SCORE; i++) {
-                sram_data.score_array[i] = default_score;
+            for (int i = 0; i < constants::NUMBER_SAVES_SCORE; i++) {
+                sram_data.score_array.at(i) = default_score;
                 default_score -= 20;
-                for (int j = 0; j < ac::constants::NUMBER_NAME_LETTERS; j++)
-                    sram_data.name_array[i][j] = 'A';
+                for (int j = 0; j < constants::NUMBER_NAME_LETTERS; j++)
+                    sram_data.name_array.at(i).at(j) = 'X';
             }
             
             return sram_data;

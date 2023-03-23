@@ -8,10 +8,12 @@
 #include "ac_bullet.h"
 #include "ac_game_events.h"
 #include "ac_constants.h"
+// arr
+#include "arr_actor.h"
 
 namespace ac
 {
-    class Player
+    class Player : public arr::Actor
     {
         private:      
             bn::sprite_ptr _sprite;
@@ -25,8 +27,8 @@ namespace ac
 
         public:
             Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events);
-
-            void update();
+            virtual ~Player() = default;
+            virtual void update() override;
     };
 }
 
