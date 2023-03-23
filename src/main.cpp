@@ -37,7 +37,6 @@ int main()
             max_cpu_usage = 0;
         }
 //******************
-
         // Gameloop
         if (scene) next_scene_type = scene->update();
         bn::core::update();
@@ -63,6 +62,6 @@ int main()
                 BN_ERROR("Invalid next scene: ", int(*next_scene_type));
                 break;
             }
-        }
+        }        
     }
 }
