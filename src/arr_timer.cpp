@@ -2,24 +2,23 @@
 
 namespace arr
 {
-    Timer::Timer(int frame_time) : 
-        _frame_count(frame_time), 
+    Timer::Timer(unsigned int frame_time) : 
+        _frame_timer(frame_time), 
         _frame_interval(frame_time)
     {}
 
     int Timer::frames_left() {
-        return _frame_count;
+        return _frame_timer;
     }
     
     int Timer::frames_elapsed() {
-        return _frame_interval - _frame_count;
+        return _frame_interval - _frame_timer;
     }
 
     bool Timer::is_time_up()
     {
-        _frame_count--;
-        if (!_frame_count) {
-            _frame_count = _frame_interval;
+        if (!--_frame_timer) {
+            _frame_timer = _frame_interval;
             return true;
         }
         return false;
@@ -27,22 +26,17 @@ namespace arr
 
     bool Timer::is_time_up_once()
     {
-        if (_frame_count > 0) 
-        {
-            _frame_count--;
-            if (!_frame_count) {
-                return true;
-            }
-        }
-        return false;
+        if (!_frame_timer) 
+            return false;
+        return !--_frame_timer;
     }
 
     void Timer::reset_timer() {
-        _frame_count = _frame_interval;
+        _frame_timer = _frame_interval;
     }
 
-    void Timer::reset_timer(int frame_time) {
+    void Timer::reset_timer(unsigned int frame_time) {
         _frame_interval = frame_time;
-        _frame_count    = frame_time;
+        _frame_timer    = frame_time;
     }
 }
