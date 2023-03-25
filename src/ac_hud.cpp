@@ -9,9 +9,9 @@ namespace ac
 {
     namespace
     {
-        constexpr bn::fixed text_x_limit = bn::display::width() / 2 - 10;
-        constexpr bn::fixed text_y_limit = -bn::display::height() / 2 + 7;
-        constexpr bn::string_view score_label = "SCORE: ";
+        constexpr const bn::fixed TEXT_X_LIMIT = bn::display::width() / 2 - 10;
+        constexpr const bn::fixed TEXT_Y_LIMIT = -bn::display::height() / 2 + 7;
+        constexpr const bn::string_view SCORE_LABEL = "SCORE: ";
     }
 
     Hud::Hud() : 
@@ -29,11 +29,11 @@ namespace ac
         bn::string<32> text;
         
         bn::ostringstream text_stream(text);
-        text_stream.append(score_label);
+        text_stream.append(SCORE_LABEL);
         text_stream.append(_total_score);
 
         _text_sprites.clear();
-        _text_generator.generate(text_x_limit, text_y_limit, text, _text_sprites);
+        _text_generator.generate(TEXT_X_LIMIT, TEXT_Y_LIMIT, text, _text_sprites);
     }
     
     int Hud::total_score() { 

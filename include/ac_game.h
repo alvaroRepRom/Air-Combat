@@ -12,6 +12,7 @@
 #include "ac_enemy_spawner.h"
 #include "ac_game_events.h"
 #include "ac_hud.h"
+#include "ac_pause.h"
 
 namespace ac
 {
@@ -33,6 +34,7 @@ namespace ac
             Enemy_Spawner _enemy_spawner;
             Game_Events* _game_events;
             Hud _hud;
+            Pause _pause;
             bn::vector<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> _bullet_col_vector;
     };
 }

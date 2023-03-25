@@ -24,7 +24,8 @@ namespace ac
         _mode7_cam(_mode7_bg),
         _enemy_spawner(game_events),
         _game_events(game_events),
-        _hud()
+        _hud(),
+        _pause()
     {
         _hud.update(0);
         actor = &_player;
@@ -34,6 +35,10 @@ namespace ac
     {
         bn::optional<Scene_Type> result;
 
+        if (_pause.is_game_paused()) {
+            return result;
+        }
+        
         actor->update();
         //_player.update();
         _enemy_spawner.update();
@@ -44,11 +49,11 @@ namespace ac
             _game_events->score = 0;
         }
 
-        if (bn::keypad::start_pressed()) {
+        if (bn::keypad::select_pressed()) {
             result = Scene_Type::RANKING;
             _game_events->score = _hud.total_score();
         }
-        
+
         return result;
     }
 }
