@@ -87,7 +87,7 @@ namespace ac
                 }                
                 text_stream.append(":  ");
                 text_stream.append(_player_score);
-                score_index_offset = 1;
+                score_index_offset = 1;                
             }
             else {
                 for (int i = 0; i < ac::constants::NUMBER_NAME_LETTERS; i++) {

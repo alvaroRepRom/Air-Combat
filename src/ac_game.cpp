@@ -10,12 +10,8 @@
 #include "bn_affine_bg_items_fondo.h"
 #include "bn_affine_bg_items_ground.h"
 
-#include "arr_actor.h"
-
 namespace ac
 {
-    arr::Actor* actor;
-
     Game::Game(Game_Events* game_events) : 
         _sprite_sheet(bn::sprite_items::plane_sheet.create_sprite(0, 0)),
         _mode7_bg(bn::affine_bg_items::ground.create_bg(-376, -336)),
@@ -28,7 +24,6 @@ namespace ac
         _pause()
     {
         _hud.update(0);
-        actor = &_player;
     }
 
     bn::optional<Scene_Type> Game::update()
@@ -39,8 +34,7 @@ namespace ac
             return result;
         }
         
-        actor->update();
-        //_player.update();
+        _player.update();
         _enemy_spawner.update();
         _mode7_cam.update();
 
