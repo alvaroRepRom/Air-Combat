@@ -1,8 +1,6 @@
 #include "ac_enemy_spawner.h"
 // butano
 #include "bn_log.h"
-// arr
-#include "arr_collisions.h"
 // assets
 #include "bn_sprite_items_pivot.h"
 
@@ -32,16 +30,12 @@ namespace ac
             
             for (auto bullet_collider : _game_events->bullet_col_f_list)
             {
-                if (!bullet_collider->is_collision_enabled()) continue;
-
-                if (_enemy_array.at(i).check_collision(*bullet_collider)) {
+                if (_enemy_array.at(i).check_collision(*bullet_collider))
                     _game_events->score += 10;
-                }
             }
         }
         
-        _frames_left--;
-        if (!_frames_left)
+        if (!--_frames_left)
         {
             _frames_left = FRAMES_LEFT_SPAWN_ENEMY;
             if (_random_generator.get_int(5) == 0)
