@@ -4,6 +4,7 @@
 #include "bn_display.h"
 #include "bn_keypad.h"
 #include "bn_log.h"
+#include "bn_sound_items.h"
 // assets
 #include "bn_sprite_items_cross.h"
 #include "bn_sprite_items_plane_sheet.h"
@@ -170,7 +171,8 @@ namespace ac
             else 
             if (bn::keypad::a_held() && _wait_shot_cadence < 0)
             {
-                _bullet_array[i].init(_sprite.position(), _aim_cross_sprite.position());                
+                _bullet_array[i].init(_sprite.position(), _aim_cross_sprite.position());
+                bn::sound_items::gun_2.play();               
                 _wait_shot_cadence = WAIT_SHOT_CADENCE;
             }
         }

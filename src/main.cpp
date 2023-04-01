@@ -1,5 +1,6 @@
 //butano
 #include "bn_core.h"
+#include "bn_music_items.h"
 #include "bn_log.h"
 // air combat
 #include "ac_scene_type.h"
@@ -21,6 +22,7 @@ int main()
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
     ac::Game_Events game_events;
 
+    bn::music_items::minor_boss_r.play();
 
 // profiling *****
     bn::fixed max_cpu_usage;
