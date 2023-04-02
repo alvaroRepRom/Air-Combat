@@ -1,6 +1,7 @@
 #include "ac_enemy_spawner.h"
 // butano
 #include "bn_log.h"
+#include "bn_sound_items.h"
 // assets
 #include "bn_sprite_items_pivot.h"
 
@@ -30,8 +31,10 @@ namespace ac
             
             for (auto bullet_collider : _game_events->bullet_col_f_list)
             {
-                if (_enemy_array.at(i).check_collision(*bullet_collider))
+                if (_enemy_array.at(i).check_collision(*bullet_collider)) {
+                    bn::sound_items::explosion.play();
                     _game_events->score += 10;
+                }
             }
         }
         
