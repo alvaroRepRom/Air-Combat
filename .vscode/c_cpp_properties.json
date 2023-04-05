@@ -27,7 +27,7 @@
             "windowsSdkVersion": "10.0.16299.0",
             "compilerPath": "/devkitpro/devkitARM/bin/arm-none-eabi-g++.exe",
             "cStandard": "c17",
-            "cppStandard": "c++17",
+            "cppStandard": "c++20",
             "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
