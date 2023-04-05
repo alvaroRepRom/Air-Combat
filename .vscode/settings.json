@@ -26,4 +26,9 @@
         }
     ],
     "C_Cpp.errorSquiggles": "enabled",
+    "cpp.creator.setPath": "C:\\GBA-DEV\\Air-Combat\\src",
+    "cpp.creator.headerFileContentPreset": "#ifndef AC_{{*CLASSNAMEUPPER*}}_H\n#define AC_{{*CLASSNAMEUPPER*}}_H\n\nnamespace ac\n{\n    class {{*CLASSNAME*}}\n    {\n    public:\n        {{*CLASSNAME*}}();\n\n    private:\n\n    };\n}\n#endif",
+    "cpp.creator.headerFileNamePreset": "ac_{{*CLASSNAMELOWER*}}.h",
+    "cpp.creator.sourceFileContentPreset": "#include \"{{*HEADERFILENAME*}}\"\n\nnamespace ac\n{\n    {{*CLASSNAME*}}::{{*CLASSNAME*}}()\n    {\n\n    }\n}",
+    "cpp.creator.sourceFileNamePreset": "ac_{{*CLASSNAMELOWER*}}.cpp",
 }
