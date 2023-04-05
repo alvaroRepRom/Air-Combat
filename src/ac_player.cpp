@@ -97,41 +97,13 @@ namespace ac
     void Player::_move_air_ship()
     {
         int sprite_index = 0;
-        // MOVE SHIP X
-        bn::fixed x_dist = _aim_cross_sprite.x() - _sprite.x();        
-        if (x_dist > 0) // IF aim to the right
-        {
-            sprite_index = 1;
-            bn::fixed delta_x = 0.5;
-            if (x_dist > AIM_OFFSET.x())
-            {
-                sprite_index = 2;
-                delta_x = 1;
-            }
-
-            if (_sprite.x() < X_BORDER - AIM_OFFSET.x())
-                _sprite.set_x(_sprite.x() + delta_x);
-        }
-        else 
-        if (x_dist < 0) // IF aim to the left
-        {
-            sprite_index = 5;
-            bn::fixed delta_x = 0.5;
-            if (x_dist < -AIM_OFFSET.x())
-            {
-                sprite_index = 6;
-                delta_x = 1;
-            }
-
-            if(_sprite.x() > -X_BORDER + AIM_OFFSET.x())
-                _sprite.set_x(_sprite.x() - delta_x);
-        }
 
         // MOVE SHIP Y
         bn::fixed y_dist = _aim_cross_sprite.y() - _sprite.y() + INIT_Y;
         if (y_dist > 0) // aim down
         {
             bn::fixed delta_y = 0.5;
+            sprite_index = 3;
             if (y_dist > AIM_OFFSET.y())
             {
                 delta_y = 1;
@@ -146,6 +118,7 @@ namespace ac
         if (y_dist < 0) // aim up
         {
             bn::fixed delta_y = 0.5;
+            sprite_index = 2;
             if (y_dist < -AIM_OFFSET.y())
             {
                 delta_y = 1;
@@ -156,6 +129,37 @@ namespace ac
             if (_sprite.y() < -Y_BORDER + INIT_Y + AIM_OFFSET.y())
                 _sprite.set_y(-Y_BORDER + INIT_Y + AIM_OFFSET.y());
         }
+
+        
+        // MOVE SHIP X
+        bn::fixed x_dist = _aim_cross_sprite.x() - _sprite.x();        
+        if (x_dist > 0) // IF aim to the right
+        {
+            sprite_index = 1;
+            bn::fixed delta_x = 0.5;
+            if (x_dist > AIM_OFFSET.x())
+            {
+                //sprite_index = 2;
+                delta_x = 1;
+            }
+
+            if (_sprite.x() < X_BORDER - AIM_OFFSET.x())
+                _sprite.set_x(_sprite.x() + delta_x);
+        }
+        else 
+        if (x_dist < 0) // IF aim to the left
+        {
+            sprite_index = 4;
+            bn::fixed delta_x = 0.5;
+            if (x_dist < -AIM_OFFSET.x())
+            {
+                //sprite_index = 6;
+                delta_x = 1;
+            }
+
+            if(_sprite.x() > -X_BORDER + AIM_OFFSET.x())
+                _sprite.set_x(_sprite.x() - delta_x);
+        }        
 
         _sprite.set_item(bn::sprite_items::plane_sheet, sprite_index);
     }
