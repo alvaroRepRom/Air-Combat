@@ -4,6 +4,8 @@
 // butano
 #include "bn_sprite_ptr.h"
 #include "bn_array.h"
+
+#include "bn_sprite_palette_ptr.h"
 // air combat
 #include "ac_bullet.h"
 #include "ac_game_events.h"
@@ -20,6 +22,8 @@ namespace ac
             bn::sprite_ptr _aim_cross_sprite;
             int _wait_shot_cadence;
             bn::array<Bullet, ac::constants::NUMBER_OF_BULLETS> _bullet_array;
+
+            bn::sprite_palette_ptr _plane_palette;
 
             void _move_aim_cross();
             void _move_air_ship();

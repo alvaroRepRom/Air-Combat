@@ -5,10 +5,17 @@
 #include "bn_keypad.h"
 #include "bn_log.h"
 #include "bn_sound_items.h"
+
+#include "bn_sprite_palette_actions.h"
+#include "bn_sprite_palettes_actions.h"
+#include "bn_bg_palette_color_hbe_ptr.h"
+#include "bn_bg_palettes_transparent_color_hbe_ptr.h"
 // assets
 #include "bn_sprite_items_cross.h"
 #include "bn_sprite_items_plane_sheet.h"
 #include "bn_sprite_items_bullet.h"
+
+#include "bn_sprite_palette_items_pink_palette.h"
 
 namespace ac
 {
@@ -19,6 +26,7 @@ namespace ac
         constexpr const int Y_BORDER = bn::display::height() / 2 - 20;
         constexpr const bn::fixed_point AIM_OFFSET(30, 15);
         constexpr const int INIT_Y = 48;
+        constexpr const bn::sprite_palette_item& pink_palette_item = bn::sprite_palette_items::pink_palette;
     }
 
     Player::Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events) : 
@@ -29,9 +37,12 @@ namespace ac
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events)
-        })
+        }),
+        _plane_palette(_sprite.palette())
     {
         _sprite.set_position(0, INIT_Y);
+        bn::sprite_palette_ptr plane_palette = _sprite.palette();
+        plane_palette.set_colors(pink_palette_item);
     }
 
     void Player::update()

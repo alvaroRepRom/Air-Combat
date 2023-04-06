@@ -7,7 +7,6 @@
 // assets
 #include "bn_sprite_items_plane_sheet.h"
 #include "bn_regular_bg_items_sky.h"
-#include "bn_affine_bg_items_fondo.h"
 #include "bn_affine_bg_items_ground.h"
 
 namespace ac
