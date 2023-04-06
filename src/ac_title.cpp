@@ -1,6 +1,7 @@
 #include "ac_title.h"
 // butano
 #include "bn_keypad.h"
+#include "bn_array.h"
 // air combat
 #include "ac_scene_type.h"
 #include "ac_scene.h"
@@ -12,10 +13,10 @@
 namespace ac
 {
     namespace {
-        constexpr const bn::sprite_palette_item& 
-            original_palette = bn::sprite_items::plane_sheet.palette_item();
-        constexpr const bn::sprite_palette_item& 
-            pink_palette = bn::sprite_palette_items::pink_palette;
+        constexpr const bn::array<const bn::sprite_palette_item, 2> palette_array{
+            bn::sprite_items::plane_sheet.palette_item(),
+            bn::sprite_palette_items::pink_palette
+        };
     }
 
     Title::Title() : 
@@ -32,17 +33,17 @@ namespace ac
         if (bn::keypad::left_pressed()) {
             _palette_index--;
             if (_palette_index < 0)
-                _palette_index = 1;
+                _palette_index = palette_array.size() - 1;
 
-            _sprite_palette.set_colors(original_palette);
+            _sprite_palette.set_colors(palette_array[_palette_index]);
         } 
         else 
         if (bn::keypad::right_pressed()) {
             _palette_index++;
-            if (_palette_index > 1)
+            if (_palette_index >= palette_array.size())
                 _palette_index = 0;
 
-            _sprite_palette.set_colors(pink_palette);
+            _sprite_palette.set_colors(palette_array[_palette_index]);
         }
         
         if (bn::keypad::a_pressed()) {
