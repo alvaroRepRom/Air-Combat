@@ -103,7 +103,7 @@ namespace ac
         }
 
         if (bn::keypad::start_pressed()) {
-            result = Scene_Type::INTRO;
+            result = Scene_Type::TITLE;
             if (_new_record_position != constants::NUMBER_SAVES_SCORE)
                 _save_result();
         }
