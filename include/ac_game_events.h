@@ -3,6 +3,7 @@
 
 // butano
 #include "bn_forward_list.h"
+#include "bn_sprite_palette_ptr.h"
 // air combat
 #include "ac_constants.h"
 // arr
@@ -16,6 +17,8 @@ namespace ac
             Game_Events() { bullet_col_f_list.clear(); score = 0; }
             bn::forward_list<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> bullet_col_f_list;
             int score;
+            
+            //bn::sprite_palette_item sprite_palette;
     };
 }
 

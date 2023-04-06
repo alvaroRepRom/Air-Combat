@@ -8,6 +8,7 @@
 // air combat
 #include "ac_scene_type.h"
 #include "ac_scene.h"
+#include "ac_game_events.h"
 
 namespace ac
 {
@@ -16,7 +17,7 @@ namespace ac
     class Title : public Scene
     {
         public:
-            Title();
+            Title(Game_Events* game_events);
             virtual ~Title() = default;
             virtual bn::optional<Scene_Type> update() final;
 
@@ -25,6 +26,7 @@ namespace ac
             bn::sprite_ptr _sprite;
             bn::sprite_palette_ptr _sprite_palette;
             int _palette_index;
+            Game_Events* _game_events;
     };
 }
 

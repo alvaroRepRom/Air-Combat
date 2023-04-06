@@ -50,11 +50,11 @@ int main()
             switch (*next_scene_type)
             {
             case ac::Scene_Type::INTRO:
-                game_events = ac::Game_Events();
                 scene.reset(new ac::Intro());
                 break;
             case ac::Scene_Type::TITLE:
-                scene.reset(new ac::Title());
+                game_events = ac::Game_Events();
+                scene.reset(new ac::Title(&game_events));
                 break;
             case ac::Scene_Type::GAME:
                 scene.reset(new ac::Game(&game_events));
