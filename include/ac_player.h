@@ -22,6 +22,7 @@ namespace ac
             bn::sprite_ptr _aim_cross_sprite;
             int _wait_shot_cadence;
             bn::array<Bullet, ac::constants::NUMBER_OF_BULLETS> _bullet_array;
+            bn::sprite_palette_ptr _sprite_palette;
 
             void _move_aim_cross();
             void _move_air_ship();

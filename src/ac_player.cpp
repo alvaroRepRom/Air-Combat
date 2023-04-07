@@ -36,10 +36,12 @@ namespace ac
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events)
-        })
+        }),
+        _sprite_palette(*game_events->ship_palette.get())
     {
         _sprite.set_position(0, INIT_Y);
-        _sprite.set_palette(*game_events->ship_palette.get());
+        //_sprite.set_palette(*game_events->ship_palette.get());
+        _sprite.set_palette(_sprite_palette);
     }
 
     void Player::update()
@@ -170,6 +172,7 @@ namespace ac
         }        
 
         _sprite.set_item(bn::sprite_items::plane_sheet, sprite_index);
+        _sprite.set_palette(_sprite_palette);
     }
 
     void Player::_shooting()
