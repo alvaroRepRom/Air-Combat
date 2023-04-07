@@ -22,7 +22,6 @@ namespace ac
     Title::Title(Game_Events* game_events) : 
         _bg(bn::regular_bg_items::sky.create_bg(0, 0)),
         _sprite(bn::sprite_items::plane_sheet.create_sprite(0, 0)),
-        _sprite_palette(_sprite.palette()),
         _palette_index(0),
         _game_events(game_events)
     {}
@@ -36,7 +35,7 @@ namespace ac
             if (_palette_index < 0)
                 _palette_index = palette_array.size() - 1;
 
-            _sprite_palette.set_colors(palette_array[_palette_index]);
+            _sprite.set_palette(palette_array[_palette_index]);
         } 
         else 
         if (bn::keypad::right_pressed()) {
@@ -44,10 +43,13 @@ namespace ac
             if (_palette_index >= palette_array.size())
                 _palette_index = 0;
 
-            _sprite_palette.set_colors(palette_array[_palette_index]);
+            _sprite.set_palette(palette_array[_palette_index]);
         }
         
-        if (bn::keypad::a_pressed()) {
+        if (bn::keypad::start_pressed()) {
+            _game_events->ship_palette = 
+                bn::sprite_palette_ptr::create_optional(palette_array[_palette_index]);
+            //_sprite.set_palette(*_game_events->ship_palette.get());
             result = Scene_Type::GAME;
         }
         else

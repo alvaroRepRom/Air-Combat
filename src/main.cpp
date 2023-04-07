@@ -24,7 +24,7 @@ int main()
     //bn::unique_ptr<ac::Scene> scene(new ac::Test_Scene());
     ac::Game_Events game_events;
 
-    bn::music_items::minor_boss_r.play();
+    //bn::music_items::minor_boss_r.play();
 
 // profiling *****
     bn::fixed max_cpu_usage;

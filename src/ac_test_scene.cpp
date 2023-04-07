@@ -11,7 +11,7 @@ namespace ac
     Test_Scene::Test_Scene() : 
         _sprite(bn::sprite_items::plane_sheet.create_sprite(0, 0)),
         _plane_palette(_sprite.palette())
-        {}
+    {}
 
     bn::optional<Scene_Type> Test_Scene::update()
     {

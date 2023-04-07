@@ -24,7 +24,6 @@ namespace ac
         private:
             bn::regular_bg_ptr _bg;
             bn::sprite_ptr _sprite;
-            bn::sprite_palette_ptr _sprite_palette;
             int _palette_index;
             Game_Events* _game_events;
     };

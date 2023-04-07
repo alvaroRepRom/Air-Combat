@@ -19,6 +19,8 @@ namespace ac
             virtual ~Test_Scene() = default;
             virtual bn::optional<Scene_Type> update() final;
 
+            bn::optional<const bn::sprite_palette_ptr> ship_palette;
+
         private:
             bn::sprite_ptr _sprite;
             bn::sprite_palette_ptr _plane_palette;
