@@ -36,10 +36,10 @@ namespace ac
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events), 
             Bullet(bn::sprite_items::bullet.create_sprite(0, 0), game_events)
-        }),
-        _plane_palette(_sprite.palette())
+        })
     {
         _sprite.set_position(0, INIT_Y);
+        _sprite.set_palette(*game_events->ship_palette.get());
     }
 
     void Player::update()
