@@ -21,7 +21,6 @@ int main()
 
     bn::optional<ac::Scene_Type> next_scene_type;
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
-    //bn::unique_ptr<ac::Scene> scene(new ac::Test_Scene());
     ac::Game_Events game_events;
 
     //bn::music_items::minor_boss_r.play();
