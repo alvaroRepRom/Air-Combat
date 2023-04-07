@@ -14,11 +14,8 @@ namespace ac
     class Game_Events
     {
         public:
-            Game_Events();
             bn::forward_list<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> bullet_col_f_list;
-            unsigned int score;
-            unsigned int palette_index;
-            
+            unsigned int score { 0 };            
             bn::optional<bn::sprite_palette_ptr> ship_palette;
     };
 }

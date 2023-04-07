@@ -26,7 +26,6 @@ namespace ac
         constexpr const int Y_BORDER = bn::display::height() / 2 - 20;
         constexpr const bn::fixed_point AIM_OFFSET(30, 15);
         constexpr const int INIT_Y = 48;
-        constexpr const bn::sprite_palette_item& pink_palette_item = bn::sprite_palette_items::pink_palette;
     }
 
     Player::Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events) : 
@@ -41,8 +40,6 @@ namespace ac
         _plane_palette(_sprite.palette())
     {
         _sprite.set_position(0, INIT_Y);
-        bn::sprite_palette_ptr plane_palette = _sprite.palette();
-        plane_palette.set_colors(pink_palette_item);
     }
 
     void Player::update()

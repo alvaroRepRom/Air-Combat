@@ -49,7 +49,9 @@ namespace ac
         if (bn::keypad::start_pressed()) {
             _game_events->ship_palette = 
                 bn::sprite_palette_ptr::create_optional(palette_array[_palette_index]);
+
             //_sprite.set_palette(*_game_events->ship_palette.get());
+            
             result = Scene_Type::GAME;
         }
         else
