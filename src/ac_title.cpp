@@ -2,9 +2,7 @@
 // butano
 #include "bn_keypad.h"
 #include "bn_array.h"
-// air combat
-#include "ac_scene_type.h"
-#include "ac_scene.h"
+#include "bn_sprite_palette_ptr.h"
 // assets
 #include "bn_regular_bg_items_sky.h"
 #include "bn_sprite_items_plane_sheet.h"
@@ -49,8 +47,6 @@ namespace ac
         if (bn::keypad::start_pressed()) {
             _game_events->ship_palette = 
                 bn::sprite_palette_ptr::create_optional(palette_array[_palette_index]);
-
-            //_sprite.set_palette(*_game_events->ship_palette.get());
             
             result = Scene_Type::GAME;
         }

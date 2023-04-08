@@ -8,9 +8,9 @@
 #include "ac_intro.h"
 #include "ac_title.h"
 #include "ac_game.h"
-#include "ac_test_scene.h"
 #include "ac_ranking.h"
 #include "ac_game_events.h"
+#include "ac_test_scene.h"
 // arr
 #include "arr_timer.h"
 
