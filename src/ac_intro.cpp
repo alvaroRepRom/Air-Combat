@@ -10,7 +10,7 @@
 namespace ac
 {
     namespace {
-        constexpr int NUM_FRAMES = constants::FPS * 3; // 3 seconds
+        constexpr const int NUM_FRAMES = constants::FPS * 3; // 3 seconds
     }
 
     Intro::Intro() : 

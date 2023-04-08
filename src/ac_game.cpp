@@ -3,7 +3,6 @@
 #include "bn_affine_bg_builder.h"
 #include "bn_log.h"
 #include "bn_keypad.h"
-// air combat
 // assets
 #include "bn_sprite_items_plane_sheet.h"
 #include "bn_regular_bg_items_sky.h"
