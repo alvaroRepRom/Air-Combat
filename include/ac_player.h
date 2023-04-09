@@ -28,7 +28,7 @@ namespace ac
             void _shooting();
 
         public:
-            Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events);
+            Player(Game_Events* game_events);
             virtual ~Player() = default;
             virtual void update() override;
     };

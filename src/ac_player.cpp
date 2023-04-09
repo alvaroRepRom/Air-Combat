@@ -15,8 +15,6 @@
 #include "bn_sprite_items_plane_sheet.h"
 #include "bn_sprite_items_bullet.h"
 
-#include "bn_sprite_palette_items_pink_palette.h"
-
 namespace ac
 {
     namespace
@@ -28,8 +26,8 @@ namespace ac
         constexpr const int INIT_Y = 48;
     }
 
-    Player::Player(bn::sprite_ptr& sprite_sheet, Game_Events* game_events) : 
-        _sprite(sprite_sheet),
+    Player::Player(Game_Events* game_events) : 
+        _sprite(bn::sprite_items::plane_sheet.create_sprite(0, 0)),
         _aim_cross_sprite(bn::sprite_items::cross.create_sprite(0, 0)),
         _wait_shot_cadence(WAIT_SHOT_CADENCE),
         _bullet_array({ 
