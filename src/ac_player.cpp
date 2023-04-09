@@ -3,13 +3,7 @@
 #include "bn_math.h"
 #include "bn_display.h"
 #include "bn_keypad.h"
-#include "bn_log.h"
 #include "bn_sound_items.h"
-
-#include "bn_sprite_palette_actions.h"
-#include "bn_sprite_palettes_actions.h"
-#include "bn_bg_palette_color_hbe_ptr.h"
-#include "bn_bg_palettes_transparent_color_hbe_ptr.h"
 // assets
 #include "bn_sprite_items_cross.h"
 #include "bn_sprite_items_plane_sheet.h"
@@ -38,7 +32,6 @@ namespace ac
         _sprite_palette(*game_events->ship_palette.get())
     {
         _sprite.set_position(0, INIT_Y);
-        //_sprite.set_palette(*game_events->ship_palette.get());
         _sprite.set_palette(_sprite_palette);
     }
 

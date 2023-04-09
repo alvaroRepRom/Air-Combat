@@ -34,7 +34,6 @@ namespace ac
             Game_Events* _game_events;
             Hud _hud;
             Pause _pause;
-            bn::vector<arr::Circle_Collider*, ac::constants::NUMBER_OF_BULLETS> _bullet_col_vector;
     };
 }
 

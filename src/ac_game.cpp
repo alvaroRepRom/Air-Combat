@@ -1,7 +1,6 @@
 #include "ac_game.h"
 // butano
 #include "bn_affine_bg_builder.h"
-#include "bn_log.h"
 #include "bn_keypad.h"
 // assets
 #include "bn_regular_bg_items_sky.h"
