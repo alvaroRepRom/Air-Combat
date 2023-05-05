@@ -3,7 +3,9 @@
 #include "bn_log.h"
 #include "bn_sound_items.h"
 // assets
-#include "bn_sprite_items_pivot.h"
+#include "bn_sprite_items_enemy_red.h"
+#include "bn_sprite_items_enemy_green.h"
+#include "bn_sprite_items_enemy_purple.h"
 
 namespace ac
 {
@@ -13,9 +15,9 @@ namespace ac
 
     Enemy_Spawner::Enemy_Spawner(Game_Events* game_events) : 
         _enemy_array({
-            Enemy(bn::sprite_items::pivot.create_sprite(0, 0), game_events),
-            Enemy(bn::sprite_items::pivot.create_sprite(0, 0), game_events),
-            Enemy(bn::sprite_items::pivot.create_sprite(0, 0), game_events)
+            Enemy(bn::sprite_items::enemy_red.create_sprite(0, 0), game_events),
+            Enemy(bn::sprite_items::enemy_green.create_sprite(0, 0), game_events),
+            Enemy(bn::sprite_items::enemy_purple.create_sprite(0, 0), game_events)
         }),
         _random_generator(),
         _frames_left(FRAMES_LEFT_SPAWN_ENEMY),
