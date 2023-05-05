@@ -24,7 +24,6 @@ namespace ac
         _bg(bn::regular_bg_items::title.create_bg(0, 0)),
         _sprite(bn::sprite_items::plane_sheet.create_sprite(0, 16)),
         _arrow_select(bn::sprite_items::arrow.create_sprite(72, 16)),
-        _is_right_arrow(true),
         _palette_index(0),
         _game_events(game_events),
         _arrow_timer(30)
@@ -52,6 +51,8 @@ namespace ac
             _arrow_select.set_visible(true);
             _arrow_select.set_x(-72);
             _arrow_select.set_horizontal_flip(true);
+
+            _arrow_timer.reset_timer();
         } 
         else 
         if (bn::keypad::right_pressed()) {
@@ -64,6 +65,8 @@ namespace ac
             _arrow_select.set_visible(true);
             _arrow_select.set_x(72);
             _arrow_select.set_horizontal_flip(false);
+            
+            _arrow_timer.reset_timer();
         }
         
         if (bn::keypad::start_pressed()) {
