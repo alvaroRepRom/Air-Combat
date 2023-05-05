@@ -17,7 +17,7 @@ namespace ac
         arr::Circle_Collider(sprite, COLLIDER_RADIUS),
         _sprite(sprite),
         _explosion_sprite(bn::sprite_items::explosion.create_sprite(0, 0)),
-        _explosion_action(bn::create_sprite_animate_action_forever(_explosion_sprite, 20, 
+        _explosion_action(bn::create_sprite_animate_action_once(_explosion_sprite, 10, 
                         bn::sprite_items::explosion.tiles_item(), 0, 1, 2, 3)),
         _game_events(game_events)
     {
@@ -40,7 +40,12 @@ namespace ac
     {
         if (_is_exploded) 
         {
-            _explosion_action.update();
+            if (_explosion_action.done()) {
+                _explosion_sprite.set_visible(false);
+            }
+            else {
+                _explosion_action.update();
+            }
         }
         else
         {
