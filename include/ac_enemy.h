@@ -3,6 +3,8 @@
 
 // butano
 #include "bn_sprite_ptr.h"
+#include "bn_sprite_tiles.h"
+#include "bn_sprite_animate_actions.h"
 // air combat
 #include "ac_game_events.h"
 // arr
@@ -26,9 +28,12 @@ namespace ac
 
         private:
             bn::sprite_ptr _sprite;
+            bn::sprite_ptr _explosion_sprite;
+            bn::sprite_animate_action<4> _explosion_action;
             int _frames_left;
             bool _goes_up;
             bool _goes_right;
+            bool _is_exploded;
             Game_Events* _game_events;
     };
 }
