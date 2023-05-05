@@ -33,7 +33,6 @@ namespace ac
             int _frames_left;
             bool _goes_up;
             bool _goes_right;
-            bool _is_exploded;
             Game_Events* _game_events;
     };
 }

@@ -23,7 +23,6 @@ namespace ac
     {
         _goes_right = true;
         _goes_up = false;
-        _is_exploded = false;
         _sprite.set_visible(false);
         _sprite.set_z_order(1);
         _explosion_sprite.set_visible(false);
@@ -38,7 +37,7 @@ namespace ac
 
     void Enemy::update()
     {
-        if (_is_exploded) 
+        if (_explosion_sprite.visible()) 
         {
             if (_explosion_action.done()) {
                 _explosion_sprite.set_visible(false);
@@ -94,7 +93,7 @@ namespace ac
         set_collision_enabled(false);
         _explosion_sprite.set_visible(true);
         _explosion_sprite.set_position(_sprite.position());
+        _explosion_action.reset();
         _sprite.set_visible(false);
-        _is_exploded = true;
     }
 }
