@@ -2,12 +2,11 @@
 // butano
 #include "bn_keypad.h"
 #include "bn_string.h"
-#include "bn_log.h"
 // air combat
 #include "ac_scene_type.h"
 #include "ac_constants.h"
 // assets
-#include "bn_regular_bg_items_sky.h"
+#include "bn_regular_bg_items_best_score.h"
 // common
 #include "common_variable_8x8_sprite_font.h"
 
@@ -30,7 +29,7 @@ namespace ac
     }
     
     Ranking::Ranking(int player_score) : 
-        _bg(bn::regular_bg_items::sky.create_bg(0, 0)),
+        _bg(bn::regular_bg_items::best_score.create_bg(0, 0)),
         _text_generator(common::variable_8x8_sprite_font),
         _current_letter_index(0),
         _save_data_ranking(Save_Ranking::load_score()),
