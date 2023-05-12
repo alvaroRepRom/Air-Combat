@@ -178,7 +178,7 @@ namespace ac
             if (bn::keypad::a_held() && _wait_shot_cadence < 0)
             {
                 _bullet_array[i].init(_sprite.position(), _aim_cross_sprite.position());
-                bn::sound_items::gun_2.play();               
+                bn::sound_items::shoot.play();               
                 _wait_shot_cadence = WAIT_SHOT_CADENCE;
             }
         }
