@@ -84,15 +84,16 @@ namespace ac
                 }
                 else if (_sprite.x() < -HALF_WIDTH) {
                     _goes_right = true;
-                }                
+                }
 
-                if (_goes_up) {
-                    _dy = -1;
-                    _rand.update();
-                }
                 if (!_goes_right) {
-                    _dx = -1;
+                    _dx = -2;
                 }
+                else {
+                    _dx = 2;
+                }
+                _dy = 0;
+
                 break;
 
             case Enemy_Type::Type_2: 
