@@ -13,13 +13,14 @@ namespace ac
         constexpr const int HALF_HEIGHT = 60;
     }
 
-    Enemy::Enemy(bn::sprite_ptr sprite, Game_Events* game_events) :
+    Enemy::Enemy(bn::sprite_ptr sprite, Game_Events* game_events, Enemy_Type enemy_type) :
         arr::Circle_Collider(sprite, COLLIDER_RADIUS),
         _sprite(sprite),
         _explosion_sprite(bn::sprite_items::explosion.create_sprite(0, 0)),
         _explosion_action(bn::create_sprite_animate_action_once(_explosion_sprite, 10, 
                         bn::sprite_items::explosion.tiles_item(), 0, 1, 2, 3)),
-        _game_events(game_events)
+        _game_events(game_events),
+        _enemy_type(enemy_type)
     {
         _goes_right = true;
         _goes_up = false;
@@ -31,7 +32,22 @@ namespace ac
     void Enemy::init()
     {
         _sprite.set_visible(true);
-        _sprite.set_position(0, 0);
+
+        switch (_enemy_type)
+        {
+        case Enemy_Type::Type_2:
+            _rand.update();
+            break;
+        case Enemy_Type::Type_3:
+            _rand.update();
+            _rand.update();
+        default: break;
+        }
+        
+        int x = _rand.get_int(-HALF_WIDTH + 10, HALF_WIDTH - 10);
+        int y = _rand.get_int(-HALF_HEIGHT + 10, HALF_HEIGHT - 10);
+        _sprite.set_position(x, y);
+
         set_collision_enabled(true);
     }
 
@@ -48,30 +64,92 @@ namespace ac
         }
         else
         {
-            if (_sprite.y() > HALF_HEIGHT) {
-                _goes_up = true;
-            }
-            else if (_sprite.y() < -HALF_HEIGHT) {
-                _goes_up = false;
-            }
-
-            if (_sprite.x() > HALF_WIDTH) {
-                _goes_right = false;
-            }
-            else if (_sprite.x() < -HALF_WIDTH) {
-                _goes_right = true;
-            }
-
             bn::fixed _dx = 1;
             bn::fixed _dy = 1;
 
-            if (_goes_up) {
-                _dy = -1;
+            switch (_enemy_type)
+            {
+            case Enemy_Type::Type_1:
+
+                if (_sprite.y() > HALF_HEIGHT) {
+                _goes_up = true;
+                }
+                else if (_sprite.y() < -HALF_HEIGHT) {
+                    _goes_up = false;
+                }
+
+                if (_sprite.x() > HALF_WIDTH) {
+                    _goes_right = false;
+                    _rand.update();
+                }
+                else if (_sprite.x() < -HALF_WIDTH) {
+                    _goes_right = true;
+                }                
+
+                if (_goes_up) {
+                    _dy = -1;
+                    _rand.update();
+                }
+                if (!_goes_right) {
+                    _dx = -1;
+                }
+                break;
+
+            case Enemy_Type::Type_2: 
+
+                if (_sprite.y() > HALF_HEIGHT) {
+                    _goes_up = true;
+                    _rand.update();
+                }
+                else if (_sprite.y() < -HALF_HEIGHT) {
+                    _goes_up = false;
+                }
+
+                if (_sprite.x() > HALF_WIDTH) {
+                    _goes_right = false;
+                }
+                else if (_sprite.x() < -HALF_WIDTH) {
+                    _goes_right = true;
+                }                
+
+                if (_goes_up) {
+                    _dy = -1;
+                }
+                if (!_goes_right) {
+                    _dx = -1;
+                }
+
+                break;
+
+            case Enemy_Type::Type_3:
+
+                if (_sprite.y() > HALF_HEIGHT) {
+                    _goes_up = true;
+                }
+                else if (_sprite.y() < -HALF_HEIGHT) {
+                    _goes_up = false;
+                }
+
+                if (_sprite.x() > HALF_WIDTH) {
+                    _goes_right = false;
+                }
+                else if (_sprite.x() < -HALF_WIDTH) {
+                    _goes_right = true;
+                    _rand.update();
+                }                
+
+                if (_goes_up) {
+                    _dy = -1;
+                }
+                if (!_goes_right) {
+                    _dx = -1;
+                    _rand.update();
+                }
+
+                break;
+
+            default: BN_ERROR("Invalid enemy type: ", _enemy_type);
             }
-            if (!_goes_right) {
-                _dx = -1;
-            }
-            
             bn::sprite_move_by_action move_sprite_action(_sprite, _dx, _dy);
             move_sprite_action.update();
         }
@@ -86,6 +164,17 @@ namespace ac
     void Enemy::deactivate() 
     {
         _sprite.set_visible(false);
+    }
+
+    int Enemy::score_given() 
+    {
+        switch (_enemy_type)
+        {
+        case Enemy_Type::Type_1: return 5;
+        case Enemy_Type::Type_2: return 10;
+        case Enemy_Type::Type_3: return 15;
+        default: return 0;
+        }
     }
 
     void Enemy::on_collision() 

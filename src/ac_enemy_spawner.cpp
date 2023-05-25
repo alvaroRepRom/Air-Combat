@@ -15,9 +15,9 @@ namespace ac
 
     Enemy_Spawner::Enemy_Spawner(Game_Events* game_events) : 
         _enemy_array({
-            Enemy(bn::sprite_items::enemy_red.create_sprite(0, 0), game_events),
-            Enemy(bn::sprite_items::enemy_green.create_sprite(0, 0), game_events),
-            Enemy(bn::sprite_items::enemy_purple.create_sprite(0, 0), game_events)
+            Enemy(bn::sprite_items::enemy_red.create_sprite(0, 0), game_events, Enemy_Type::Type_1),
+            Enemy(bn::sprite_items::enemy_green.create_sprite(0, 0), game_events, Enemy_Type::Type_2),
+            Enemy(bn::sprite_items::enemy_purple.create_sprite(0, 0), game_events, Enemy_Type::Type_3)
         }),
         _random_generator(),
         _frames_left(FRAMES_LEFT_SPAWN_ENEMY),
@@ -35,7 +35,7 @@ namespace ac
             {
                 if (_enemy_array.at(i).check_collision(*bullet_collider)) {
                     bn::sound_items::explosion.play();
-                    _game_events->score += 10;
+                    _game_events->score += _enemy_array.at(i).score_given();
                 }
             }
         }

@@ -5,6 +5,7 @@
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_tiles.h"
 #include "bn_sprite_animate_actions.h"
+#include "bn_random.h"
 // air combat
 #include "ac_game_events.h"
 // arr
@@ -12,10 +13,14 @@
 
 namespace ac
 {
+    enum Enemy_Type {
+        Type_1, Type_2, Type_3
+    };
+
     class Enemy : public arr::Circle_Collider
     {
         public:
-            Enemy(bn::sprite_ptr sprite, Game_Events* game_events);
+            Enemy(bn::sprite_ptr sprite, Game_Events* game_events, Enemy_Type enemy_type);
 
             virtual ~Enemy() = default;
             
@@ -23,6 +28,7 @@ namespace ac
             void update();
             bool is_active();
             void deactivate();
+            int  score_given();
 
             void on_collision() override;
 
@@ -34,6 +40,8 @@ namespace ac
             bool _goes_up;
             bool _goes_right;
             Game_Events* _game_events;
+            Enemy_Type _enemy_type;
+            bn::random _rand;
     };
 }
 
