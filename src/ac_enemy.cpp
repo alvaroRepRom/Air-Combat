@@ -72,7 +72,7 @@ namespace ac
             case Enemy_Type::Type_1:
 
                 if (_sprite.y() > HALF_HEIGHT) {
-                _goes_up = true;
+                    _goes_up = true;
                 }
                 else if (_sprite.y() < -HALF_HEIGHT) {
                     _goes_up = false;
@@ -141,11 +141,19 @@ namespace ac
 
                 if (_goes_up) {
                     _dy = -1;
+                    if (_goes_right) {
+                        _dx = 0;
+                        _dy = -2;
+                    }
+                }
+                else {
+                    _dx = 2;
+                    _dy = 2;
                 }
                 if (!_goes_right) {
                     _dx = -1;
-                    _rand.update();
                 }
+
 
                 break;
 
@@ -154,7 +162,6 @@ namespace ac
             bn::sprite_move_by_action move_sprite_action(_sprite, _dx, _dy);
             move_sprite_action.update();
         }
-        
     }
 
     bool Enemy::is_active()
