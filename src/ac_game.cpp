@@ -38,7 +38,7 @@ namespace ac
             _game_events->score = 0;
         }
 
-        if (bn::keypad::select_pressed()) {
+        if (_game_events->gameHasEnded) {
             result = Scene_Type::RANKING;
             _game_events->score = _hud.total_score();
         }

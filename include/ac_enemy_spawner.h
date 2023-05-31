@@ -26,6 +26,7 @@ namespace ac
             bn::random _random_generator;
             int _frames_left;
             Game_Events* _game_events;
+            int _next_enemy_index;
             
             void _spawn();
     };

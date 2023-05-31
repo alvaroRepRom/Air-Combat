@@ -10,6 +10,7 @@
 #include "ac_game_events.h"
 // arr
 #include "arr_circle_collider.h"
+#include "arr_timer.h"
 
 namespace ac
 {
@@ -29,6 +30,7 @@ namespace ac
             bool is_active();
             void deactivate();
             int  score_given();
+            Enemy_Type enemy_type();
 
             void on_collision() override;
 
@@ -42,6 +44,7 @@ namespace ac
             Game_Events* _game_events;
             Enemy_Type _enemy_type;
             bn::random _rand;
+            arr::Timer _enemy_active_timer;
     };
 }
 

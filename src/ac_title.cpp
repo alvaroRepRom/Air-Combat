@@ -9,14 +9,18 @@
 #include "bn_sprite_items_plane_sheet.h"
 #include "bn_sprite_palette_items_pink_palette.h"
 #include "bn_sprite_palette_items_red_palette.h"
+#include "bn_sprite_palette_items_green_palette.h"
+#include "bn_sprite_palette_items_purple_palette.h"
 
 namespace ac
 {
     namespace {
-        constexpr const bn::array<const bn::sprite_palette_item, 3> palette_array{
+        constexpr const bn::array<const bn::sprite_palette_item, 5> palette_array{
             bn::sprite_items::plane_sheet.palette_item(),
             bn::sprite_palette_items::pink_palette,
-            bn::sprite_palette_items::red_palette
+            bn::sprite_palette_items::red_palette,
+            bn::sprite_palette_items::green_palette,
+            bn::sprite_palette_items::purple_palette
         };
     }
 

@@ -20,7 +20,8 @@ namespace ac
         _explosion_action(bn::create_sprite_animate_action_once(_explosion_sprite, 10, 
                         bn::sprite_items::explosion.tiles_item(), 0, 1, 2, 3)),
         _game_events(game_events),
-        _enemy_type(enemy_type)
+        _enemy_type(enemy_type),
+        _enemy_active_timer(0)
     {
         _goes_right = true;
         _goes_up = false;
@@ -35,10 +36,15 @@ namespace ac
 
         switch (_enemy_type)
         {
+        case Enemy_Type::Type_1:
+            _enemy_active_timer.reset_timer(4 * 60);
+            break;
         case Enemy_Type::Type_2:
+            _enemy_active_timer.reset_timer(4 * 60);
             _rand.update();
             break;
         case Enemy_Type::Type_3:
+            _enemy_active_timer.reset_timer(3 * 60);
             _rand.update();
             _rand.update();
         default: break;
@@ -64,6 +70,11 @@ namespace ac
         }
         else
         {
+            if (_enemy_active_timer.is_time_up_once()) {
+                deactivate();
+                return;
+            }
+
             bn::fixed _dx = 1;
             bn::fixed _dy = 1;
 
@@ -183,6 +194,11 @@ namespace ac
         case Enemy_Type::Type_3: return 15;
         default: return 0;
         }
+    }
+
+    Enemy_Type Enemy::enemy_type() 
+    {
+        return _enemy_type;
     }
 
     void Enemy::on_collision() 
