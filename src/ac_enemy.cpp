@@ -11,6 +11,7 @@ namespace ac
         constexpr const bn::fixed COLLIDER_RADIUS = 9;
         constexpr const int HALF_WIDTH = 100;
         constexpr const int HALF_HEIGHT = 60;
+        constexpr const bn::fixed SOUND_VOLUME(0.5);
     }
 
     Enemy::Enemy(bn::sprite_ptr sprite, Game_Events* game_events, Enemy_Type enemy_type) :

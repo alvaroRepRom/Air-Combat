@@ -18,6 +18,7 @@ namespace ac
         constexpr const int Y_BORDER = bn::display::height() / 2 - 20;
         constexpr const bn::fixed_point AIM_OFFSET(30, 15);
         constexpr const int INIT_Y = 48;
+        constexpr const bn::fixed SOUND_VOLUME(0.2);
     }
 
     Player::Player(Game_Events* game_events) : 
@@ -178,7 +179,7 @@ namespace ac
             if (bn::keypad::a_held() && _wait_shot_cadence < 0)
             {
                 _bullet_array[i].init(_sprite.position(), _aim_cross_sprite.position());
-                bn::sound_items::shoot.play();               
+                bn::sound_items::shoot.play(SOUND_VOLUME);               
                 _wait_shot_cadence = WAIT_SHOT_CADENCE;
             }
         }

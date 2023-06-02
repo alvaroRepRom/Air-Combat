@@ -11,6 +11,7 @@ namespace ac
 {
     namespace {
         constexpr const int FRAMES_GAME_DURATION = constants::FPS * constants::GAME_SECONDS_DURATION;
+        constexpr const bn::fixed SOUND_VOLUME(0.2);
 
         constexpr bn::array<Enemy_Type, constants::INGAME_NUM_ENEMIES> enemy_type_array {
             Enemy_Type::Type_1,
@@ -78,7 +79,7 @@ namespace ac
             for (auto bullet_collider : _game_events->bullet_col_f_list)
             {
                 if (_enemy_array.at(i).check_collision(*bullet_collider)) {
-                    bn::sound_items::explosion.play();
+                    bn::sound_items::explosion.play(SOUND_VOLUME);
                     _game_events->score += _enemy_array.at(i).score_given();
                 }
             }

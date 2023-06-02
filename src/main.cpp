@@ -19,7 +19,7 @@ int main()
     bn::unique_ptr<ac::Scene> scene(new ac::Intro());
     ac::Game_Events game_events;
 
-    bn::music_items::air_combat.play(1, true);
+    bn::music_items::air_combat.play();
 
     while(1)
     {
