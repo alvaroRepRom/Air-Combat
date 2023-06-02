@@ -1,28 +1,33 @@
-#ifndef ARR_EVENT_H
-#define ARR_EVENT_H
+#ifndef AC_EVENT_H
+#define AC_EVENT_H
 
-// butano
-#include "bn_sprite_ptr.h"
-#include "bn_fixed_point.h"
-#include "bn_array.h"
 #include "bn_deque.h"
-// air combat
-#include "ac_constants.h"
-// arr
-#include "arr_box_collider.h"
-#include "arr_circle_collider.h"
-#include "arr_collisions.h"
 
 namespace arr
 {
+    class EventArgs { }
+
+    template<typename TArg0>
     class Event
     {
-        public:
-            virtual ~Event() = default;
-            virtual void action() = 0;
-        protected:
-            Event() = default;
+    private:
+        typedef void(*FuncPtr)(TArg0);        
+        typedef bn::deque<FuncPtr, 8> FuncPtrSeq;
+
+        FuncPtrSeq ls;
+
+    public:
+        Event& operator += (FuncPtr func)
+        {
+            ls.push_back(func);
+            return *this;
+        }
+
+        void operator()(TArg0 x) 
+        { 
+            for (typename FuncPtrSeq::iterator it(ls.begin()); it != ls.end(); ++it)
+                (*it)(x);
+        }
     };
 }
-
 #endif
